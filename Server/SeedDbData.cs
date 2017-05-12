@@ -64,6 +64,34 @@ namespace AspNetCoreSpa.Server
                 _context.SaveChanges();
             }
 
+            if (!_context.Clients.Any())
+            {
+                _context.Clients.Add(new Client { Name = "Horbatenko", PhysicAddress = "dsds", ShippingAddress = "dsds", Link = "google.com", Phone = "322-233-322", Info = "info", Status = true, ContactPerson = "Vasyl" });
+                _context.SaveChanges();
+            }
+
+            if (!_context.Products.Any())
+            {
+                _context.Products.Add(new Product { Name = "Product1", Volume = 50, NicotineAmount = 10});
+                _context.SaveChanges();
+                _context.Products.Add(new Product { Name = "Product2", Volume = 45, NicotineAmount = 11 });
+                _context.SaveChanges();
+            }
+
+            if (!_context.Orders.Any())
+            {
+                _context.Orders.Add(new Order { Date = DateTime.Now, Realization = true, Payment = false, ClientId = 1 });
+                _context.SaveChanges();
+            }
+
+            if (!_context.OrderDetails.Any())
+            {
+                _context.OrderDetails.Add(new OrderDetails { OrderId = 2, Count = 2, Price = 30.45M, ProductId = 2 });
+                _context.SaveChanges();
+                _context.OrderDetails.Add(new OrderDetails { OrderId = 2, Count = 4, Price = 30.46M, ProductId = 3 });
+                _context.SaveChanges();
+            }
+
             if (!_context.Content.Any())
             {
                 _context.Content.Add(new Content { Key = "TITLE" });
