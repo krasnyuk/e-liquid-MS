@@ -50,6 +50,7 @@ export class AuthTokenService {
                 this.store.dispatch(this.loggedInActions.loggedIn());
 
                 const profile = this.jwtHelper.decodeToken(tokens.id_token ? tokens.id_token : '') as ProfileModel;
+
                 this.store.dispatch(this.profileActions.load(profile));
 
                 localStorage.setItem('auth-tokens', JSON.stringify(tokens));
