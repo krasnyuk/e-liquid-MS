@@ -5,15 +5,18 @@ import {JwtHelper} from 'angular2-jwt';
 import {Subscription} from 'rxjs/Subscription';
 import {Observable} from 'rxjs/Observable';
 
-import {AppState} from '../../app-store';
-import {ProfileModel} from '../models/profile-model';
-import {LoginModel} from '../models/login-model';
-import {LoggedInActions} from '../auth-store/logged-in.actions';
+import {AppState} from '../../../app-store';
+import {ProfileModel} from '../../models/profile-model';
+import {LoginModel} from '../../models/login-model';
+import {LoggedInActions} from '../../auth-store/logged-in.actions';
 import {AuthTokenActions} from './auth-token.actions';
-import {AuthReadyActions} from '../auth-store/auth-ready.actions';
-import {ProfileActions} from '../profile/profile.actions';
-import {RefreshGrantModel} from '../models/refresh-grant-model';
-import {AuthTokenModel} from '../models/auth-tokens-model';
+import {AuthReadyActions} from '../../auth-store/auth-ready.actions';
+import {ProfileActions} from '../../profile/profile.actions';
+import {RefreshGrantModel} from '../../models/refresh-grant-model';
+import {AuthTokenModel} from '../../models/auth-tokens-model';
+import {CurrentUserService} from "../current-user.service";
+import {StorageService} from "../storage.service";
+import {AppConst} from "../../app-constants";
 
 @Injectable()
 export class AuthTokenService {
@@ -25,6 +28,8 @@ export class AuthTokenService {
                 private loggedInActions: LoggedInActions,
                 private authTokenActions: AuthTokenActions,
                 private authReadyActions: AuthReadyActions,
+                private currentUserService: CurrentUserService,
+                private storageService: StorageService,
                 private profileActions: ProfileActions) {
     }
 
@@ -50,18 +55,12 @@ export class AuthTokenService {
                 this.store.dispatch(this.loggedInActions.loggedIn());
 
                 const profile = this.jwtHelper.decodeToken(tokens.id_token ? tokens.id_token : '') as ProfileModel;
+                this.currentUserService.set(Object.assign(profile, {token: tokens}));
 
                 this.store.dispatch(this.profileActions.load(profile));
-
-                localStorage.setItem('auth-tokens', JSON.stringify(tokens));
                 this.store.dispatch(this.authReadyActions.ready());
             });
 
-    }
-
-    public deleteTokens() {
-        localStorage.removeItem('auth-tokens');
-        this.store.dispatch(this.authTokenActions.delete());
     }
 
     public unsubscribeRefresh() {
@@ -86,8 +85,8 @@ export class AuthTokenService {
     }
 
     public startupTokenRefresh() {
-        const tokensString = localStorage.getItem('auth-tokens');
-        const tokensModel = tokensString === null ? null : JSON.parse(tokensString);
+        const tokenObject = this.storageService.get(AppConst.storageKeys.XAuthToken);
+        const tokensModel = tokenObject ? tokenObject : null;
         return Observable.of(tokensModel)
             .flatMap(tokens => {
                 // check if the token is even if localStorage, if it isn't tell them it's not and return

@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { AppState } from './../../app-store';
 import { AccountService } from './../../core/account/account.service';
-import { AuthTokenService } from './../../core/auth-token/auth-token.service';
+import { AuthTokenService } from '../../core/services/auth-token/auth-token.service';
 import { AuthState } from '../../core/auth-store/auth.store';
 
 

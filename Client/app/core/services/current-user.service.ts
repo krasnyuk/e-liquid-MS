@@ -1,5 +1,5 @@
-import {Injectable, EventEmitter} from "@angular/core";
-import {Router, NavigationCancel} from "@angular/router";
+import {EventEmitter, Injectable} from "@angular/core";
+import {Router} from "@angular/router";
 import {AppConst} from "../app-constants";
 import {StorageService} from "./storage.service";
 import {AuthStateService} from "./auth-state.service";
@@ -18,12 +18,6 @@ export class CurrentUserService {
 
         CurrentUserService.user = this.storageService.get(AppConst.storageKeys.User);
         this.authStateService.onTokenClear.subscribe(() => this.clear());
-        this.router.events.filter(event => event instanceof NavigationCancel)
-            .subscribe((event: NavigationCancel) => {
-                /*if (!this.isLoggedIn()) {
-                 this.errorService.throwForbiddenAccess();
-                 }*/
-            });
     }
 
     set(userDetails: any): void {

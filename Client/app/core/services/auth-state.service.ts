@@ -6,7 +6,7 @@ import {AppConst} from "../app-constants";
 @Injectable()
 export class AuthStateService {
 
-    private token: string | null;
+    private token: any;
 
     public onTokenClear = new EventEmitter<any>();
 
@@ -14,7 +14,7 @@ export class AuthStateService {
         this.token = this.storageService.get(AppConst.storageKeys.XAuthToken);
     }
 
-    public setToken(token: string | null) {
+    public setToken(token: any) {
         this.token = token;
         if (token !== null) {
             this.storageService.set(AppConst.storageKeys.XAuthToken, token);
