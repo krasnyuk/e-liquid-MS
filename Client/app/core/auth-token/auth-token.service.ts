@@ -1,39 +1,38 @@
-import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Response, Headers, RequestOptions, Http } from '@angular/http';
-import { JwtHelper } from 'angular2-jwt';
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {Response, Headers, RequestOptions, Http} from '@angular/http';
+import {JwtHelper} from 'angular2-jwt';
+import {Subscription} from 'rxjs/Subscription';
+import {Observable} from 'rxjs/Observable';
 
-import { AppState } from '../../app-store';
-import { ProfileModel } from '../models/profile-model';
-import { LoginModel } from '../models/login-model';
-import { LoggedInActions } from '../auth-store/logged-in.actions';
-import { AuthTokenActions } from './auth-token.actions';
-import { AuthReadyActions } from '../auth-store/auth-ready.actions';
-import { ProfileActions } from '../profile/profile.actions';
-import { RefreshGrantModel } from '../models/refresh-grant-model';
-import { AuthTokenModel } from '../models/auth-tokens-model';
+import {AppState} from '../../app-store';
+import {ProfileModel} from '../models/profile-model';
+import {LoginModel} from '../models/login-model';
+import {LoggedInActions} from '../auth-store/logged-in.actions';
+import {AuthTokenActions} from './auth-token.actions';
+import {AuthReadyActions} from '../auth-store/auth-ready.actions';
+import {ProfileActions} from '../profile/profile.actions';
+import {RefreshGrantModel} from '../models/refresh-grant-model';
+import {AuthTokenModel} from '../models/auth-tokens-model';
 
 @Injectable()
 export class AuthTokenService {
     public refreshSubscription$: Subscription;
     public jwtHelper: JwtHelper = new JwtHelper();
 
-    constructor(
-        private http: Http,
-        private store: Store<AppState>,
-        private loggedInActions: LoggedInActions,
-        private authTokenActions: AuthTokenActions,
-        private authReadyActions: AuthReadyActions,
-        private profileActions: ProfileActions
-    ) { }
+    constructor(private http: Http,
+                private store: Store<AppState>,
+                private loggedInActions: LoggedInActions,
+                private authTokenActions: AuthTokenActions,
+                private authReadyActions: AuthReadyActions,
+                private profileActions: ProfileActions) {
+    }
 
     public getTokens(data: LoginModel | RefreshGrantModel, grantType: string): Observable<void> {
         // data can be any since it can either be a refresh tokens or login details
         // The request for tokens must be x-www-form-urlencoded
-        const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        const options = new RequestOptions({ headers });
+        const headers = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+        const options = new RequestOptions({headers});
 
         Object.assign(data, {
             grant_type: grantType,
@@ -74,8 +73,8 @@ export class AuthTokenService {
         return this.store.select(state => state.auth.authTokens)
             .first()
             .flatMap((tokens: any) => {
-                return this.getTokens({ refresh_token: tokens.refresh_token }, 'refresh_token')
-                    // This should only happen if the refresh token has expired
+                return this.getTokens({refresh_token: tokens.refresh_token}, 'refresh_token')
+                // This should only happen if the refresh token has expired
                     .catch((error: any) => {
                         // let the app know that we cant refresh the token
                         // which means something is invalid and they aren't logged in

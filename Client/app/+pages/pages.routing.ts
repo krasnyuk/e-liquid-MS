@@ -1,15 +1,22 @@
 import {Routes, RouterModule} from '@angular/router';
 import {DashboardComponent} from "./dashboard/dashboard.component";
+import {PagesComponent} from "./pages.component";
 
 const pagesRoutes: Routes = [
     {
         path: '',
-        pathMatch: 'full',
-        redirectTo: 'dashboard'
-    },
-    {
-        path: 'dashboard',
-        component: DashboardComponent
+        component: PagesComponent,
+        children: [
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'dashboard'
+            },
+            {
+                path: 'dashboard',
+                component: DashboardComponent
+            }
+        ]
     }
 ];
 
