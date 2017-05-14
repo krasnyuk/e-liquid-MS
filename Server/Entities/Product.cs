@@ -13,7 +13,7 @@ namespace AspNetCoreSpa.Server.Entities
         [Required]
         public int Volume { get; set; } //мл
         [Required]
-        public int NicotineAmount { get; set; }
+        public double NicotineAmount { get; set; }
         [StringLength(255)]
         public string Info { get; set; }
 

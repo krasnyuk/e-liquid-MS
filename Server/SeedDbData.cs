@@ -59,8 +59,16 @@ namespace AspNetCoreSpa.Server
 
             if (!_context.Clients.Any())
             {
-                _context.Clients.Add(new Client { Name = "Horbatenko", PhysicAddress = "dsds", ShippingAddress = "dsds",
-                    Phone = "322-233-322", Info = "info", Status = 0, ContactPerson = "Vasyl" });
+                _context.Clients.Add(new Client
+                {
+                    Name = "Horbatenko",
+                    PhysicAddress = "dsds",
+                    ShippingAddress = "dsds",
+                    Phone = "322-233-322",
+                    Info = "info",
+                    Status = 0,
+                    ContactPerson = "Vasyl"
+                });
                 _context.SaveChanges();
             }
 
@@ -74,9 +82,9 @@ namespace AspNetCoreSpa.Server
 
             if (!_context.Products.Any())
             {
-                _context.Products.Add(new Product { Name = "Product1", Volume = 50, NicotineAmount = 10});
+                _context.Products.Add(new Product { Name = "Product1", Volume = 50, NicotineAmount = 0.24 });
                 _context.SaveChanges();
-                _context.Products.Add(new Product { Name = "Product2", Volume = 45, NicotineAmount = 11 });
+                _context.Products.Add(new Product { Name = "Product2", Volume = 45, NicotineAmount = 1.43 });
                 _context.SaveChanges();
             }
 
@@ -110,9 +118,9 @@ namespace AspNetCoreSpa.Server
 
             if (!_context.ReceiptDetails.Any())
             {
-                _context.ReceiptDetails.Add(new ReceiptDetails { ReceiptId = 1, ComponentId = 1, Amount  = 2 });
+                _context.ReceiptDetails.Add(new ReceiptDetails { ReceiptId = 1, ComponentId = 1, Amount = 1.5 });
                 _context.SaveChanges();
-                _context.ReceiptDetails.Add(new ReceiptDetails { ReceiptId = 1, ComponentId = 2, Amount = 3 });
+                _context.ReceiptDetails.Add(new ReceiptDetails { ReceiptId = 1, ComponentId = 2, Amount = 0.5 });
                 _context.SaveChanges();
             }
 
@@ -136,8 +144,8 @@ namespace AspNetCoreSpa.Server
 
             if (!_context.ContentText.Any())
             {
-                _context.ContentText.Add(new ContentText { Text = "Site title",  ContentId = 1 });
-                _context.ContentText.Add(new ContentText { Text = "Home",  ContentId = 2 });
+                _context.ContentText.Add(new ContentText { Text = "Site title", ContentId = 1 });
+                _context.ContentText.Add(new ContentText { Text = "Home", ContentId = 2 });
                 _context.ContentText.Add(new ContentText { Text = "Examples", ContentId = 3 });
                 _context.ContentText.Add(new ContentText { Text = "Login", ContentId = 4 });
                 _context.ContentText.Add(new ContentText { Text = "Logout", ContentId = 5 });
@@ -146,6 +154,5 @@ namespace AspNetCoreSpa.Server
                 _context.SaveChanges();
             }
         }
-
     }
 }

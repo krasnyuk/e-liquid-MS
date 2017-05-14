@@ -11,7 +11,7 @@ namespace AspNetCoreSpa.Server
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
         public DbSet<Content> Content { get; set; }
         public DbSet<ContentText> ContentText { get; set; }
-      
+
         public DbSet<Client> Clients { get; set; }
         public DbSet<ClientLink> ClientLinks { get; set; }
         public DbSet<Order> Orders { get; set; }

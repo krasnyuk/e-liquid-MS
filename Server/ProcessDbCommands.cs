@@ -25,17 +25,17 @@ namespace AspNetCoreSpa.Server
                     db.Database.EnsureDeleted();
                 }
 
-                 if (args.Contains("migratedb"))
-                 {
-                Console.WriteLine("Migrating database");
-                db.Database.Migrate();
-                 }
+                if (args.Contains("migratedb"))
+                {
+                    Console.WriteLine("Migrating database");
+                    db.Database.Migrate();
+                }
 
-                 if (args.Contains("seeddb"))
-                 {
-                Console.WriteLine("Seeding database");
-                db.Seed(host);
-                 }
+                if (args.Contains("seeddb"))
+                {
+                    Console.WriteLine("Seeding database");
+                    db.Seed(host);
+                }
             }
         }
 

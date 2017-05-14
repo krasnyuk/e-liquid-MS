@@ -8,7 +8,7 @@ namespace AspNetCoreSpa.Server.Entities
         [Key]
         public int Id { get; set; }
         [Required]
-        public int Amount { get; set; }
+        public double Amount { get; set; }
 
         [Required]
         public int ReceiptId { get; set; }
