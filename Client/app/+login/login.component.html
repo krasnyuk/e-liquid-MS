@@ -1,39 +1,4 @@
-﻿<!--<div class="container">-->
-<!--<div class="card card-container">-->
-
-<!--&lt;!&ndash;<form (ngSubmit)="save()" [formGroup]="editForm" class="form-signin">&ndash;&gt;-->
-<!--&lt;!&ndash;<span id="reauth-email" class="reauth-email"></span>&ndash;&gt;-->
-<!--&lt;!&ndash;<input formControlName="username" type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>&ndash;&gt;-->
-<!--&lt;!&ndash;<input formControlName="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>&ndash;&gt;-->
-<!--&lt;!&ndash;<div id="remember" class="checkbox">&ndash;&gt;-->
-<!--&lt;!&ndash;<label>&ndash;&gt;-->
-<!--&lt;!&ndash;<input type="checkbox" value="remember-me"> Remember me&ndash;&gt;-->
-<!--&lt;!&ndash;</label>&ndash;&gt;-->
-<!--&lt;!&ndash;</div>&ndash;&gt;-->
-<!--&lt;!&ndash;<button [disabled]="isProcessing" class="btn btn-lg btn-success btn-block btn-signin" type="submit">&ndash;&gt;-->
-<!--&lt;!&ndash;<i *ngIf="isProcessing" class="fa fa-spinner fa-spin" aria-hidden="true"></i> Login&ndash;&gt;-->
-<!--&lt;!&ndash;</button>&ndash;&gt;-->
-<!--&lt;!&ndash;</form>&lt;!&ndash; /form &ndash;&gt;&ndash;&gt;-->
-<!--<form (ngSubmit)="save()" [formGroup]="editForm">-->
-<!--<div class="group">-->
-<!--<input formControlName="username" type="email" autocomplete="off">-->
-<!--<span class="highlight"></span><span class="bar"></span>-->
-<!--<label>Email</label>-->
-<!--</div>-->
-<!--<div class="group">-->
-<!--<input formControlName="password" type="password" autocomplete="off">-->
-<!--<span class="highlight"></span>-->
-<!--<span class="bar"></span>-->
-<!--<label>Пароль</label>-->
-<!--</div>-->
-<!--<button [disabled]="isProcessing" type="submit" class="button buttonBlue">-->
-<!--<i *ngIf="isProcessing" class="fa fa-spinner fa-spin" aria-hidden="true"></i> Войти-->
-<!--</button>-->
-<!--</form>-->
-<!--</div>&lt;!&ndash; /card-container &ndash;&gt;-->
-<!--</div>&lt;!&ndash; /container &ndash;&gt;-->
-
-<div class="form">
+﻿<div class="form">
     <div id="login">
         <h1>Вход в систему</h1>
         <form (ngSubmit)="save()" [formGroup]="editForm">
@@ -51,7 +16,6 @@
                 <p class="validation-error" *ngIf="editForm.controls['password'].hasError('required') && submitted">
                     Password required</p>
             </div>
-            <p class="forgot"><a href="#">Forgot Password?</a></p>
             <button [disabled]="isProcessing" type="submit" class="button button-block">
                 <i *ngIf="isProcessing" class="fa fa-spinner fa-spin" aria-hidden="true"></i> Войти
             </button>
