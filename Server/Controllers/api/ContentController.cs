@@ -17,22 +17,11 @@ namespace AspNetCoreSpa.Server.Controllers.api
             _context = context;
         }
 
-        [HttpGet("languages")]
-        public IActionResult Languages()
-        {
-            var langs = _context.Languages.ToList();
-
-            return Ok(langs);
-        }
-
         [HttpGet]
         public IActionResult Get(string lang)
         {
-            var contentCacheKey = "ContentKey" + lang;
             var result = (from c in _context.Content
                           join t in _context.ContentText on c.Id equals t.ContentId
-                          join l in _context.Languages on t.LanguageId equals l.Id
-                          where l.Locale == lang
                           select new ContentVm
                           {
                               Key = c.Key,

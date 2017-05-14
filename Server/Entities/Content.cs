@@ -21,9 +21,7 @@ namespace AspNetCoreSpa.Server.Entities
         [StringLength(2048)]
         public string Text { get; set; }
         public virtual Content Content { get; set; }
-        public virtual Language Language { get; set; }
         public int ContentId { get; set; }
-        public int LanguageId { get; set; }
 
     }
 
