@@ -22,6 +22,7 @@ import {UppercasePipe} from './pipes/uppercase.pipe';
 // Services
 import {ContentService} from './services/content.service';
 import {NavbarComponent} from "./components/navbar.component";
+import {CanActivateUser} from "./guards/user-can-activate.guard";
 
 const components: Array<any> = [
     DynamicFormComponent,
@@ -33,6 +34,12 @@ const components: Array<any> = [
     PageHeadingComponent,
     UppercasePipe,
     NavbarComponent
+];
+
+const services = [
+    FormControlService,
+    ContentService,
+    CanActivateUser
 ];
 
 @NgModule({
@@ -67,8 +74,7 @@ export class SharedModule {
         return {
             ngModule: SharedModule,
             providers: [
-                FormControlService,
-                ContentService
+                ...services
             ]
         };
     }
