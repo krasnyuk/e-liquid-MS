@@ -17,9 +17,6 @@ const routes: Routes = [
         path: 'register', loadChildren: './+register/register.module#RegisterModule'
     },
     {
-        path: 'profile', loadChildren: './+profile/profile.module#ProfileModule'
-    },
-    {
         path: 'admin', loadChildren: './+admin/admin.module#AdminModule'
     },
     {

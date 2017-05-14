@@ -17,7 +17,11 @@ const pagesRoutes: Routes = [
             {
                 path: 'dashboard',
                 component: DashboardComponent
-            }
+            },
+            {
+                path: 'profile',
+                loadChildren: './+profile/profile.module#ProfileModule'
+            },
         ]
     }
 ];

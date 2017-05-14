@@ -1,9 +1,9 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
-import { ProfileService } from '../profile.service';
-import { ChangePasswordModel } from './change-password.model';
-import { ValidationService } from '../../shared/forms/validation.service';
+import {ProfileService} from "../profile.service";
+import {ChangePasswordModel} from "./change-password.model";
+import {ValidationService} from "../../../shared/forms/validation.service";
 
 @Component({
     selector: 'appc-change-password',
@@ -16,7 +16,8 @@ export class ChangePasswordComponent implements OnInit {
     public changePasswordModel: ChangePasswordModel = new ChangePasswordModel('', '', '');
     @Output() public notification = new EventEmitter<string>();
 
-    constructor(public profileService: ProfileService, public fb: FormBuilder) { }
+    constructor(public profileService: ProfileService, public fb: FormBuilder) {
+    }
 
     public ngOnInit() {
         this.changePasswordForm = this.fb.group({
@@ -25,6 +26,7 @@ export class ChangePasswordComponent implements OnInit {
             confirmPassword: ['', Validators.compose([Validators.required, ValidationService.passwordValidator])]
         });
     }
+
     public changePassword(): void {
         this.submitted = true;
         if (this.changePasswordForm.valid && this.changePasswordForm.dirty) {
