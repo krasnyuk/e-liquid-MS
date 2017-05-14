@@ -42,7 +42,7 @@ export class AuthTokenService {
         Object.assign(data, {
             grant_type: grantType,
             // offline_access is required for a refresh token
-            scope: ['openid offline_access']
+            scope: ['openid profile offline_access']
         });
 
         return this.http.post('/connect/token', this.encodeObjectToParams(data), options)
@@ -54,7 +54,7 @@ export class AuthTokenService {
                 this.store.dispatch(this.authTokenActions.load(tokens));
                 this.store.dispatch(this.loggedInActions.loggedIn());
 
-                const profile = this.jwtHelper.decodeToken(tokens.id_token ? tokens.id_token : '') as ProfileModel;
+                const profile = this.jwtHelper.decodeToken(tokens.id_token ? tokens.id_token : '');
                 this.currentUserService.set(Object.assign(profile, {token: tokens}));
 
                 this.store.dispatch(this.profileActions.load(profile));
