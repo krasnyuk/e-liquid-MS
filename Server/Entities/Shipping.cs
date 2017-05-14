@@ -20,4 +20,3 @@ namespace AspNetCoreSpa.Server.Entities
         public int UserId { get; set; }
     }
 }
-

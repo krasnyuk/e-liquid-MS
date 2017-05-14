@@ -66,7 +66,15 @@ namespace AspNetCoreSpa.Server
 
             if (!_context.Clients.Any())
             {
-                _context.Clients.Add(new Client { Name = "Horbatenko", PhysicAddress = "dsds", ShippingAddress = "dsds", Link = "google.com", Phone = "322-233-322", Info = "info", Status = true, ContactPerson = "Vasyl" });
+                _context.Clients.Add(new Client { Name = "Horbatenko", PhysicAddress = "dsds", ShippingAddress = "dsds", Phone = "322-233-322", Info = "info", Status = true, ContactPerson = "Vasyl" });
+                _context.SaveChanges();
+            }
+
+            if (!_context.ClientLinks.Any())
+            {
+                _context.ClientLinks.Add(new ClientLink { ClientId = 1, Link = "google.com" });
+                _context.SaveChanges();
+                _context.ClientLinks.Add(new ClientLink { ClientId = 1, Link = "ukr.net" });
                 _context.SaveChanges();
             }
 
@@ -89,6 +97,28 @@ namespace AspNetCoreSpa.Server
                 _context.OrderDetails.Add(new OrderDetails { OrderId = 2, Count = 2, Price = 30.45M, ProductId = 2 });
                 _context.SaveChanges();
                 _context.OrderDetails.Add(new OrderDetails { OrderId = 2, Count = 4, Price = 30.46M, ProductId = 3 });
+                _context.SaveChanges();
+            }
+
+            if (!_context.Components.Any())
+            {
+                _context.Components.Add(new Component { Title = "Component1", Description = "desc1" });
+                _context.SaveChanges();
+                _context.Components.Add(new Component { Title = "Component2", Description = "desc2" });
+                _context.SaveChanges();
+            }
+
+            if (!_context.Receipts.Any())
+            {
+                _context.Receipts.Add(new Receipt { Description = "First receipt" });
+                _context.SaveChanges();
+            }
+
+            if (!_context.ReceiptDetails.Any())
+            {
+                _context.ReceiptDetails.Add(new ReceiptDetails { ReceiptId = 1, ComponentId = 1, Amount  = 2 });
+                _context.SaveChanges();
+                _context.ReceiptDetails.Add(new ReceiptDetails { ReceiptId = 1, ComponentId = 2, Amount = 3 });
                 _context.SaveChanges();
             }
 

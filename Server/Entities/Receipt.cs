@@ -3,15 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AspNetCoreSpa.Server.Entities
 {
-    public class Language : IEntityBase
+    public class Receipt : IEntityBase
     {
         [Key]
         public int Id { get; set; }
-        [Required]
-        [MaxLength(7)]
-        public string Locale { get; set; }
-        [MaxLength(100)]
+        [StringLength(255)]
         public string Description { get; set; }
-        public ICollection<ContentText> ContentTexts { get; set; }
+
+        public ICollection<ReceiptDetails> ReceiptDetails { get; set; }
     }
 }

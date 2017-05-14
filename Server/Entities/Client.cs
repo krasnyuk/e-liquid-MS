@@ -19,8 +19,6 @@ namespace AspNetCoreSpa.Server.Entities
         [Required]
         [StringLength(100)]
         public string ContactPerson { get; set; }
-        [StringLength(250)]
-        public string Link { get; set; }
         [Required]
         [StringLength(15)]
         public string Phone { get; set; }
@@ -31,9 +29,9 @@ namespace AspNetCoreSpa.Server.Entities
         [StringLength(255)]
         public string Info { get; set; }
 
+        public ICollection<ClientLink> ClientLinks { get; set; }
         public ICollection<Shipping> Shipping { get; set; }
         public ICollection<Order> Orders { get; set; }
     }
 
 }
-

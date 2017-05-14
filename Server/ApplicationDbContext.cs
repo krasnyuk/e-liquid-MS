@@ -14,11 +14,15 @@ namespace AspNetCoreSpa.Server
         public DbSet<ContentText> ContentText { get; set; }
       
         public DbSet<Client> Clients { get; set; }
+        public DbSet<ClientLink> ClientLinks { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Shipping> Shipping { get; set; }
         public DbSet<Storage> Storage { get; set; }
+        public DbSet<Component> Components { get; set; }
+        public DbSet<Receipt> Receipts { get; set; }
+        public DbSet<ReceiptDetails> ReceiptDetails { get; set; }
 
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)

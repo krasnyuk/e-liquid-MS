@@ -8,6 +8,5 @@ namespace AspNetCoreSpa.Server.Entities
         TwoFactor = 3,
         Lockout = 4,
         CreateAccount = 5
-
     }
 }

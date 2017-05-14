@@ -26,4 +26,3 @@ namespace AspNetCoreSpa.Server.Entities
         public ICollection<Shipping> Shipping { get; set; }
     }
 }
-

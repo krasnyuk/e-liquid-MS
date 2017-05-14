@@ -18,4 +18,3 @@ namespace AspNetCoreSpa.Server.Entities
         public int ProductId { get; set; }
     }
 }
-

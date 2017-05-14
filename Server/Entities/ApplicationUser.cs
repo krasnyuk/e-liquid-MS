@@ -23,6 +23,5 @@ namespace AspNetCoreSpa.Server.Entities
                 return this.FirstName + " " + this.LastName;
             }
         }
-
     }
 }

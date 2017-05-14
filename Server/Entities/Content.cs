@@ -28,4 +28,3 @@ namespace AspNetCoreSpa.Server.Entities
     }
 
 }
-
