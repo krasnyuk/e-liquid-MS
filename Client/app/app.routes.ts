@@ -1,13 +1,14 @@
-import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
+import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
 
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'pages',
+        redirectTo: 'login',
         pathMatch: 'full'
     },
     {
-        path: 'pages', loadChildren: './+pages/pages.module#PagesModule'
+        path: 'pages',
+        loadChildren: './+pages/pages.module#PagesModule'
     },
     {
         path: 'login', loadChildren: './+login/login.module#LoginModule'

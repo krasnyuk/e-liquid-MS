@@ -14,6 +14,7 @@ export class CanActivateUser implements CanActivate {
         if (this.currentUserService.isLoggedIn()) {
             return true;
         } else {
+            console.warn('No permission for this route.');
             this.utilsService.navigateToSignIn();
             return false;
         }

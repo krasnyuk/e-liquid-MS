@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {Title} from '@angular/platform-browser';
-import {Observable} from 'rxjs/Observable';
-import {Store} from '@ngrx/store';
-import {TranslateService} from '@ngx-translate/core';
+import {Component, OnInit} from "@angular/core";
+import {Title} from "@angular/platform-browser";
+import {Observable} from "rxjs/Observable";
+import {Store} from "@ngrx/store";
+import {TranslateService} from "@ngx-translate/core";
 
-import {AppState} from './app-store';
-import {AuthState} from './core/auth-store/auth.store';
-import {AuthTokenService} from './core/services/auth-token/auth-token.service';
+import {AppState} from "./app-store";
+import {AuthState} from "./core/auth-store/auth.store";
+import {AuthTokenService} from "./core/services/auth-token/auth-token.service";
 
 @Component({
     selector: 'appc-root',
@@ -28,19 +28,18 @@ export class AppComponent implements OnInit {
     }
 
     public ngOnInit() {
-        this.translate.onLangChange.subscribe((lan: string) => {
-            this.translate.get('TITLE').subscribe(title => this.setTitle(title));
-        });
+        this.setTitle('E-liquid MS');
+        // this.translate.onLangChange.subscribe((lan: string) => {
+        //     this.translate.get('TITLE').subscribe(title => this.setTitle(title));
+        // });
 
         this.authState$ = this.store.select(state => state.auth);
 
         // This starts up the token refresh preocess for the app
-        this.tokens.startupTokenRefresh()
-            .subscribe(
-                // tslint:disable-next-line:no-console
-                () => console.info('Startup success'),
-                error => console.warn(error)
-            );
+        this.tokens.startupTokenRefresh().subscribe(
+            () => console.info('Startup success'),
+            error => console.warn(error)
+        );
     }
 
     public setTitle(newTitle: string) {

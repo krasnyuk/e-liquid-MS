@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     public login(): void {
         this.accountService.login(this.editForm.value as LoginModel)
             .subscribe(() => {
-                    this.utilityService.navigate('');
+                    this.utilityService.navigate('/pages');
                 },
                 (errors: any) => {
                     this.isProcessing = false;

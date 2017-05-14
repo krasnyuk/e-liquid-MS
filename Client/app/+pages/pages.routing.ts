@@ -1,4 +1,4 @@
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {PagesComponent} from "./pages.component";
 import {CanActivateUser} from "../shared/guards/user-can-activate.guard";
@@ -6,6 +6,7 @@ import {CanActivateUser} from "../shared/guards/user-can-activate.guard";
 const pagesRoutes: Routes = [
     {
         path: '',
+        canActivate: [CanActivateUser],
         component: PagesComponent,
         children: [
             {
@@ -15,7 +16,6 @@ const pagesRoutes: Routes = [
             },
             {
                 path: 'dashboard',
-                canActivate: [CanActivateUser],
                 component: DashboardComponent
             }
         ]
