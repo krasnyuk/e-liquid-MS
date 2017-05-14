@@ -5,56 +5,50 @@ using AspNetCoreSpa.Server.Entities;
 using AspNetCoreSpa.Server.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Microsoft.EntityFrameworkCore;
 
 namespace AspNetCoreSpa.Server.Controllers.api
 {
-
     [Produces("application/json")]
     [Route("api/[controller]")]
     [AllowAnonymous]
     public class ProductController : BaseController
     {
-        private readonly ApplicationDbContext _context;
-     //   private List<Product> _products;
-        public ProductController(ApplicationDbContext context)
+        private readonly ApplicationDbContext context;
+
+        public ProductController(ApplicationDbContext _context)
         {
-            _context = context;
-           // _products = AllProducts.PRODUCTS;
+            context = _context;
         }
 
         // GET: api/Product
-
         [HttpGet]
         public IActionResult Products()
         {
-            var products = _context.Products.ToList();
+            var products = context.Products.ToList();
 
             return Ok(products);
         }
 
-        /*[HttpGet]
-        public IEnumerable<Product> GetProducts()
+        // GET: api/Product/2
+        [HttpGet("{id}")]
+        public IActionResult GetProduct([FromRoute]int id)
         {
-            return _products;
-        }*/
-
-        /*[HttpGet("{id}")]
-        public Product GetProduct([FromRoute]int id)
-        {
-            return _products.FirstOrDefault(x => x.Id == id);
+            Product product = context.Products.Find(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return Ok(product);
         }
 
         [HttpPut("{id}")]
         public IActionResult PutProduct([FromRoute] int id, [FromBody] Product product)
         {
-            var productToEdit = _products.FirstOrDefault(p => p.Id == id);
-            var index = _products.IndexOf(productToEdit);
-
-            if (index > -1)
+            if (ModelState.IsValid)
             {
-                _products[index] = product;
+                context.Entry(product).State = EntityState.Modified;
+                context.SaveChanges();
             }
 
             return Ok(product);
@@ -63,9 +57,11 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [HttpPost]
         public IActionResult PostProduct([FromBody] Product product)
         {
-            product.Id = _products.Count + 1;
-
-            _products.Add(product);
+            if (ModelState.IsValid)
+            {
+                context.Products.Add(product);
+                context.SaveChanges();
+            }
 
             return Ok(product);
         }
@@ -73,10 +69,16 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [HttpDelete("{id}")]
         public IActionResult DeleteProduct([FromRoute] int id)
         {
-            _products.Remove(_products.FirstOrDefault(p => p.Id == id));
+            Product product = context.Products.Find(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            context.Products.Remove(product);
+            context.SaveChanges();
 
             return Ok();
-        }*/
-
+        }
     }
 }
