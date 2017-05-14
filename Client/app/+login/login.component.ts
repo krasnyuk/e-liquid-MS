@@ -1,11 +1,10 @@
-﻿import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+﻿import {Component, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
 
-import {LoginModel} from '../core/models/login-model';
-import {AccountService} from '../core/account/account.service';
-import {ControlBase} from '../shared/forms/control-base';
-import {ControlTextbox} from '../shared/forms/control-textbox';
-import {UtilityService} from '../core/services/utility.service';
+import {LoginModel} from "../core/models/login-model";
+import {AccountService} from "../core/account/account.service";
+import {UtilityService} from "../core/services/utility.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
     selector: 'appc-login',
@@ -13,48 +12,40 @@ import {UtilityService} from '../core/services/utility.service';
     templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-    public loginModel: LoginModel;
-    public errors: string[] = [];
-    public controls: any;
+    public editForm: FormGroup;
+    public isProcessing = false;
+    public submitted = false;
 
     constructor(public accountService: AccountService,
                 public router: Router,
+                private fb: FormBuilder,
                 public utilityService: UtilityService) {
     }
 
-    public login(model: LoginModel): void {
-        this.errors = [];
-        this.accountService.login(model)
+    public save() {
+        this.submitted = true;
+        if (this.editForm.valid) {
+            this.isProcessing = true;
+            return this.login();
+        } else {
+            return null;
+        }
+    }
+
+    public login(): void {
+        this.accountService.login(this.editForm.value as LoginModel)
             .subscribe(() => {
                     this.utilityService.navigate('');
                 },
                 (errors: any) => {
-                    this.errors.push(errors['error_description']);
+                    this.isProcessing = false;
                 });
     };
 
     public ngOnInit() {
-        const controls: Array<ControlBase<any>> = [
-            new ControlTextbox({
-                key: 'username',
-                label: 'Email',
-                placeholder: 'Email',
-                value: '',
-                type: 'email',
-                required: true,
-                order: 1
-            }),
-            new ControlTextbox({
-                key: 'password',
-                label: 'Password',
-                placeholder: 'Password',
-                value: '',
-                type: 'password',
-                required: true,
-                order: 2
-            })
-        ];
-
-        this.controls = controls;
+        this.editForm = this.fb.group({
+            username: ["", Validators.required],
+            password: ["", Validators.required]
+        });
     }
 }

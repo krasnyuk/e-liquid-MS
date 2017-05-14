@@ -1,138 +1,200 @@
-h2   {color:white}
-p    {color:white}
 
- body, html {
-    height: 100%;
-    background-repeat: no-repeat;
-    background-image: linear-gradient(135deg, rgba(31,123,229,1) 0%, rgba(58,139,232,1) 47%, rgba(70,153,234,1) 92%, rgba(72,156,234,1) 100%);
-    background-size: 100% 100%;
+$body-bg: #c1bdba;
+$form-bg: #13232f;
+$white: #ffffff;
+$input-danger: #ff0000;
+$main: #1ab188;
+$main-light: lighten($main,5%);
+$main-dark: darken($main,5%);
+
+$gray-light: #a0b3b0;
+$gray: #ddd;
+
+$thin: 300;
+$normal: 400;
+$bold: 600;
+$br: 4px;
+
+*, *:before, *:after {
+    box-sizing: border-box;
 }
 
-.card-container.card {
-    width: 350px;
-    padding: 40px 40px;
+html {
+    overflow-y: scroll;
 }
 
-.btn {
-    font-weight: 700;
-    height: 36px;
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
-    cursor: default;
+body {
+    background:$body-bg;
+    font-family: 'Titillium Web', sans-serif;
 }
-h1 {
-    margin-top: 30px;
-}
-/*
- * Card component
- */
-.card {
-    background-color: #F7F7F7;
-    /* just in case there no content*/
-    padding: 20px 25px 30px;
-    margin: 20px auto 25px;
-    /* shadows and rounded borders */
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    .card-header{
 
+a {
+    text-decoration:none;
+    color:$main;
+    transition:.5s ease;
+    &:hover {
+        color:$main-dark;
     }
 }
 
-.profile-img-card {
-    width: 96px;
-    height: 96px;
-    margin: 0 auto 10px;
-    display: block;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    border-radius: 50%;
+.form {
+    background:rgba($form-bg,.9);
+    padding: 40px;
+    max-width:600px;
+    margin:40px auto;
+    border-radius:$br;
+    box-shadow:0 4px 10px 4px rgba($form-bg,.3);
 }
 
-/*
- * Form styles
- */
-.profile-name-card {
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    margin: 10px 0 0;
-    min-height: 1em;
+.tab-group {
+    list-style:none;
+    padding:0;
+    margin:0 0 40px 0;
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    li a {
+        display:block;
+        text-decoration:none;
+        padding:15px;
+        background:rgba($gray-light,.25);
+        color:$gray-light;
+        font-size:20px;
+        float:left;
+        width:50%;
+        text-align:center;
+        cursor:pointer;
+        transition:.5s ease;
+        &:hover {
+            background:$main-dark;
+            color:$white;
+        }
+    }
+    .active a {
+        background:$main;
+        color:$white;
+    }
 }
 
-.reauth-email {
-    display: block;
-    color: #404040;
-    line-height: 2;
-    margin-bottom: 10px;
-    font-size: 14px;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+.tab-content > div:last-child {
+    display:none;
 }
 
-.form-signin #inputEmail,
-.form-signin #inputPassword {
-    direction: ltr;
-    height: 44px;
-    font-size: 16px;
+input.validation-error {
+    border-color: $input-danger;
 }
 
-.form-signin input[type=email],
-.form-signin input[type=password],
-.form-signin input[type=text],
-.form-signin button {
-    width: 100%;
-    display: block;
-    margin-bottom: 10px;
-    z-index: 1;
-    position: relative;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+p.validation-error {
+    color: $input-danger;
+    margin-top: 5px;
 }
 
-.form-signin .form-control:focus {
-    border-color: rgb(104, 145, 162);
-    outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+h1 {
+    text-align:center;
+    color:$white;
+    font-weight:$thin;
+    margin:0 0 40px;
 }
 
-.btn.btn-signin {
-    /*background-color: #4d90fe; */
-    /*background-color: rgb(104, 145, 162);
-    / background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
-    padding: 0px;
-    font-weight: 700;
-    font-size: 14px;
-    height: 36px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    border: none;
-    -o-transition: all 0.218s;
-    -moz-transition: all 0.218s;
-    -webkit-transition: all 0.218s;
-    transition: all 0.218s;
+label {
+    position:absolute;
+    transform:translateY(6px);
+    left:13px;
+    color:rgba($white,.5);
+    transition:all 0.25s ease;
+    -webkit-backface-visibility: hidden;
+    pointer-events: none;
+    font-size:22px;
+    .req {
+        margin:2px;
+        color:$main;
+    }
 }
 
-
-.forgot-password {
-    color: rgb(104, 145, 162);
+label.active {
+    transform:translateY(50px);
+    left:2px;
+    font-size:14px;
+    .req {
+        opacity:0;
+    }
 }
 
-.forgot-password:hover,
-.forgot-password:active,
-.forgot-password:focus{
-    color: rgb(12, 97, 33);
+label.highlight {
+    color:$white;
+}
+
+input, textarea {
+    font-size:22px;
+    display:block;
+    width:100%;
+    height:100%;
+    padding:5px 10px;
+    background:none;
+    background-image:none;
+    border:1px solid $gray-light;
+    color:$white;
+    border-radius:0;
+    transition:border-color .25s ease, box-shadow .25s ease;
+    &:focus {
+        outline:0;
+        border-color:$main;
+    }
+}
+
+textarea {
+    border:2px solid $gray-light;
+    resize: vertical;
+}
+
+.field-wrap {
+    position:relative;
+    margin-bottom:40px;
+}
+
+.top-row {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    > div {
+        float:left;
+        width:48%;
+        margin-right:4%;
+        &:last-child {
+            margin:0;
+        }
+    }
+}
+
+.button {
+    border:0;
+    outline:none;
+    border-radius:0;
+    padding:15px 0;
+    font-size:2rem;
+    font-weight:$bold;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    background:$main;
+    color:$white;
+    transition:all.5s ease;
+    -webkit-appearance: none;
+    &:hover, &:focus {
+        background:$main-dark;
+    }
+}
+
+.button-block {
+    display:block;
+    width:100%;
+}
+
+.forgot {
+    margin-top:-20px;
+    text-align:right;
 }
