@@ -59,7 +59,8 @@ namespace AspNetCoreSpa.Server
 
             if (!_context.Clients.Any())
             {
-                _context.Clients.Add(new Client { Name = "Horbatenko", PhysicAddress = "dsds", ShippingAddress = "dsds", Phone = "322-233-322", Info = "info", Status = true, ContactPerson = "Vasyl" });
+                _context.Clients.Add(new Client { Name = "Horbatenko", PhysicAddress = "dsds", ShippingAddress = "dsds",
+                    Phone = "322-233-322", Info = "info", Status = 0, ContactPerson = "Vasyl" });
                 _context.SaveChanges();
             }
 

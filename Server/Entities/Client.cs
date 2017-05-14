@@ -25,7 +25,7 @@ namespace AspNetCoreSpa.Server.Entities
         [StringLength(15)]
         public string SecondaryPhone { get; set; }
         [Required]
-        public bool Status { get; set; }
+        public int Status { get; set; }
         [StringLength(255)]
         public string Info { get; set; }
 

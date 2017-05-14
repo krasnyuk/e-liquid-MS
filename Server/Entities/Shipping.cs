@@ -12,7 +12,7 @@ namespace AspNetCoreSpa.Server.Entities
         [DataType(DataType.DateTime)]
         public DateTime Date { get; set; }
         [Required]  
-        public bool Status { get; set; }
+        public int Status { get; set; }
 
         [Required]
         public int OrderId { get; set; }
