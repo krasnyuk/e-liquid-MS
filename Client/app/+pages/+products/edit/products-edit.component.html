@@ -21,7 +21,8 @@
                        formControlName="volume"/>
                 <span [hidden]="!editForm.get('volume').hasError('required') || (editForm.get('volume').pristine && !submitted)"
                       class="text-danger">Объём обязательное поле</span>
-                <span class="text-danger" *ngIf="editForm.get('volume').hasError('pattern') && !editForm.get('volume').pristine">
+                <span class="text-danger"
+                      *ngIf="editForm.get('volume').hasError('pattern') && !editForm.get('volume').pristine">
                     Число должно быть целым положительным</span>
             </div>
             <div class="form-group">
@@ -29,8 +30,11 @@
                 <input type="text" [class.error]="!editForm.get('nicotineAmount').valid"
                        class="form-control" placeholder="Крепость никотина"
                        formControlName="nicotineAmount"/>
-                <span [hidden]="editForm.get('nicotineAmount').valid || (editForm.get('nicotineAmount').pristine && !submitted)"
+                <span [hidden]="!editForm.get('nicotineAmount').hasError('required') || (editForm.get('nicotineAmount').pristine && !submitted)"
                       class="text-danger">Крепость никотина обязательное поле</span>
+                <span class="text-danger"
+                      *ngIf="editForm.get('nicotineAmount').hasError('pattern') && !editForm.get('nicotineAmount').pristine">
+                    Значение должно быть числом</span>
             </div>
             <div class="form-group">
                 <label>Описание</label>

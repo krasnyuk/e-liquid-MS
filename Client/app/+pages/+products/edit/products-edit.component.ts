@@ -27,7 +27,7 @@ export class ProductsEditComponent extends BaseEditForm {
             id: [""],
             name: ["", [Validators.maxLength(100), Validators.required]],
             volume: ["", [Validators.required, Validators.pattern(/^\d+$/)]],
-            nicotineAmount: ["", Validators.required],
+            nicotineAmount: ["", [Validators.required, Validators.pattern("[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?")]],
             info: ["", Validators.maxLength(255)]
         });
         this.router.params.subscribe(params => {
