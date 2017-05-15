@@ -19,10 +19,10 @@ namespace AspNetCoreSpa.Server.Entities
         [Required]
         public bool Payment { get; set; }
 
-        [Required]
         public int ClientId { get; set; }
 
-        public ICollection<OrderDetails> OrderDetails { get; set; }
-        public ICollection<Shipping> Shipping { get; set; }
+        public virtual Client Client { get; set; }
+        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
+        public virtual ICollection<Shipping> Shipping { get; set; }
     }
 }

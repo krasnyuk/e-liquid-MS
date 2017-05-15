@@ -1,12 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using AspNetCoreSpa.Server;
 using AspNetCoreSpa.Server.Entities;
+using AspNetCoreSpa.Server.ViewModels;
 
 namespace AspNetCoreSpa.Server.Controllers.api
 {
@@ -30,19 +28,20 @@ namespace AspNetCoreSpa.Server.Controllers.api
 
         // GET: api/Client/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetClient([FromRoute] int id)
+        public IActionResult GetClient([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var client = await _context.Clients.SingleOrDefaultAsync(m => m.Id == id);
-
+            Client client = _context.Clients.SingleOrDefault(m => m.Id == id);
             if (client == null)
             {
                 return NotFound();
             }
+
+            _context.Entry(client).Collection(c => c.ClientLinks).Load();
 
             return Ok(client);
         }

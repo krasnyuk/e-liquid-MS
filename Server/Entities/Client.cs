@@ -29,9 +29,9 @@ namespace AspNetCoreSpa.Server.Entities
         [StringLength(255)]
         public string Info { get; set; }
 
-        public ICollection<ClientLink> ClientLinks { get; set; }
-        public ICollection<Shipping> Shipping { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public virtual ICollection<ClientLink> ClientLinks { get; set; }
+        public virtual ICollection<Shipping> Shipping { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 
 }

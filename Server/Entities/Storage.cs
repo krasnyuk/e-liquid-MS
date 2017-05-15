@@ -14,7 +14,8 @@ namespace AspNetCoreSpa.Server.Entities
         [Required]
         public int Count { get; set; }
 
-        [Required]
         public int ProductId { get; set; }
+
+        public virtual Product Product { get; set; }
     }
 }

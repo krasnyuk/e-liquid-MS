@@ -10,6 +10,6 @@ namespace AspNetCoreSpa.Server.Entities
         [StringLength(255)]
         public string Description { get; set; }
 
-        public ICollection<ReceiptDetails> ReceiptDetails { get; set; }
+        public virtual ICollection<ReceiptDetails> ReceiptDetails { get; set; }
     }
 }

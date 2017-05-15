@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AspNetCoreSpa.Server.Entities
 {
@@ -10,9 +11,8 @@ namespace AspNetCoreSpa.Server.Entities
         [Required]
         [StringLength(255)]
         public string Link { get; set; }
-
-        [Required]
         public int ClientId { get; set; }
-    }
 
+        public virtual Client Client { get; set; }
+    }
 }
