@@ -48,7 +48,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
 
         // PUT: api/Client/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutClient([FromRoute] int id, [FromBody] Client client)
+        public async Task<IActionResult> PutClient([FromRoute] int id, [FromBody] List<ClientLink> links, Client client )
         {
             if (!ModelState.IsValid)
             {
@@ -78,12 +78,16 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 }
             }
 
+            foreach (ClientLink o in links)
+                _context.Entry(o).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
             return NoContent();
         }
 
         // POST: api/Client
         [HttpPost]
-        public async Task<IActionResult> PostClient([FromBody] Client client)
+        public async Task<IActionResult> PostClient([FromBody] Client client, List<string> links)
         {
             if (!ModelState.IsValid)
             {
@@ -91,6 +95,11 @@ namespace AspNetCoreSpa.Server.Controllers.api
             }
 
             _context.Clients.Add(client);
+            await _context.SaveChangesAsync();
+
+            foreach (string o in links)
+                _context.ClientLinks.Add(new ClientLink { ClientId = client.Id, Link = o });
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetClient", new { id = client.Id }, client);
