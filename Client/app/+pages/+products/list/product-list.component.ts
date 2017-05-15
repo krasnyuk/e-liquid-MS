@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ProductModel} from "../../../core/models/product.model";
 import {ProductsService} from "../../../core/services/products.service";
 import {BaseComponent} from "../../../core/base/base-component";
+import {ToastsManager} from "ng2-toastr";
 
 @Component({
     selector: 'appc-product-list',
@@ -11,7 +12,8 @@ export class ProductListComponent extends BaseComponent  {
 
     public products: Array<ProductModel> = [];
 
-    constructor(private productsService: ProductsService) {
+    constructor(private productsService: ProductsService,
+                private notificationService: ToastsManager) {
         super();
     }
 
@@ -25,7 +27,9 @@ export class ProductListComponent extends BaseComponent  {
         if (confirm('Удалить данный продукт?')) {
             this.productsService.deleteProduct(productId).subscribe(success => {
                 this.removeFromObjArray(this.products, productId);
+                this.notificationService.success('Продукт успешно удалён!');
             }, error => {
+                this.notificationService.error('Server error. Details: ' + error);
             });
         }
     }

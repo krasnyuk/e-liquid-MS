@@ -12,6 +12,14 @@ import {routing} from "./app.routes";
 import {AppService} from "./app.service";
 import {appReducer} from "./app-store";
 import {AppComponent} from "./app.component";
+import {ToastModule, ToastOptions} from 'ng2-toastr/ng2-toastr';
+
+export class CustomOption extends ToastOptions {
+    animate = 'fade'; // you can override any options available
+    newestOnTop = true;
+    showCloseButton = true;
+    positionClass = 'toast-bottom-right';
+}
 
 @NgModule({
     declarations: [AppComponent],
@@ -26,10 +34,12 @@ import {AppComponent} from "./app.component";
         SharedModule.forRoot(),
         HomeModule,
         StoreModule.provideStore(appReducer),
-        StoreDevtoolsModule.instrumentOnlyWithExtension()
+        StoreDevtoolsModule.instrumentOnlyWithExtension(),
+        ToastModule.forRoot()
     ],
     providers: [
-        AppService
+        AppService,
+        {provide: ToastOptions, useClass: CustomOption},
     ],
     bootstrap: [AppComponent]
 })

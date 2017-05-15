@@ -5,6 +5,7 @@ import {ProductsService} from "../../../core/services/products.service";
 import {ProductModel} from "../../../core/models/product.model";
 import {FormBuilder, Validators} from "@angular/forms";
 import {UtilityService} from "../../../core/services/utility.service";
+import {ToastsManager} from "ng2-toastr";
 
 @Component({
     selector: 'appc-products-edit',
@@ -17,6 +18,7 @@ export class ProductsEditComponent extends BaseEditForm {
     constructor(private router: ActivatedRoute,
                 private utilsService: UtilityService,
                 private fb: FormBuilder,
+                private notificationService: ToastsManager,
                 private productsService: ProductsService) {
         super();
     }
@@ -46,6 +48,7 @@ export class ProductsEditComponent extends BaseEditForm {
         this.product = this.editForm.value as ProductModel;
         this.productsService.saveProduct(this.product).subscribe(success => {
             this.isProcessing = false;
+            this.notificationService.success('Продукт сохранён!');
             this.utilsService.navigate('/pages/products');
         }, error => {
             this.isProcessing = false;

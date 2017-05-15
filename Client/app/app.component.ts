@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewContainerRef} from "@angular/core";
 import {Title} from "@angular/platform-browser";
 import {Observable} from "rxjs/Observable";
 import {Store} from "@ngrx/store";
@@ -7,6 +7,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {AppState} from "./app-store";
 import {AuthState} from "./core/auth-store/auth.store";
 import {AuthTokenService} from "./core/services/auth-token/auth-token.service";
+import {ToastsManager} from "ng2-toastr";
 
 @Component({
     selector: 'appc-root',
@@ -18,7 +19,10 @@ export class AppComponent implements OnInit {
 
     constructor(public titleService: Title,
                 private tokens: AuthTokenService,
+                public toastr: ToastsManager,
+                vcr: ViewContainerRef,
                 private store: Store<AppState>) {
+        this.toastr.setRootViewContainerRef(vcr);
     }
 
     public ngOnInit() {
