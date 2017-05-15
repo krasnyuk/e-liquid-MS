@@ -14,9 +14,10 @@ namespace AspNetCoreSpa.Server.Entities
         [Required]  
         public int Status { get; set; }
 
-        [Required]
         public int OrderId { get; set; }
-        [Required]
         public int UserId { get; set; }
+
+        public virtual Order Order { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

@@ -10,9 +10,10 @@ namespace AspNetCoreSpa.Server.Entities
         [Required]
         public double Amount { get; set; }
 
-        [Required]
         public int ReceiptId { get; set; }
-        [Required]
         public int ComponentId { get; set; }
+
+        public virtual Receipt Receipt { get; set; }
+        public virtual Component Component { get; set; }
     }
 }

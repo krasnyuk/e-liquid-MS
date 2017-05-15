@@ -51,8 +51,5 @@ namespace AspNetCoreSpa.Server.Controllers.api
             }
             return BadRequest("Unable to update content");
         }
-
-
-
     }
 }

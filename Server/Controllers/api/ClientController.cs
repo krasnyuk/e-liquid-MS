@@ -1,67 +1,66 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AspNetCoreSpa.Server.Entities;
-using AspNetCoreSpa.Server.Extensions;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AspNetCoreSpa.Server.Entities;
+using AspNetCoreSpa.Server.ViewModels;
 
 namespace AspNetCoreSpa.Server.Controllers.api
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
-    [AllowAnonymous]
-    public class ProductController : BaseController
+    [Route("api/Client")]
+    public class ClientController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ProductController(ApplicationDbContext context)
+        public ClientController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Product
+        // GET: api/Client
         [HttpGet]
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<Client> GetClients()
         {
-            return _context.Products;
+            return _context.Clients;
         }
 
-        // GET: api/Product/2
+        // GET: api/Client/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProduct([FromRoute] int id)
+        public IActionResult GetClient([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var product = await _context.Products.SingleOrDefaultAsync(m => m.Id == id);
-
-            if (product == null)
+            Client client = _context.Clients.SingleOrDefault(m => m.Id == id);
+            if (client == null)
             {
                 return NotFound();
             }
 
-            return Ok(product);
+            _context.Entry(client).Collection(c => c.ClientLinks).Load();
+
+            return Ok(client);
         }
 
-        // PUT: api/Product/5
+        // PUT: api/Client/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PuTProduct([FromRoute] int id, [FromBody] Product product)
+        public async Task<IActionResult> PutClient([FromRoute] int id, [FromBody] Client client)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != product.Id)
+            if (id != client.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(product).State = EntityState.Modified;
+            _context.Entry(client).State = EntityState.Modified;
 
             try
             {
@@ -69,7 +68,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductExists(id))
+                if (!ClientExists(id))
                 {
                     return NotFound();
                 }
@@ -82,44 +81,45 @@ namespace AspNetCoreSpa.Server.Controllers.api
             return NoContent();
         }
 
+        // POST: api/Client
         [HttpPost]
-        public async Task<IActionResult> PostProduct([FromBody] Product product)
+        public async Task<IActionResult> PostClient([FromBody] Client client)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Products.Add(product);
+            _context.Clients.Add(client);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetClient", new { id = product.Id }, product);
+            return CreatedAtAction("GetClient", new { id = client.Id }, client);
         }
 
-        // DELETE: api/Product/5
+        // DELETE: api/Client/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct([FromRoute] int id)
+        public async Task<IActionResult> DeleteClient([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var product = await _context.Products.SingleOrDefaultAsync(m => m.Id == id);
-            if (product == null)
+            var client = await _context.Clients.SingleOrDefaultAsync(m => m.Id == id);
+            if (client == null)
             {
                 return NotFound();
             }
 
-            _context.Products.Remove(product);
+            _context.Clients.Remove(client);
             await _context.SaveChangesAsync();
 
-            return Ok(product);
+            return Ok(client);
         }
 
-        private bool ProductExists(int id)
+        private bool ClientExists(int id)
         {
-            return _context.Products.Any(e => e.Id == id);
+            return _context.Clients.Any(e => e.Id == id);
         }
     }
 }
