@@ -22,6 +22,10 @@ const pagesRoutes: Routes = [
                 path: 'profile',
                 loadChildren: './+profile/profile.module#ProfileModule'
             },
+            {
+                path: 'products',
+                loadChildren: './+products/products.module#ProductsModule'
+            },
         ]
     }
 ];

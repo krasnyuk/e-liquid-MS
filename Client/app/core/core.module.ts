@@ -13,6 +13,7 @@ import { UtilityService } from './services/utility.service';
 import {StorageService} from "./services/storage.service";
 import {CurrentUserService} from "./services/current-user.service";
 import {AuthStateService} from "./services/auth-state.service";
+import {ProductsService} from "./services/products.service";
 
 @NgModule({
     imports: [
@@ -40,7 +41,8 @@ export class CoreModule {
                 UtilityService,
                 StorageService,
                 CurrentUserService,
-                AuthStateService
+                AuthStateService,
+                ProductsService
             ]
         };
     }
