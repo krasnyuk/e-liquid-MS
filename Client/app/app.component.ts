@@ -16,23 +16,13 @@ export class AppComponent implements OnInit {
 
     private authState$: Observable<AuthState>;
 
-    constructor(public translate: TranslateService,
-                public titleService: Title,
+    constructor(public titleService: Title,
                 private tokens: AuthTokenService,
                 private store: Store<AppState>) {
-        // this language will be used as a fallback when a translation isn't found in the current language
-        translate.setDefaultLang('en');
-
-        // the lang to use, if the lang isn't available, it will use the current loader to get them
-        translate.use('en');
     }
 
     public ngOnInit() {
         this.setTitle('E-liquid MS');
-        // this.translate.onLangChange.subscribe((lan: string) => {
-        //     this.translate.get('TITLE').subscribe(title => this.setTitle(title));
-        // });
-
         this.authState$ = this.store.select(state => state.auth);
 
         // This starts up the token refresh preocess for the app
