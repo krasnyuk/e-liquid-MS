@@ -1,8 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AspNetCoreSpa.Server.Entities
 {
+    public enum StatusEnum
+    {
+        active, inactive
+    }
+        
+
+
     public class Client : IEntityBase
     {
         [Key]
@@ -25,7 +34,8 @@ namespace AspNetCoreSpa.Server.Entities
         [StringLength(15)]
         public string SecondaryPhone { get; set; }
         [Required]
-        public int Status { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public StatusEnum Status { get; set; }
         [StringLength(255)]
         public string Info { get; set; }
 
