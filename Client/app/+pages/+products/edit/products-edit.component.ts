@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {ProductsService} from "../../../core/services/products.service";
 import {ProductModel} from "../../../core/models/product.model";
 import {FormBuilder, Validators} from "@angular/forms";
+import {UtilityService} from "../../../core/services/utility.service";
 
 @Component({
     selector: 'appc-products-edit',
@@ -14,6 +15,7 @@ export class ProductsEditComponent extends BaseEditForm {
     public product: ProductModel = <ProductModel> {};
 
     constructor(private router: ActivatedRoute,
+                private utilsService: UtilityService,
                 private fb: FormBuilder,
                 private productsService: ProductsService) {
         super();
@@ -44,7 +46,7 @@ export class ProductsEditComponent extends BaseEditForm {
         this.product = this.editForm.value as ProductModel;
         this.productsService.saveProduct(this.product).subscribe(success => {
             this.isProcessing = false;
-            debugger;
+            this.utilsService.navigate('/pages/products');
         }, error => {
             this.isProcessing = false;
         });

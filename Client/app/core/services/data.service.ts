@@ -35,7 +35,7 @@ export class DataService {
 
     // I perform a GET request to the API, appending the given params
     // as URL search parameters. Returns a stream.
-    public get(url: string, params?: any): Observable<Response> {
+    public get(url: string, params?: any): Observable<any> {
         const options = new DataServiceOptions();
         options.method = RequestMethod.Get;
         options.url = url;
@@ -48,7 +48,7 @@ export class DataService {
     // and the data will be serialized as a JSON payload. If only the
     // data is present, it will be serialized as a JSON payload. Returns
     // a stream.
-    public post(url: string, data?: any, params?: any): Observable<Response> {
+    public post(url: string, data?: any, params?: any): Observable<any> {
         if (!data) {
             data = params;
             params = {};
@@ -61,7 +61,7 @@ export class DataService {
         return this.request(options);
     }
 
-    public put(url: string, data?: any, params?: any): Observable<Response> {
+    public put(url: string, data?: any, params?: any): Observable<any> {
         if (!data) {
             data = params;
             params = {};
@@ -74,7 +74,7 @@ export class DataService {
         return this.request(options);
     }
 
-    public delete(url: string): Observable<Response> {
+    public delete(url: string): Observable<any> {
         const options = new DataServiceOptions();
         options.method = RequestMethod.Delete;
         options.url = url;
@@ -193,7 +193,7 @@ export class DataService {
 
     private unwrapHttpError(error: any): any {
         try {
-            return (error.json());
+            return error.text() ? error.json() : {}
         } catch (jsonError) {
             return ({
                 code: -1,
@@ -201,9 +201,11 @@ export class DataService {
             });
         }
     }
+
     private unwrapHttpValue(value: Response): any {
-        return (value.json());
+        return value.text() ? value.json() : {}
     }
+
     private handleErrors(error: any) {
         if (error.status === 401) {
             this.authStateService.clearToken();
