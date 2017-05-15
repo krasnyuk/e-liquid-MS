@@ -15,6 +15,7 @@ import { Subject } from 'rxjs/Subject';
 
 import { UtilityService } from './utility.service';
 import { DataServiceOptions } from './data-service-options';
+import {AuthStateService} from "./auth-state.service";
 
 @Injectable()
 export class DataService {
@@ -26,7 +27,9 @@ export class DataService {
     // Provide the *public* Observable that clients can subscribe to
     public pendingCommands$: Observable<number>;
 
-    constructor(public http: Http, public us: UtilityService) {
+    constructor(public http: Http,
+                private authStateService: AuthStateService,
+                public utilityService: UtilityService) {
         this.pendingCommands$ = this.pendingCommandsSubject.asObservable();
     }
 
@@ -116,17 +119,14 @@ export class DataService {
     }
 
     private addContentType(options: DataServiceOptions): DataServiceOptions {
-        // if (options.method !== RequestMethod.Get) {
         options.headers['Content-Type'] = 'application/json; charset=UTF-8';
-        // }
         return options;
     }
 
     private addAuthToken(options: DataServiceOptions): DataServiceOptions {
-        const authTokens = localStorage.getItem('auth-tokens');
+        const authTokens = this.authStateService.getToken();
         if (authTokens) {
-            // tslint:disable-next-line:whitespace
-            options.headers.Authorization = 'Bearer ' + JSON.parse((<any>authTokens)).access_token;
+            options.headers.Authorization = 'Bearer ' + authTokens.access_token;
         }
         return options;
     }
@@ -206,11 +206,11 @@ export class DataService {
     }
     private handleErrors(error: any) {
         if (error.status === 401) {
-            sessionStorage.clear();
-            this.us.navigateToSignIn();
+            this.authStateService.clearToken();
+            this.utilityService.navigateToSignIn();
         } else if (error.status === 403) {
             // Forbidden
-            this.us.navigateToSignIn();
+            this.utilityService.navigateToSignIn();
         }
     }
 }

@@ -1,22 +1,25 @@
-﻿<div class="col-md-6 offset-md-3">
-    <div class="card">
-        <div class="card-header">
-            Login
-        </div>
-
-        <div class="card-block">
-            <appc-error-summary [errors]="errors"></appc-error-summary>
-            <appc-dynamic-form (formsubmit)="login($event)" [controls]="controls" [btnText]="'Login'"></appc-dynamic-form>
-        </div>
-
+﻿<div class="form">
+    <div id="login">
+        <h1>Вход в систему</h1>
+        <form (ngSubmit)="save()" [formGroup]="editForm">
+            <div class="field-wrap">
+                <input formControlName="username" type="email" placeholder="Email"
+                       [ngClass]="{'validation-error': editForm.controls['username'].hasError('required') && submitted}"
+                       autocomplete="off"/>
+                <p class="validation-error" *ngIf="editForm.controls['username'].hasError('required') && submitted">
+                    Email required</p>
+            </div>
+            <div class="field-wrap">
+                <input formControlName="password" type="password" placeholder="Password"
+                       [ngClass]="{'validation-error': editForm.controls['password'].hasError('required') && submitted}"
+                       autocomplete="off"/>
+                <p class="validation-error" *ngIf="editForm.controls['password'].hasError('required') && submitted">
+                    Password required</p>
+            </div>
+            <button [disabled]="isProcessing" type="submit" class="button button-block">
+                <i *ngIf="isProcessing" class="fa fa-spinner fa-spin" aria-hidden="true"></i> Войти
+            </button>
+        </form>
     </div>
+</div> <!-- /form -->
 
-    <p class="text-center font-weight-bold">
-        OR
-    </p>
-
-    <div class="text-center">
-        <appc-social-login></appc-social-login>
-    </div>
-
-</div>

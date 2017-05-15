@@ -1,7 +1,7 @@
 import { ActionReducer, combineReducers } from '@ngrx/store';
 import { ProfileModel } from '../models/profile-model';
 import { profileReducer } from '../profile/profile.reducer';
-import { authTokenReducer } from '../auth-token/auth-token.reducer';
+import { authTokenReducer } from '../services/auth-token/auth-token.reducer';
 import { authReadyReducer } from './auth-ready.reducer';
 import { loggedInReducer } from './logged-in.reducer';
 import { AuthTokenModel } from '../models/auth-tokens-model';
