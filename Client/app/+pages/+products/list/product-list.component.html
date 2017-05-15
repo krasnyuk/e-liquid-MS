@@ -3,7 +3,7 @@
         <div class="x_title">
             <h2>Продукция компании</h2>
             <div class="nav navbar-right panel_toolbox">
-                <button class="btn btn-md btn-success">
+                <button [routerLink]="['/pages', 'products', 'add']" class="btn btn-md btn-success">
                     Добавить
                 </button>
             </div>
@@ -24,11 +24,14 @@
                 <tbody>
                 <tr *ngFor="let product of products">
                     <td>{{product.id}}</td>
-                    <td>{{product.name}}</td>
+                    <td><b>{{product.name}}</b></td>
                     <td>{{product.volume}}</td>
                     <td>{{product.nicotineAmount}}</td>
                     <td>{{product.info}}</td>
                     <td>
+                        <button [routerLink]="['/pages','products','edit', product.id]" class="btn btn-xs btn-warning">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </button>
                         <button class="btn btn-xs btn-danger">
                             <i class="fa fa-close"></i>
                         </button>

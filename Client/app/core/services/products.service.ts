@@ -14,18 +14,19 @@ export class ProductsService {
         return this.dataService.get(this.baseUrl);
     }
 
-    public getProduct(id: string): Observable<any> {
+    public getProduct(id: number): Observable<any> {
         const url = `${this.baseUrl}/${id}`;
         return this.dataService.get(url);
     }
 
-    public deleteProduct(id: string): Observable<any> {
+    public deleteProduct(id: number): Observable<any> {
         const url = `${this.baseUrl}/${id}`;
         return this.dataService.delete(url);
     }
 
     public saveProduct(product: ProductModel): Observable<any> {
         if (!product.id) {
+            product.id = 0;
             return this.createProduct(product);
         }
         return this.updateProduct(product);
