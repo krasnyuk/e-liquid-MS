@@ -103,7 +103,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             _context.Orders.Add(order);
             await _context.SaveChangesAsync();
 
-            foreach (OrderDetails o in order.OrderDetails)
+            foreach (OrderDetails o in order.OrderDetails.ToList())
                 _context.OrderDetails.Add(new OrderDetails { Price = o.Price, Count = o.Count, ProductId = o.ProductId, OrderId = o.OrderId });
 
             await _context.SaveChangesAsync();
