@@ -48,7 +48,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
 
         // PUT: api/Client/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutClient([FromRoute] int id, [FromBody] List<ClientLink> links, Client client )
+        public async Task<IActionResult> PutClient([FromRoute] int id, [FromBody] Client client )
         {
             if (!ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 }
             }
 
-            foreach (ClientLink o in links)
+            foreach (ClientLink o in client.ClientLinks)
                 _context.Entry(o).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
@@ -87,22 +87,22 @@ namespace AspNetCoreSpa.Server.Controllers.api
 
         // POST: api/Client
         [HttpPost]
-        public async Task<IActionResult> PostClient([FromBody] Client client, List<string> links)
+        public async Task<IActionResult> PostClient([FromBody] PostClientViewModel client)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Clients.Add(client);
+            _context.Clients.Add(client.Client);
             await _context.SaveChangesAsync();
 
-            foreach (string o in links)
-                _context.ClientLinks.Add(new ClientLink { ClientId = client.Id, Link = o });
+            foreach (string o in client.Links)
+                _context.ClientLinks.Add(new ClientLink { ClientId = client.Client.Id, Link = o });
 
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetClient", new { id = client.Id }, client);
+            return CreatedAtAction("GetClient", new { id = client.Client.Id }, client);
         }
 
         // DELETE: api/Client/5
