@@ -64,6 +64,8 @@ namespace AspNetCoreSpa.Server.Controllers.api
             }
 
             _context.Entry(order).State = EntityState.Modified;
+            var oldOrderDetails = _context.OrderDetails.Where(x => x.OrderId == id).ToList();
+            _context.OrderDetails.RemoveRange(oldOrderDetails);
 
             try
             {
@@ -81,17 +83,10 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 }
             }
 
-            foreach (OrderDetails o in order.OrderDetails)
-                if (o.Id == -1)
-                {
+            foreach (OrderDetails o in order.OrderDetails.ToList())
                     _context.OrderDetails.Add(new OrderDetails { Count = o.Count, OrderId = o.OrderId, Price = o.Price, ProductId = o.ProductId });
-                    await _context.SaveChangesAsync();
-                }
-                else
-                {
-                    _context.Entry(o).State = EntityState.Modified;
-                    await _context.SaveChangesAsync();
-                }
+
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
