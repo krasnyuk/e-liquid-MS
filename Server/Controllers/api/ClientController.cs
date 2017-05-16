@@ -79,8 +79,16 @@ namespace AspNetCoreSpa.Server.Controllers.api
             }
 
             foreach (ClientLink o in client.ClientLinks)
-                _context.Entry(o).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+                if (o.Id == -1)
+                {
+                    _context.ClientLinks.Add(new ClientLink { Link = o.Link, ClientId = o.ClientId });
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    _context.Entry(o).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                }
 
             return NoContent();
         }
