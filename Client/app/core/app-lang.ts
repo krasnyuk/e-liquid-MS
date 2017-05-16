@@ -1,6 +1,6 @@
 export const Lang = {
     clientStatus: {
-        active: "Сотрудничаем",
+        active: "Сотрудничество",
         inactive: "Отказали",
         pending: "Ожидание",
         realization: "Реализация",

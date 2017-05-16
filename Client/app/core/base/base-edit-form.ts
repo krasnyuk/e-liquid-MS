@@ -1,7 +1,8 @@
 import {FormGroup} from "@angular/forms";
 import {OnInit} from "@angular/core";
+import {BaseComponent} from "./base-component";
 
-export class BaseEditForm implements OnInit {
+export class BaseEditForm extends BaseComponent {
     protected editForm: FormGroup;
     protected formTitle: string = "";
     protected isProcessing = false;
@@ -18,6 +19,10 @@ export class BaseEditForm implements OnInit {
     }
 
     protected saveInternal() {
+    }
+
+    protected checkControlValidation(controlName: string, errorName: string) {
+        return this.editForm.get(controlName).hasError(errorName) && !this.editForm.get(controlName).pristine;
     }
 
     protected resetForm() {

@@ -8,7 +8,7 @@ import {ClientsService} from "../../../core/services/clients.service";
     selector: 'appc-clients-list',
     templateUrl: 'clients-list.component.html'
 })
-export class ClientsListComponent extends BaseComponent  {
+export class ClientsListComponent extends BaseComponent {
 
     public clients: Array<ClientModel> = [];
 
@@ -18,8 +18,10 @@ export class ClientsListComponent extends BaseComponent  {
     }
 
     ngOnInit() {
-        this.clientsService.getClients().subscribe(success => {
-            this.clients = success;
+        this.clientsService.getClients().subscribe((success: Array<any>) => {
+            this.clients = success.sort((a, b) => {
+                return (a.status > b.status) ? 1 : ((b.status > a.status) ? -1 : 0);
+            });
         });
     }
 

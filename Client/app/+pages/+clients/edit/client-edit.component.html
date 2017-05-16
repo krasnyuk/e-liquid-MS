@@ -5,49 +5,89 @@
     <div class="x_content">
         <form class="form-horizontal" (ngSubmit)="submitForm()" [formGroup]="editForm">
             <div class="form-group">
-                <label>Наименование</label>
+                <label>Название</label>
                 <input type="text" [class.error]="!editForm.get('name').valid"
-                       class="form-control" placeholder="Наименование"
+                       class="form-control" placeholder="Название"
                        formControlName="name"/>
-                <span [hidden]="!editForm.get('name').hasError('required') || (editForm.get('name').pristine && !submitted)"
-                      class="text-danger">Наименование обязательное поле</span>
-                <span class="text-danger" *ngIf="editForm.get('name').hasError('maxLength') && submitted">
-                    Максимальная длина 100 символов</span>
+                <span *ngIf="checkControlValidation('name', 'required')"
+                      class="text-danger">Название обязательное поле</span>
+                <span *ngIf="checkControlValidation('name', 'maxLength')"
+                      class="text-danger">Максимальная длина поля 100 символов</span>
             </div>
             <div class="form-group">
-                <label>Объём</label>
-                <input type="text" [class.error]="!editForm.get('volume').valid"
-                       class="form-control" placeholder="Объём"
-                       formControlName="volume"/>
-                <span [hidden]="!editForm.get('volume').hasError('required') || (editForm.get('volume').pristine && !submitted)"
-                      class="text-danger">Объём обязательное поле</span>
-                <span class="text-danger"
-                      *ngIf="editForm.get('volume').hasError('pattern') && !editForm.get('volume').pristine">
-                    Число должно быть целым положительным</span>
+                <label>Адресс</label>
+                <input type="text" [class.error]="!editForm.get('physicAddress').valid"
+                       class="form-control" placeholder="Адресс"
+                       formControlName="physicAddress"/>
+                <span *ngIf="checkControlValidation('physicAddress', 'required')"
+                      class="text-danger">Адресс обязательное поле</span>
+                <span *ngIf="checkControlValidation('physicAddress', 'maxLength')"
+                      class="text-danger">Максимальная длина поля 150 символов</span>
             </div>
             <div class="form-group">
-                <label>Крепость никотина</label>
-                <input type="text" [class.error]="!editForm.get('nicotineAmount').valid"
-                       class="form-control" placeholder="Крепость никотина"
-                       formControlName="nicotineAmount"/>
-                <span [hidden]="!editForm.get('nicotineAmount').hasError('required') || (editForm.get('nicotineAmount').pristine && !submitted)"
-                      class="text-danger">Крепость никотина обязательное поле</span>
-                <span class="text-danger"
-                      *ngIf="editForm.get('nicotineAmount').hasError('pattern') && !editForm.get('nicotineAmount').pristine">
-                    Значение должно быть числом</span>
+                <label>Адресс доставки</label>
+                <input type="text" [class.error]="!editForm.get('shippingAddress').valid"
+                       class="form-control" placeholder="Адресс доставки"
+                       formControlName="shippingAddress"/>
+                <span *ngIf="checkControlValidation('shippingAddress', 'required')"
+                      class="text-danger">Адресс доставки обязательное поле</span>
+                <span *ngIf="checkControlValidation('shippingAddress', 'maxLength')"
+                      class="text-danger">Максимальная длина поля 150 символов</span>
+            </div>
+            <div class="form-group">
+                <label>Контактное лицо</label>
+                <input type="text" [class.error]="!editForm.get('contactPerson').valid"
+                       class="form-control" placeholder="Контактное лицо"
+                       formControlName="contactPerson"/>
+                <span *ngIf="checkControlValidation('contactPerson', 'required')"
+                      class="text-danger">Контактное лицо обязательное поле</span>
+                <span *ngIf="checkControlValidation('contactPerson', 'maxLength')"
+                      class="text-danger">Максимальная длина поля 100 символов</span>
+            </div>
+            <div class="form-group">
+                <label>Телефон (основной)</label>
+                <input type="text" [class.error]="!editForm.get('phone').valid"
+                       class="form-control" placeholder="Телефон (основной)"
+                       formControlName="phone"/>
+                <span *ngIf="checkControlValidation('phone', 'required')"
+                      class="text-danger">Телефон (основной) обязательное поле</span>
+                <span *ngIf="checkControlValidation('phone', 'maxLength')"
+                      class="text-danger">Максимальная длина поля 15 символов</span>
+            </div>
+            <div class="form-group">
+                <label>Телефон (дополнительный)</label>
+                <input type="text" [class.error]="!editForm.get('secondaryPhone').valid"
+                       class="form-control" placeholder="Телефон (дополнительный)"
+                       formControlName="secondaryPhone"/>
+                <span *ngIf="checkControlValidation('secondaryPhone', 'required')"
+                      class="text-danger">Телефон (дополнительный) обязательное поле</span>
+                <span *ngIf="checkControlValidation('secondaryPhone', 'maxLength')"
+                      class="text-danger">Максимальная длина поля 15 символов</span>
+            </div>
+            <div class="form-group">
+                <label>Статус клиента</label>
+                <select type="text" [class.error]="!editForm.get('status').valid"
+                        class="form-control" formControlName="status">
+                    <option *ngFor="let option of clientStatuses" [ngValue]="option.key">
+                        {{templateLang.clientStatus[option.key]}}
+                    </option>
+                </select>
+                <span *ngIf="checkControlValidation('status', 'required')"
+                      class="text-danger">Статус клиента обязательное поле</span>
             </div>
             <div class="form-group">
                 <label>Описание</label>
                 <textarea type="text" [class.error]="!editForm.get('info').valid"
                           class="form-control" placeholder="Описание"
                           formControlName="info"></textarea>
-                <span [hidden]="!editForm.get('info').hasError('maxLength') || (editForm.get('info').pristine && !submitted)"
-                      class="text-danger">Описание может быть максимальной длиной в 255 символов</span>
+                <span *ngIf="checkControlValidation('info', 'maxLength')"
+                      class="text-danger">Максимальная длина поля 255 символов</span>
             </div>
-            <button [disabled]="isProcessing" type="submit" class="btn btn-success pull-right">
+
+            <button [disabled]="isProcessing || editForm.invalid" type="submit" class="btn btn-success pull-right">
                 <i *ngIf="isProcessing" class="fa fa-spinner fa-spin" aria-hidden="true"></i> Сохранить
             </button>
-            <button [routerLink]="['/pages', 'products']" class="btn btn-default pull-right">Назад</button>
+            <button [routerLink]="['/pages', 'clients']" class="btn btn-default pull-right">Назад</button>
         </form>
     </div>
 </div>

@@ -1,11 +1,12 @@
 import {Component} from "@angular/core";
 import {BaseEditForm} from "../../../core/base/base-edit-form";
 import {ActivatedRoute} from "@angular/router";
-import {ProductsService} from "../../../core/services/products.service";
-import {ProductModel} from "../../../core/models/product.model";
 import {FormBuilder, Validators} from "@angular/forms";
 import {UtilityService} from "../../../core/services/utility.service";
 import {ToastsManager} from "ng2-toastr";
+import {ClientModel} from "../../../core/models/client.model";
+import {ClientsService} from "../../../core/services/clients.service";
+import {AppConst} from "../../../core/app-constants";
 
 @Component({
     selector: 'appc-client-edit',
@@ -13,43 +14,53 @@ import {ToastsManager} from "ng2-toastr";
 })
 export class ClientEditComponent extends BaseEditForm {
 
-    public product: ProductModel = <ProductModel> {};
+    public client: ClientModel = <ClientModel> {};
+    public clientStatuses: Array<any> = [];
 
     constructor(private router: ActivatedRoute,
                 private utilsService: UtilityService,
                 private fb: FormBuilder,
                 private notificationService: ToastsManager,
-                private productsService: ProductsService) {
+                private clientsService: ClientsService) {
         super();
     }
 
     ngOnInit() {
-        this.formTitle = "Добавить продукт";
+        this.clientStatuses = Object.keys(AppConst.clientStatus).map(item => {
+            return {key: item, value: AppConst.clientStatus[item]};
+        });
+        this.formTitle = "Добавить клиента";
         this.editForm = this.fb.group({
             id: [""],
-            name: ["", [Validators.maxLength(100), Validators.required]],
-            volume: ["", [Validators.required, Validators.pattern(/^\d+$/)]],
-            nicotineAmount: ["", [Validators.required, Validators.pattern("[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?")]],
-            info: ["", Validators.maxLength(255)]
+            name: ["", [Validators.required, Validators.maxLength(100)]],
+            physicAddress: ["", [Validators.required, Validators.maxLength(150)]],
+            shippingAddress: ["", [Validators.required, Validators.maxLength(150)]],
+            contactPerson: ["", [Validators.required, Validators.maxLength(100)]],
+            phone: ["", [Validators.required, Validators.maxLength(15)]],
+            secondaryPhone: ["", Validators.maxLength(15)],
+            status: ["", [Validators.required]],
+            info: ["", Validators.maxLength(255)],
+            // clientLinks: [""]
         });
         this.router.params.subscribe(params => {
-            const productId = +params['productId'];
-            if (productId) {
-                this.formTitle = "Редактировать продукт";
-                this.productsService.getProduct(productId).subscribe(success => {
-                    this.product = success;
+            const clientId = +params['clientId'];
+            if (clientId) {
+                this.formTitle = "Редактировать клиента";
+                this.clientsService.getClient(clientId).subscribe(success => {
+                    this.client = success;
                     this.editForm.patchValue(success);
                 });
             }
         });
     }
 
+
     protected saveInternal() {
-        this.product = this.editForm.value as ProductModel;
-        this.productsService.saveProduct(this.product).subscribe(success => {
+        this.client = this.editForm.value as ClientModel;
+        this.clientsService.saveClient(this.client).subscribe(success => {
             this.isProcessing = false;
-            this.notificationService.success('Продукт сохранён!');
-            this.utilsService.navigate('/pages/products');
+            this.notificationService.success(`Клиент ${this.client.name} сохранён!`);
+            this.utilsService.navigate('/pages/clients');
         }, error => {
             this.isProcessing = false;
         });
