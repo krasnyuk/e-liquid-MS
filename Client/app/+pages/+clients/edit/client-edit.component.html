@@ -75,6 +75,21 @@
                 <span *ngIf="checkControlValidation('status', 'required')"
                       class="text-danger">Статус клиента обязательное поле</span>
             </div>
+            <label>Ссылки</label>
+            <fieldset formArrayName="clientLinks">
+                <div class="input-group" *ngFor="let option of editForm.controls['clientLinks'].controls; let i=index;"
+                     [formGroupName]="i">
+                    <input formControlName="link" type="text" class="form-control">
+                    <span class="input-group-btn">
+                        <button (click)="deleteLink(i)" type="button" class="btn btn-default">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                    </span>
+                </div>
+                <button class="btn btn-default" (click)="addOtherLinkFormControl()" type="button">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Добавить ссылку
+                </button>
+            </fieldset>
             <div class="form-group">
                 <label>Описание</label>
                 <textarea type="text" [class.error]="!editForm.get('info').valid"

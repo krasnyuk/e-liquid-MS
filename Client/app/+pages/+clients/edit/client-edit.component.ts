@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {BaseEditForm} from "../../../core/base/base-edit-form";
 import {ActivatedRoute} from "@angular/router";
-import {FormBuilder, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UtilityService} from "../../../core/services/utility.service";
 import {ToastsManager} from "ng2-toastr";
 import {ClientModel} from "../../../core/models/client.model";
@@ -26,7 +26,7 @@ export class ClientEditComponent extends BaseEditForm {
     }
 
     ngOnInit() {
-        this.clientStatuses = Object.keys(AppConst.clientStatus).map(item => {
+        this.clientStatuses = Object.keys(AppConst.clientStatus).map((item: any) => {
             return {key: item, value: AppConst.clientStatus[item]};
         });
         this.formTitle = "Добавить клиента";
@@ -40,7 +40,7 @@ export class ClientEditComponent extends BaseEditForm {
             secondaryPhone: ["", Validators.maxLength(15)],
             status: ["", [Validators.required]],
             info: ["", Validators.maxLength(255)],
-            // clientLinks: [""]
+            clientLinks: this.fb.array([])
         });
         this.router.params.subscribe(params => {
             const clientId = +params['clientId'];
@@ -48,12 +48,36 @@ export class ClientEditComponent extends BaseEditForm {
                 this.formTitle = "Редактировать клиента";
                 this.clientsService.getClient(clientId).subscribe(success => {
                     this.client = success;
-                    this.editForm.patchValue(success);
+                    this.updateEditForm();
                 });
+            } else {
+                this.addOtherLinkFormControl();
             }
         });
     }
 
+    private updateEditForm() {
+        if (this.client.clientLinks.length === 0) {
+            this.addOtherLinkFormControl(); // set default control
+        } else {
+            this.client.clientLinks.forEach(item => this.addOtherLinkFormControl()); // add new control for each link
+        }
+        this.editForm.patchValue(this.client); // update form value
+    }
+
+    private getOtherLinkFormControl = (): FormGroup => this.fb.group({
+        id: [""],
+        link: [""],
+        clientId: [""]
+    });
+
+    public addOtherLinkFormControl(): void {
+        (<FormArray>this.editForm.controls['clientLinks']).push(this.getOtherLinkFormControl());
+    }
+
+    public deleteLink(controlId: number): void {
+        (<FormArray>this.editForm.controls['clientLinks']).removeAt(controlId);
+    }
 
     protected saveInternal() {
         this.client = this.editForm.value as ClientModel;

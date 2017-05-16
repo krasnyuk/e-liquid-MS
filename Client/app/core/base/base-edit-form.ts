@@ -22,7 +22,8 @@ export class BaseEditForm extends BaseComponent {
     }
 
     protected checkControlValidation(controlName: string, errorName: string) {
-        return this.editForm.get(controlName).hasError(errorName) && !this.editForm.get(controlName).pristine;
+        const control = this.editForm.get(controlName);
+        return control.hasError(errorName) && (!control.pristine || control.touched);
     }
 
     protected resetForm() {
