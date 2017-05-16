@@ -12,8 +12,7 @@ namespace AspNetCoreSpa.Server.Entities
         pending,
         want_to_work,
         realization
-    }
-        
+    }     
 
 
     public class Client : IEntityBase
