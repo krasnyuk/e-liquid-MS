@@ -48,19 +48,19 @@ namespace AspNetCoreSpa.Server.Controllers.api
 
         // PUT: api/Client/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutClient([FromRoute] int id, [FromBody] Client client)
+        public async Task<IActionResult> PutClient([FromRoute] int id, [FromBody] PostClientViewModel client)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != client.Id)
+            if (id != client.Client.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(client).State = EntityState.Modified;
+            _context.Entry(client.Client).State = EntityState.Modified;
 
             var oldLinks = _context.ClientLinks.Where(x => x.ClientId == id).ToList();
             _context.ClientLinks.RemoveRange(oldLinks);
@@ -81,9 +81,9 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 }
             }
 
-            foreach (ClientLink o in client.ClientLinks.ToList())
+            foreach (string o in client.Links.ToList())
             {
-                _context.ClientLinks.Add(new ClientLink { Link = o.Link, ClientId = o.ClientId });
+                _context.ClientLinks.Add(new ClientLink { Link = o, ClientId = id });
             }
 
             await _context.SaveChangesAsync();
