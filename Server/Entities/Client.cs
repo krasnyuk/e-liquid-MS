@@ -7,7 +7,11 @@ namespace AspNetCoreSpa.Server.Entities
 {
     public enum StatusEnum
     {
-        active, inactive
+        active,
+        inactive,
+        pending,
+        want_to_work,
+        realization
     }
         
 
