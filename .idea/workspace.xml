@@ -19,8 +19,8 @@
       <file leaf-file-name="clients-list.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Client/app/+pages/+clients/list/clients-list.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="70" lean-forward="false" selection-start-line="29" selection-start-column="70" selection-end-line="29" selection-end-column="70" />
+            <state relative-caret-position="170">
+              <caret line="10" column="47" lean-forward="false" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -38,21 +38,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="clients-list.component.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="clients-list.component.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Client/app/+pages/+clients/list/clients-list.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="12" column="37" lean-forward="false" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
-              <folding />
+            <state relative-caret-position="250">
+              <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+              <folding>
+                <marker date="1494933762705" expanded="true" signature="1049:1283" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app-constants.ts" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Client/app/core/app-constants.ts">
+      <file leaf-file-name="app-lang.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Client/app/core/app-lang.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="23" lean-forward="false" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+            <state relative-caret-position="68">
+              <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -107,7 +109,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Server/Controllers/api/AuthorizationController.cs" />
         <option value="$PROJECT_DIR$/Client/app/shared/components/navbar.component.ts" />
         <option value="$PROJECT_DIR$/Client/app/core/services/storage.service.ts" />
         <option value="$PROJECT_DIR$/Client/app/+login/login.component.scss" />
@@ -133,7 +134,6 @@
         <option value="$PROJECT_DIR$/tslint.json" />
         <option value="$PROJECT_DIR$/Client/app/core/base/base-edit-form.ts" />
         <option value="$PROJECT_DIR$/Client/app/core/services/products.service.ts" />
-        <option value="$PROJECT_DIR$/Client/app/core/base/base-component.ts" />
         <option value="$PROJECT_DIR$/Client/app/core/services/data.service.ts" />
         <option value="$PROJECT_DIR$/Client/app/+pages/+products/list/product-list.component.html" />
         <option value="$PROJECT_DIR$/Client/app/+pages/+products/edit/products-edit.component.html" />
@@ -156,8 +156,10 @@
         <option value="$PROJECT_DIR$/Client/app/+pages/+clients/list/clients-list.component.ts" />
         <option value="$PROJECT_DIR$/Client/app/+pages/pages.routing.ts" />
         <option value="$PROJECT_DIR$/Client/app/+pages/+clients/clients.module.ts" />
-        <option value="$PROJECT_DIR$/Client/app/+pages/+clients/list/clients-list.component.html" />
         <option value="$PROJECT_DIR$/Client/app/core/app-constants.ts" />
+        <option value="$PROJECT_DIR$/Client/app/core/app-lang.ts" />
+        <option value="$PROJECT_DIR$/Client/app/core/base/base-component.ts" />
+        <option value="$PROJECT_DIR$/Client/app/+pages/+clients/list/clients-list.component.html" />
       </list>
     </option>
   </component>
@@ -501,12 +503,12 @@
       <workItem from="1494777896751" duration="9928000" />
       <workItem from="1494848154164" duration="2946000" />
       <workItem from="1494851138144" duration="15135000" />
-      <workItem from="1494925758216" duration="5722000" />
+      <workItem from="1494925758216" duration="6867000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84369000" />
+    <option name="totallyTimeSpent" value="85514000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
@@ -545,13 +547,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Client/app/core/base/base-edit-form.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="21" column="4" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server/Entities/Product.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -584,13 +579,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="45" column="5" lean-forward="true" selection-start-line="43" selection-start-column="4" selection-end-line="45" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Client/app/core/base/base-component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="69" lean-forward="false" selection-start-line="7" selection-start-column="69" selection-end-line="7" selection-end-column="69" />
         </state>
       </provider>
     </entry>
@@ -847,7 +835,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -912,16 +900,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Client/app/+pages/+clients/list/clients-list.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="70" lean-forward="false" selection-start-line="29" selection-start-column="70" selection-end-line="29" selection-end-column="70" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Client/app/+pages/+clients/clients.module.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -940,19 +918,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Client/app/+pages/+clients/list/clients-list.component.html">
+    <entry file="file://$PROJECT_DIR$/Client/app/core/app-lang.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="37" lean-forward="false" selection-start-line="12" selection-start-column="37" selection-end-line="12" selection-end-column="37" />
+        <state relative-caret-position="68">
+          <caret line="4" column="26" lean-forward="false" selection-start-line="4" selection-start-column="26" selection-end-line="4" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Client/app/core/app-constants.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="23" lean-forward="false" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+        <state relative-caret-position="459">
+          <caret line="27" column="5" lean-forward="true" selection-start-line="21" selection-start-column="4" selection-end-line="27" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/app/core/base/base-component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="39" lean-forward="false" selection-start-line="5" selection-start-column="39" selection-end-line="5" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/app/+pages/+clients/list/clients-list.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="47" lean-forward="false" selection-start-line="10" selection-start-column="47" selection-end-line="10" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Client/app/+pages/+clients/list/clients-list.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="28" column="20" lean-forward="false" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+          <folding>
+            <marker date="1494933762705" expanded="true" signature="1049:1283" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>

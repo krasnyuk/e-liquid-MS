@@ -24,14 +24,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let client of clients">
+                <tr *ngFor="let client of clients"
+                    [ngClass]="{'success': client.status === templateConst.clientStatus.active,
+                    'warning': client.status === templateConst.clientStatus.pending,
+                    'danger': client.status === templateConst.clientStatus.inactive}">
                     <td><b>{{client.name}}</b></td>
                     <td>{{client.physicAddress}}</td>
                     <td>{{client.shippingAddress}}</td>
                     <td>{{client.contactPerson}}</td>
                     <td>{{client.phone}}</td>
                     <td>{{client.secondaryPhone}}</td>
-                    <td>{{client.status}}</td>
+                    <td>{{templateLang.clientStatus[client.status]}}</td>
                     <td>{{client.info}}</td>
                     <td>
                         <button [routerLink]="['/pages','clients','details', client.id]" class="btn btn-xs btn-info">
