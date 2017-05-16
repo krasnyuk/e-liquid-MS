@@ -67,7 +67,7 @@ export class ClientEditComponent extends BaseEditForm {
 
     private getOtherLinkFormControl = (): FormGroup => this.fb.group({
         id: [""],
-        link: [""],
+        link: ["", Validators.required],
         clientId: [""]
     });
 
@@ -87,6 +87,7 @@ export class ClientEditComponent extends BaseEditForm {
             this.utilsService.navigate('/pages/clients');
         }, error => {
             this.isProcessing = false;
+            this.notificationService.error(`Невозможно сохранить клиента! ` + error);
         });
     }
 }
