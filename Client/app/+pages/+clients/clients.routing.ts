@@ -2,6 +2,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {ClientsPageComponent} from "./clients-page.component";
 import {ClientsListComponent} from "./list/clients-list.component";
 import {ClientEditComponent} from "./edit/client-edit.component";
+import {ClientDetailsComponent} from "./details/client-details.component";
 
 
 export const routes: Routes = [
@@ -24,6 +25,10 @@ export const routes: Routes = [
             {
                 path: 'add',
                 component: ClientEditComponent
+            },
+            {
+                path: 'details/:clientId',
+                component: ClientDetailsComponent
             }
         ]
     }

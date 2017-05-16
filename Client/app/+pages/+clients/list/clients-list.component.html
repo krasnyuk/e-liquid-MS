@@ -28,7 +28,7 @@
                     [ngClass]="{'success': client.status === templateConst.clientStatus.active,
                     'warning': client.status === templateConst.clientStatus.pending,
                     'danger': client.status === templateConst.clientStatus.inactive}">
-                    <td><b>{{client.name}}</b></td>
+                    <td><b><a [routerLink]="['/pages','clients','details', client.id]">{{client.name}}</a></b></td>
                     <td>{{client.physicAddress}}</td>
                     <td>{{client.shippingAddress}}</td>
                     <td>{{client.contactPerson}}</td>

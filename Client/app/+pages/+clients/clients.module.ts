@@ -4,6 +4,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {ClientsPageComponent} from "./clients-page.component";
 import {ClientsListComponent} from "./list/clients-list.component";
 import {ClientEditComponent} from "./edit/client-edit.component";
+import {ClientDetailsComponent} from "./details/client-details.component";
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import {ClientEditComponent} from "./edit/client-edit.component";
     declarations: [
         ClientsPageComponent,
         ClientsListComponent,
-        ClientEditComponent
+        ClientEditComponent,
+        ClientDetailsComponent
     ],
     providers: [],
 })
