@@ -36,7 +36,8 @@
 
             <li *ngFor="let item of client.clientLinks">
                 <p>
-                    <span class="fa fa-link" style="width:50px;"></span><a [href]="item.link" target="_blank">{{item.link}}</a>
+                    <span class="fa fa-link" style="width:50px;"></span>
+                    <a [href]="item.link" target="_blank">{{item.link}}</a>
                 </p>
             </li>
             <li *ngIf="client.info">
