@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { ProfileService } from '../profile.service';
+import { ProfileService } from '../../../core/services/profile.service';
 import { ChangeNameModel } from './change-name.model';
 
 @Component({

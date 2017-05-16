@@ -1,8 +1,8 @@
 ﻿import { Injectable } from '@angular/core';
 
-import { DataService } from '../../core/services/data.service';
-import { ChangePasswordModel } from './changepassword/change-password.model';
-import { ChangeNameModel } from './changename/change-name.model';
+import { DataService } from './data.service';
+import { ChangePasswordModel } from '../../+pages/+profile/changepassword/change-password.model';
+import { ChangeNameModel } from '../../+pages/+profile/changename/change-name.model';
 
 @Injectable()
 export class ProfileService {
