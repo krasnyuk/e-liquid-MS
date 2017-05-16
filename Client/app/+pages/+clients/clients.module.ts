@@ -18,5 +18,5 @@ import {ClientEditComponent} from "./edit/client-edit.component";
     ],
     providers: [],
 })
-export class ProductsModule {
+export class ClientsModule {
 }

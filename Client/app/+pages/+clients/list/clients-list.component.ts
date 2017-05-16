@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
-import {ProductModel} from "../../../core/models/product.model";
-import {ProductsService} from "../../../core/services/products.service";
 import {BaseComponent} from "../../../core/base/base-component";
 import {ToastsManager} from "ng2-toastr";
+import {ClientModel} from "../../../core/models/client.model";
+import {ClientsService} from "../../../core/services/clients.service";
 
 @Component({
     selector: 'appc-clients-list',
@@ -10,24 +10,24 @@ import {ToastsManager} from "ng2-toastr";
 })
 export class ClientsListComponent extends BaseComponent  {
 
-    public products: Array<ProductModel> = [];
+    public clients: Array<ClientModel> = [];
 
-    constructor(private productsService: ProductsService,
+    constructor(private clientsService: ClientsService,
                 private notificationService: ToastsManager) {
         super();
     }
 
     ngOnInit() {
-        this.productsService.getProducts().subscribe(success => {
-            this.products = success;
+        this.clientsService.getClients().subscribe(success => {
+            this.clients = success;
         });
     }
 
-    public deleteProduct(productId: number): void {
-        if (confirm('Удалить данный продукт?')) {
-            this.productsService.deleteProduct(productId).subscribe(success => {
-                this.removeFromObjArray(this.products, productId);
-                this.notificationService.success('Продукт успешно удалён!');
+    public deleteClient(client: ClientModel): void {
+        if (confirm('Удалить данного клиента?')) {
+            this.clientsService.deleteClient(client.id).subscribe(success => {
+                this.removeFromObjArray(this.clients, client.id);
+                this.notificationService.success(`Клиент ${client.name} успешно удалён!`);
             }, error => {
                 this.notificationService.error('Server error. Details: ' + error);
             });

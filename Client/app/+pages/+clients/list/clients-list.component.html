@@ -1,9 +1,9 @@
 <div class="col-xs-12">
     <div class="x_panel">
         <div class="x_title">
-            <h2>Продукция компании</h2>
+            <h2>Клиенты компании</h2>
             <div class="nav navbar-right panel_toolbox">
-                <button [routerLink]="['/pages', 'products', 'add']" class="btn btn-md btn-success">
+                <button [routerLink]="['/pages', 'clients', 'add']" class="btn btn-md btn-success">
                     <i class="fa fa-plus" aria-hidden="true"></i> Добавить
                 </button>
             </div>
@@ -13,26 +13,34 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Наименования</th>
-                    <th>Объём (мл)</th>
-                    <th>Крепость</th>
-                    <th>Описание</th>
-                    <th>Действия</th>
+                    <th>Название</th>
+                    <th>Адресс</th>
+                    <th>Адресс доставки</th>
+                    <th>Контактное лицо</th>
+                    <th>Телефон № 1</th>
+                    <th>Телефон № 2</th>
+                    <th>Статус</th>
+                    <th>Информация</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let product of products">
-                    <td>{{product.id}}</td>
-                    <td><b>{{product.name}}</b></td>
-                    <td>{{product.volume}}</td>
-                    <td>{{product.nicotineAmount}}</td>
-                    <td>{{product.info}}</td>
+                <tr *ngFor="let client of clients">
+                    <td><b>{{client.name}}</b></td>
+                    <td>{{client.physicAddress}}</td>
+                    <td>{{client.shippingAddress}}</td>
+                    <td>{{client.contactPerson}}</td>
+                    <td>{{client.phone}}</td>
+                    <td>{{client.secondaryPhone}}</td>
+                    <td>{{client.status}}</td>
+                    <td>{{client.info}}</td>
                     <td>
-                        <button [routerLink]="['/pages','products','edit', product.id]" class="btn btn-xs btn-warning">
+                        <button [routerLink]="['/pages','clients','details', client.id]" class="btn btn-xs btn-info">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        </button>
+                        <button [routerLink]="['/pages','clients','edit', client.id]" class="btn btn-xs btn-warning">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </button>
-                        <button (click)="deleteProduct(product.id)" class="btn btn-xs btn-danger">
+                        <button (click)="deleteClient(client)" class="btn btn-xs btn-danger">
                             <i class="fa fa-close"></i>
                         </button>
                     </td>

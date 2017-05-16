@@ -26,6 +26,10 @@ const pagesRoutes: Routes = [
                 path: 'products',
                 loadChildren: './+products/products.module#ProductsModule'
             },
+            {
+                path: 'clients',
+                loadChildren: './+clients/clients.module#ClientsModule'
+            },
         ]
     }
 ];
