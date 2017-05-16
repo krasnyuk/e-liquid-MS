@@ -84,7 +84,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             }
 
             foreach (OrderDetails o in order.OrderDetails.ToList())
-                    _context.OrderDetails.Add(new OrderDetails { Count = o.Count, OrderId = o.OrderId, Price = o.Price, ProductId = o.ProductId });
+                    _context.OrderDetails.Add(new OrderDetails { Count = o.Count, OrderId = id, Price = o.Price, ProductId = o.ProductId });
 
             await _context.SaveChangesAsync();
 
