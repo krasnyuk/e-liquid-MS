@@ -67,8 +67,7 @@ export class ClientEditComponent extends BaseEditForm {
 
     private getOtherLinkFormControl = (): FormGroup => this.fb.group({
         id: [""],
-        link: ["", Validators.required],
-        clientId: [""]
+        link: ["", Validators.required]
     });
 
     public addOtherLinkFormControl(): void {

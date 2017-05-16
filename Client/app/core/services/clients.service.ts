@@ -42,10 +42,13 @@ export class ClientsService {
     }
 
     private updateClient(clientModel: ClientModel): Observable<any> {
-        clientModel.clientLinks.map(item => item.clientId = clientModel.id);
-        clientModel.clientLinks.map(item => item.id = !item.id ? -1 : item.id);
-        const url = `${this.baseUrl}/${clientModel.id}`;
-        return this.dataService.put(url, clientModel);
+        const clientDTO = {
+            client: clientModel,
+            links: clientModel.clientLinks.map(item => item.link)
+        };
+        delete clientDTO.client.clientLinks;
+        const url = `${this.baseUrl}/${clientDTO.client.id}`;
+        return this.dataService.put(url, clientDTO);
     }
 
 }

@@ -11,7 +11,7 @@
                        formControlName="name"/>
                 <span *ngIf="checkControlValidation('name', 'required')"
                       class="text-danger">Название обязательное поле</span>
-                <span *ngIf="checkControlValidation('name', 'maxLength')"
+                <span *ngIf="checkControlValidation('name', 'maxlength')"
                       class="text-danger">Максимальная длина поля 100 символов</span>
             </div>
             <div class="form-group">
@@ -21,7 +21,7 @@
                        formControlName="physicAddress"/>
                 <span *ngIf="checkControlValidation('physicAddress', 'required')"
                       class="text-danger">Адресс обязательное поле</span>
-                <span *ngIf="checkControlValidation('physicAddress', 'maxLength')"
+                <span *ngIf="checkControlValidation('physicAddress', 'maxlength')"
                       class="text-danger">Максимальная длина поля 150 символов</span>
             </div>
             <div class="form-group">
@@ -31,7 +31,7 @@
                        formControlName="shippingAddress"/>
                 <span *ngIf="checkControlValidation('shippingAddress', 'required')"
                       class="text-danger">Адресс доставки обязательное поле</span>
-                <span *ngIf="checkControlValidation('shippingAddress', 'maxLength')"
+                <span *ngIf="checkControlValidation('shippingAddress', 'maxlength')"
                       class="text-danger">Максимальная длина поля 150 символов</span>
             </div>
             <div class="form-group">
@@ -41,7 +41,7 @@
                        formControlName="contactPerson"/>
                 <span *ngIf="checkControlValidation('contactPerson', 'required')"
                       class="text-danger">Контактное лицо обязательное поле</span>
-                <span *ngIf="checkControlValidation('contactPerson', 'maxLength')"
+                <span *ngIf="checkControlValidation('contactPerson', 'maxlength')"
                       class="text-danger">Максимальная длина поля 100 символов</span>
             </div>
             <div class="form-group">
@@ -51,7 +51,7 @@
                        formControlName="phone"/>
                 <span *ngIf="checkControlValidation('phone', 'required')"
                       class="text-danger">Телефон (основной) обязательное поле</span>
-                <span *ngIf="checkControlValidation('phone', 'maxLength')"
+                <span *ngIf="checkControlValidation('phone', 'maxlength')"
                       class="text-danger">Максимальная длина поля 15 символов</span>
             </div>
             <div class="form-group">
@@ -61,7 +61,7 @@
                        formControlName="secondaryPhone"/>
                 <span *ngIf="checkControlValidation('secondaryPhone', 'required')"
                       class="text-danger">Телефон (дополнительный) обязательное поле</span>
-                <span *ngIf="checkControlValidation('secondaryPhone', 'maxLength')"
+                <span *ngIf="checkControlValidation('secondaryPhone', 'maxlength')"
                       class="text-danger">Максимальная длина поля 15 символов</span>
             </div>
             <div class="form-group">
@@ -97,7 +97,7 @@
                 <textarea type="text" [class.error]="!editForm.get('info').valid"
                           class="form-control" placeholder="Описание"
                           formControlName="info"></textarea>
-                <span *ngIf="checkControlValidation('info', 'maxLength')"
+                <span *ngIf="checkControlValidation('info', 'maxlength')"
                       class="text-danger">Максимальная длина поля 255 символов</span>
             </div>
 
