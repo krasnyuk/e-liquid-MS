@@ -1,16 +1,21 @@
 import {Component, OnInit} from "@angular/core";
+import {ProfileService} from "../core/services/profile.service";
 
 @Component({
     selector: 'appc-pages-root',
     templateUrl: 'pages.component.html'
 })
 export class PagesComponent implements OnInit {
+    public user: any = {
+        firstName: "",
+        lastName: ""
+    };
 
-    constructor() {
-
+    constructor(private profileService: ProfileService) {
     }
 
     ngOnInit() {
+        this.profileService.userName().subscribe(success => this.user = success);
         this.initCustomThemeScripts();
     }
 

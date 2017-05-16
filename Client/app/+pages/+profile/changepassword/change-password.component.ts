@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
-import {ProfileService} from "../profile.service";
+import {ProfileService} from "../../../core/services/profile.service";
 import {ChangePasswordModel} from "./change-password.model";
 import {ValidationService} from "../../../shared/forms/validation.service";
 

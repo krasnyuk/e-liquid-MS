@@ -14,8 +14,8 @@
                         <img src="/assets/images/default-avatar.jpg" alt="..." class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
-                        <span>Welcome,</span>
-                        <h2>Some Name</h2>
+                        <span>Добро пожаловать,</span>
+                        <h2>{{user.firstName + ' ' + user.lastName}}</h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -34,6 +34,7 @@
                             </li>
                             <li><a><i class="fa fa-edit"></i> Продукция <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
+                                    <li><a [routerLink]="['/pages', 'products', 'add']">Добавить продукт</a></li>
                                     <li><a [routerLink]="['/pages', 'products']">Список</a></li>
                                 </ul>
                             </li>
