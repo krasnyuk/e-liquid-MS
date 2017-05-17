@@ -30,6 +30,10 @@ const pagesRoutes: Routes = [
                 path: 'clients',
                 loadChildren: './+clients/clients.module#ClientsModule'
             },
+            {
+                path: 'orders',
+                loadChildren: './+orders/orders.module#OrdersModule'
+            },
         ]
     }
 ];

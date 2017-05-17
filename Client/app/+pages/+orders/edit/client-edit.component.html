@@ -1,0 +1,110 @@
+<div class="x_panel">
+    <div class="x_title">
+        <h4>{{formTitle}}</h4>
+    </div>
+    <div class="x_content">
+        <form class="form-horizontal" (ngSubmit)="submitForm()" [formGroup]="editForm">
+            <div class="form-group">
+                <label>Название</label>
+                <input type="text" [class.error]="!editForm.get('name').valid"
+                       class="form-control" placeholder="Название"
+                       formControlName="name"/>
+                <span *ngIf="checkControlValidation('name', 'required')"
+                      class="text-danger">Название обязательное поле</span>
+                <span *ngIf="checkControlValidation('name', 'maxlength')"
+                      class="text-danger">Максимальная длина поля 100 символов</span>
+            </div>
+            <div class="form-group">
+                <label>Адресс</label>
+                <input type="text" [class.error]="!editForm.get('physicAddress').valid"
+                       class="form-control" placeholder="Адресс"
+                       formControlName="physicAddress"/>
+                <span *ngIf="checkControlValidation('physicAddress', 'required')"
+                      class="text-danger">Адресс обязательное поле</span>
+                <span *ngIf="checkControlValidation('physicAddress', 'maxlength')"
+                      class="text-danger">Максимальная длина поля 150 символов</span>
+            </div>
+            <div class="form-group">
+                <label>Адресс доставки</label>
+                <input type="text" [class.error]="!editForm.get('shippingAddress').valid"
+                       class="form-control" placeholder="Адресс доставки"
+                       formControlName="shippingAddress"/>
+                <span *ngIf="checkControlValidation('shippingAddress', 'required')"
+                      class="text-danger">Адресс доставки обязательное поле</span>
+                <span *ngIf="checkControlValidation('shippingAddress', 'maxlength')"
+                      class="text-danger">Максимальная длина поля 150 символов</span>
+            </div>
+            <div class="form-group">
+                <label>Контактное лицо</label>
+                <input type="text" [class.error]="!editForm.get('contactPerson').valid"
+                       class="form-control" placeholder="Контактное лицо"
+                       formControlName="contactPerson"/>
+                <span *ngIf="checkControlValidation('contactPerson', 'required')"
+                      class="text-danger">Контактное лицо обязательное поле</span>
+                <span *ngIf="checkControlValidation('contactPerson', 'maxlength')"
+                      class="text-danger">Максимальная длина поля 100 символов</span>
+            </div>
+            <div class="form-group">
+                <label>Телефон (основной)</label>
+                <input type="text" [class.error]="!editForm.get('phone').valid"
+                       class="form-control" placeholder="Телефон (основной)"
+                       formControlName="phone"/>
+                <span *ngIf="checkControlValidation('phone', 'required')"
+                      class="text-danger">Телефон (основной) обязательное поле</span>
+                <span *ngIf="checkControlValidation('phone', 'maxlength')"
+                      class="text-danger">Максимальная длина поля 15 символов</span>
+            </div>
+            <div class="form-group">
+                <label>Телефон (дополнительный)</label>
+                <input type="text" [class.error]="!editForm.get('secondaryPhone').valid"
+                       class="form-control" placeholder="Телефон (дополнительный)"
+                       formControlName="secondaryPhone"/>
+                <span *ngIf="checkControlValidation('secondaryPhone', 'required')"
+                      class="text-danger">Телефон (дополнительный) обязательное поле</span>
+                <span *ngIf="checkControlValidation('secondaryPhone', 'maxlength')"
+                      class="text-danger">Максимальная длина поля 15 символов</span>
+            </div>
+            <div class="form-group">
+                <label>Статус клиента</label>
+                <select type="text" [class.error]="!editForm.get('status').valid"
+                        class="form-control" formControlName="status">
+                    <option *ngFor="let option of clientStatuses" [ngValue]="option.key">
+                        {{templateLang.clientStatus[option.key]}}
+                    </option>
+                </select>
+                <span *ngIf="checkControlValidation('status', 'required')"
+                      class="text-danger">Статус клиента обязательное поле</span>
+            </div>
+
+            <label>Ссылки</label>
+            <fieldset formArrayName="clientLinks">
+                <div class="input-group" *ngFor="let option of editForm.controls['clientLinks'].controls; let i=index;"
+                     [formGroupName]="i">
+                    <input formControlName="link" type="text" class="form-control">
+                    <span class="input-group-btn">
+                        <button (click)="deleteLink(i)" type="button" class="btn btn-default">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                    </span>
+                </div>
+                <button class="btn btn-default" (click)="addOtherLinkFormControl()" type="button">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Добавить ссылку
+                </button>
+            </fieldset>
+
+            <div class="form-group">
+                <label>Описание</label>
+                <textarea type="text" [class.error]="!editForm.get('info').valid"
+                          class="form-control" placeholder="Описание"
+                          formControlName="info"></textarea>
+                <span *ngIf="checkControlValidation('info', 'maxlength')"
+                      class="text-danger">Максимальная длина поля 255 символов</span>
+            </div>
+
+            <button [disabled]="isProcessing || editForm.invalid" type="submit" class="btn btn-success pull-right">
+                <i *ngIf="isProcessing" class="fa fa-spinner fa-spin" aria-hidden="true"></i> Сохранить
+            </button>
+            <button [routerLink]="['/pages', 'clients']" class="btn btn-default pull-right">Назад</button>
+        </form>
+    </div>
+</div>

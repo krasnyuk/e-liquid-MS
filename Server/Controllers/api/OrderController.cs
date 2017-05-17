@@ -25,7 +25,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [HttpGet]
         public IEnumerable<Order> GetOrders()
         {
-            return _context.Orders;
+            return _context.Orders.Include(order => order.Client).ToList();
         }
 
         // GET: api/Order/5

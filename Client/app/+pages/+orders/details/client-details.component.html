@@ -1,0 +1,51 @@
+<div class="x_panel">
+    <div class="x_title">
+        <h4>{{client.name}}</h4>
+    </div>
+    <div class="x_content">
+        <ul class="container details">
+            <li>
+                <p>
+                    <span class="fa fa-user" style="width:50px;"></span>{{client.contactPerson}}
+                </p>
+            </li>
+            <li>
+                <p>
+                    <span class="glyphicon glyphicon-earphone one" style="width:50px;"></span>{{client.phone}}
+                </p>
+            </li>
+            <li *ngIf="client.secondaryPhone">
+                <p>
+                    <span class="glyphicon glyphicon-earphone one" style="width:50px;"></span>{{client.secondaryPhone}}
+                </p>
+            </li>
+            <li>
+                <p>
+                    <span class="glyphicon glyphicon-check one" style="width:50px;"></span>{{templateLang.clientStatus[client.status]}}
+                </p>
+            </li>
+            <li>
+                <p>
+                    <span class="fa fa-location-arrow" style="width:50px;" aria-hidden="true"></span>{{client.physicAddress}}
+                </p>
+            </li>
+            <li>
+                <p><span class="glyphicon glyphicon-map-marker one" style="width:50px;"></span>{{client.shippingAddress}}
+                </p>
+            </li>
+
+            <li *ngFor="let item of client.clientLinks">
+                <p>
+                    <span class="fa fa-link" style="width:50px;"></span>
+                    <a [href]="item.link" target="_blank">{{item.link}}</a>
+                </p>
+            </li>
+            <li *ngIf="client.info">
+                <p>
+                    <span class="fa fa-info-circle" style="width:50px;"></span>{{client.info}}
+                </p>
+            </li>
+        </ul>
+        <button [routerLink]="['/pages', 'clients']" class="btn btn-default" type="button">Назад</button>
+    </div>
+</div>

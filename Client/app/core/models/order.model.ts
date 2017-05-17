@@ -1,3 +1,4 @@
+import {ClientModel} from "./client.model";
 export interface OrderDetailsModel {
     id: number;
     count: number;
@@ -14,4 +15,6 @@ export interface OrderModel {
     payment: boolean;
     clientId: number;
     orderDetails: Array<OrderDetailsModel>;
+    // additional properties
+    client: ClientModel;
 }

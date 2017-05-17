@@ -1,0 +1,66 @@
+<div class="col-xs-12">
+    <div class="x_panel">
+        <!--id: number;-->
+        <!--date: string;-->
+        <!--info: string;-->
+        <!--realization: boolean;-->
+        <!--payment: boolean;-->
+        <!--clientId: number;-->
+        <div class="x_title">
+            <h2>Заказы компании</h2>
+            <div class="nav navbar-right panel_toolbox">
+                <button [routerLink]="['/pages', 'orders', 'add']" class="btn btn-md btn-success">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Добавить
+                </button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Клиент</th>
+                        <th>Дата</th>
+                        <th>Инфо</th>
+                        <th>Реализация</th>
+                        <th>Оплачен</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let order of orders" [ngClass]="{'success': order.payment, 'warning': !order.payment}">
+                        <td>{{order.id}}</td>
+                        <td>
+                            <b><a [routerLink]="['/pages','orders','details', order.id]">{{order.client.name}}</a></b>
+                        </td>
+                        <td>{{order.date | date}}</td>
+                        <td>{{order.info}}</td>
+                        <td>
+                            <i *ngIf="order.realization" class="fa fa-check" aria-hidden="true"></i>
+                            <i *ngIf="!order.realization" class="fa fa-remove" aria-hidden="true"></i>
+                        </td>
+                        <td>
+                            <i *ngIf="order.payment" class="fa fa-check" aria-hidden="true"></i>
+                            <i *ngIf="!order.payment" class="fa fa-remove" aria-hidden="true"></i>
+                        </td>
+
+                        <td>
+                            <button [routerLink]="['/pages','orders','details', order.id]" class="btn btn-xs btn-info">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </button>
+                            <button [routerLink]="['/pages','orders','edit', order.id]" class="btn btn-xs btn-warning">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+                            <button (click)="deleteOrder(order)" class="btn btn-xs btn-danger">
+                                <i class="fa fa-close"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
