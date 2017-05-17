@@ -1,0 +1,79 @@
+<div class="x_panel">
+    <div class="x_title">
+        <h4>{{formTitle}}</h4>
+    </div>
+    <div class="x_content">
+        <form class="form-horizontal" (ngSubmit)="submitForm()" [formGroup]="editForm">
+            <!-- Client -->
+            <div class="form-group">
+                <label>Выберите клиента</label>
+                <select type="text" [class.error]="!editForm.get('clientId').valid"
+                        class="form-control" formControlName="clientId">
+                    <option *ngFor="let option of clientAvailable" [ngValue]="option.id">
+                        {{option.name + ', ' + option.contactPerson}}
+                    </option>
+                </select>
+                <span *ngIf="checkControlValidation('clientId', 'required')"
+                      class="text-danger">Клиент обязательное поле</span>
+            </div>
+
+            <div class="form-group">
+                <label>Описание</label>
+                <textarea type="text" [class.error]="!editForm.get('info').valid"
+                          class="form-control" placeholder="Описание"
+                          formControlName="info"></textarea>
+                <span *ngIf="checkControlValidation('info', 'required')"
+                      class="text-danger">Описание обязательное поле</span>
+                <span *ngIf="checkControlValidation('info', 'maxlength')"
+                      class="text-danger">Максимальная длина поля 255 символов</span>
+            </div>
+
+            <div class="form-group">
+                <label>Заказ под реализацию?</label>
+                <input type="checkbox" [class.error]="!editForm.get('realization').valid" class="form-control"
+                       formControlName="realization"/>
+                <span *ngIf="checkControlValidation('realization', 'required')"
+                      class="text-danger">Обязательное поле</span>
+            </div>
+
+            <div class="form-group">
+                <label>Заказ уже оплачен?</label>
+                <input type="checkbox" [class.error]="!editForm.get('payment').valid" class="form-control"
+                       formControlName="payment"/>
+                <span *ngIf="checkControlValidation('payment', 'required')"
+                      class="text-danger">Обязательное поле</span>
+            </div>
+
+            <label>Детали заказа</label>
+            <fieldset formArrayName="orderDetails">
+                <div class="input-group"
+                     *ngFor="let option of editForm.controls['orderDetails'].controls; let i=index;"
+                     [formGroupName]="i">
+
+                    <select type="text" class="form-control" formControlName="productId">
+                        <option *ngFor="let option of productsAvailable" [ngValue]="option.id">
+                            {{option.name + ' ' + option.nicotineAmount + ' ' + option.volume}}
+                        </option>
+                    </select>
+                    <input formControlName="count" type="text" class="form-control">
+                    <input formControlName="price" type="text" class="form-control">
+                    <span class="input-group-btn">
+                        <button (click)="deleteDynamicControl(i)" type="button" class="btn btn-default">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                        </button>
+                    </span>
+                </div>
+
+                <button class="btn btn-default" (click)="addDynamicFormControl()" type="button">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Добавить продукт
+                </button>
+            </fieldset>
+
+
+            <button [disabled]="isProcessing || editForm.invalid" type="submit" class="btn btn-success pull-right">
+                <i *ngIf="isProcessing" class="fa fa-spinner fa-spin" aria-hidden="true"></i> Сохранить
+            </button>
+            <button [routerLink]="['/pages', 'orders']" class="btn btn-default pull-right">Назад</button>
+        </form>
+    </div>
+</div>

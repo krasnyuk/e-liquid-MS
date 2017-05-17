@@ -23,29 +23,27 @@
                         <th>№</th>
                         <th>Клиент</th>
                         <th>Дата</th>
+                        <th>Оплачен</th>
                         <th>Инфо</th>
                         <th>Реализация</th>
-                        <th>Оплачен</th>
-
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let order of orders" [ngClass]="{'success': order.payment, 'warning': !order.payment}">
+                    <tr *ngFor="let order of orders" [ngClass]="{'success': order.payment}">
                         <td>{{order.id}}</td>
                         <td>
                             <b><a [routerLink]="['/pages','orders','details', order.id]">{{order.client.name}}</a></b>
                         </td>
                         <td>{{order.date | date}}</td>
+                        <td>
+                            <i *ngIf="order.payment" class="fa fa-check" aria-hidden="true"></i>
+                            <i *ngIf="!order.payment" class="fa fa-remove" aria-hidden="true"></i>
+                        </td>
                         <td>{{order.info}}</td>
                         <td>
                             <i *ngIf="order.realization" class="fa fa-check" aria-hidden="true"></i>
                             <i *ngIf="!order.realization" class="fa fa-remove" aria-hidden="true"></i>
                         </td>
-                        <td>
-                            <i *ngIf="order.payment" class="fa fa-check" aria-hidden="true"></i>
-                            <i *ngIf="!order.payment" class="fa fa-remove" aria-hidden="true"></i>
-                        </td>
-
                         <td>
                             <button [routerLink]="['/pages','orders','details', order.id]" class="btn btn-xs btn-info">
                                 <i class="fa fa-eye" aria-hidden="true"></i>

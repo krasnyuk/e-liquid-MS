@@ -3,7 +3,7 @@ import {ordersRouting} from "./orders.routing";
 import {SharedModule} from "../../shared/shared.module";
 import {OrdersPageComponent} from "./orders-page.component";
 import {OrdersListComponent} from "./list/orders-list.component";
-import {ClientEditComponent} from "./edit/client-edit.component";
+import {OrderEditComponent} from "./edit/order-edit.component";
 import {ClientDetailsComponent} from "./details/client-details.component";
 
 @NgModule({
@@ -15,7 +15,7 @@ import {ClientDetailsComponent} from "./details/client-details.component";
     declarations: [
         OrdersPageComponent,
         OrdersListComponent,
-        ClientEditComponent,
+        OrderEditComponent,
         ClientDetailsComponent
     ],
     providers: [],

@@ -19,9 +19,7 @@ export class OrdersListComponent extends BaseComponent {
 
     ngOnInit() {
         this.ordersService.getOrders().subscribe((success: Array<any>) => {
-            this.orders = success.sort((a, b) => {
-                return (a.date > b.date) ? 1 : ((b.date > a.date) ? -1 : 0);
-            });
+            this.orders = success.sort(this.dynamicSort('date', -1));
         });
     }
 

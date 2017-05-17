@@ -1,9 +1,7 @@
 import {ClientModel} from "./client.model";
 export interface OrderDetailsModel {
-    id: number;
     count: number;
     price: number;
-    orderId: number;
     productId: number
 }
 

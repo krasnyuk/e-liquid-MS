@@ -1,7 +1,7 @@
 import {Routes, RouterModule} from '@angular/router';
 import {OrdersPageComponent} from "./orders-page.component";
 import {OrdersListComponent} from "./list/orders-list.component";
-import {ClientEditComponent} from "./edit/client-edit.component";
+import {OrderEditComponent} from "./edit/order-edit.component";
 import {ClientDetailsComponent} from "./details/client-details.component";
 
 
@@ -20,11 +20,11 @@ export const routes: Routes = [
             },
             {
                 path: 'edit/:orderId',
-                component: ClientEditComponent
+                component: OrderEditComponent
             },
             {
                 path: 'add',
-                component: ClientEditComponent
+                component: OrderEditComponent
             },
             {
                 path: 'details/:orderId',

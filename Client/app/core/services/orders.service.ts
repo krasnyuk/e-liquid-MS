@@ -2,12 +2,14 @@ import {Injectable} from "@angular/core";
 import {DataService} from "./data.service";
 import {Observable} from "rxjs/Observable";
 import {OrderModel} from "../models/order.model";
+import {UtilityService} from "./utility.service";
 
 @Injectable()
 export class OrdersService {
     private baseUrl = 'api/order';
 
-    constructor(private dataService: DataService) {
+    constructor(private dataService: DataService,
+                private utilsService: UtilityService) {
     }
 
     public getOrders(): Observable<any> {
@@ -33,6 +35,7 @@ export class OrdersService {
     }
 
     private createOrder(orderModel: OrderModel): Observable<any> {
+        orderModel.date = this.utilsService.convertDateTime(new Date());
         return this.dataService.post(this.baseUrl, orderModel);
     }
 
