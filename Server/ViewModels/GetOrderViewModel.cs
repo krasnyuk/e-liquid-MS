@@ -10,6 +10,8 @@ namespace AspNetCoreSpa.Server.ViewModels
         public string Info { get; set; }
         public bool Realization { get; set; }
         public bool Payment { get; set; }
+        public int ClientId { get; set; }
+
 
         public List<OrderDetailsViewModel> OrderDetails { get; set; }
     }

@@ -60,7 +60,8 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 });
             }
 
-            var result = new GetOrderViewModel { Id = id, Date = order.Date, Info = order.Info, Payment = order.Payment, Realization = order.Realization, OrderDetails = orderDetailsVM };
+            var result = new GetOrderViewModel { Id = id, Date = order.Date, Info = order.Info, Payment = order.Payment,
+                ClientId = order.ClientId, Realization = order.Realization, OrderDetails = orderDetailsVM };
 
             return Ok(result);
         }
