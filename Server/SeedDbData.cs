@@ -102,25 +102,25 @@ namespace AspNetCoreSpa.Server
                 _context.SaveChanges();
             }
 
-            if (!_context.Components.Any())
+            if (!_context.Flavours.Any())
             {
-                _context.Components.Add(new Component { Title = "Component1", Description = "desc1" });
+                _context.Flavours.Add(new Flavour { Title = "Flavour1", Manufacturer = "Manufacturer1" });
                 _context.SaveChanges();
-                _context.Components.Add(new Component { Title = "Component2", Description = "desc2" });
+                _context.Flavours.Add(new Flavour { Title = "Flavour2", Manufacturer = "Manufacturer1" });
                 _context.SaveChanges();
             }
 
             if (!_context.Receipts.Any())
             {
-                _context.Receipts.Add(new Receipt { Description = "First receipt" });
+                _context.Receipts.Add(new Receipt {NicotinePercent = 20, PgPercent = 30, VgPercent = 50 });
                 _context.SaveChanges();
             }
 
-            if (!_context.ReceiptDetails.Any())
+            if (!_context.ReceiptFlavours.Any())
             {
-                _context.ReceiptDetails.Add(new ReceiptDetails { ReceiptId = 1, ComponentId = 1, Amount = 1.5 });
+                _context.ReceiptFlavours.Add(new ReceiptFlavours { ReceiptId = 1, FlavourId = 1, Percent = 0.5 });
                 _context.SaveChanges();
-                _context.ReceiptDetails.Add(new ReceiptDetails { ReceiptId = 1, ComponentId = 2, Amount = 0.5 });
+                _context.ReceiptFlavours.Add(new ReceiptFlavours { ReceiptId = 1, FlavourId = 2, Percent = 1.5 });
                 _context.SaveChanges();
             }
 

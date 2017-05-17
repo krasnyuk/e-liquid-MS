@@ -7,9 +7,13 @@ namespace AspNetCoreSpa.Server.Entities
     {
         [Key]
         public int Id { get; set; }
-        [StringLength(255)]
-        public string Description { get; set; }
+        [Required]
+        public double PgPercent { get; set; }
+        [Required]
+        public double VgPercent { get; set; }
+        [Required]
+        public double NicotinePercent { get; set; }
 
-        public virtual ICollection<ReceiptDetails> ReceiptDetails { get; set; }
+        public virtual ICollection<ReceiptFlavours> ReceiptFlavours { get; set; }
     }
 }

@@ -19,15 +19,13 @@ namespace AspNetCoreSpa.Server
         public DbSet<Product> Products { get; set; }
         public DbSet<Shipping> Shipping { get; set; }
         public DbSet<Storage> Storage { get; set; }
-        public DbSet<Component> Components { get; set; }
         public DbSet<Receipt> Receipts { get; set; }
-        public DbSet<ReceiptDetails> ReceiptDetails { get; set; }
-
+        public DbSet<Flavour> Flavours { get; set; }
+        public DbSet<ReceiptFlavours> ReceiptFlavours { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
