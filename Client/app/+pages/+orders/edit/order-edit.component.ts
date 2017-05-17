@@ -47,8 +47,8 @@ export class OrderEditComponent extends BaseEditForm {
             id: [""],
             date: [""],
             info: ["", [Validators.required, Validators.maxLength(255)]],
-            realization: ["", Validators.required],
-            payment: ["", Validators.required],
+            realization: [false, Validators.required],
+            payment: [false, Validators.required],
             clientId: ["", Validators.required],
             orderDetails: this.fb.array([])
         });

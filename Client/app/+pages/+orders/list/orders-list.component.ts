@@ -19,7 +19,7 @@ export class OrdersListComponent extends BaseComponent {
 
     ngOnInit() {
         this.ordersService.getOrders().subscribe((success: Array<any>) => {
-            this.orders = success.sort(this.dynamicSort('date', -1));
+            this.orders = success.sort(this.dynamicSort('id', -1));
         });
     }
 

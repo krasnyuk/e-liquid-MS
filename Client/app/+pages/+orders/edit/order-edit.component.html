@@ -6,7 +6,7 @@
         <form class="form-horizontal" (ngSubmit)="submitForm()" [formGroup]="editForm">
             <!-- Client -->
             <div class="form-group">
-                <label>Выберите клиента</label>
+                <label>Клиент</label>
                 <select type="text" [class.error]="!editForm.get('clientId').valid"
                         class="form-control" formControlName="clientId">
                     <option *ngFor="let option of clientAvailable" [ngValue]="option.id">
@@ -29,46 +29,73 @@
             </div>
 
             <div class="form-group">
-                <label>Заказ под реализацию?</label>
-                <input type="checkbox" [class.error]="!editForm.get('realization').valid" class="form-control"
-                       formControlName="realization"/>
-                <span *ngIf="checkControlValidation('realization', 'required')"
-                      class="text-danger">Обязательное поле</span>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" [class.error]="!editForm.get('realization').valid"
+                               formControlName="realization"/>
+                        Заказ под реализацию
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" [class.error]="!editForm.get('payment').valid"
+                                  formControlName="payment"/>
+                        Заказ уже оплачен
+                    </label>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Заказ уже оплачен?</label>
-                <input type="checkbox" [class.error]="!editForm.get('payment').valid" class="form-control"
-                       formControlName="payment"/>
-                <span *ngIf="checkControlValidation('payment', 'required')"
-                      class="text-danger">Обязательное поле</span>
-            </div>
+            <div class="ln_solid"></div>
 
-            <label>Детали заказа</label>
             <fieldset formArrayName="orderDetails">
-                <div class="input-group"
+                <div class="form-group"
                      *ngFor="let option of editForm.controls['orderDetails'].controls; let i=index;"
                      [formGroupName]="i">
 
-                    <select type="text" class="form-control" formControlName="productId">
-                        <option *ngFor="let option of productsAvailable" [ngValue]="option.id">
-                            {{option.name + ' ' + option.nicotineAmount + ' ' + option.volume}}
-                        </option>
-                    </select>
-                    <input formControlName="count" type="text" class="form-control">
-                    <input formControlName="price" type="text" class="form-control">
-                    <span class="input-group-btn">
-                        <button (click)="deleteDynamicControl(i)" type="button" class="btn btn-default">
+                    <div class="col-md-5 col-sm-5 col-xs-12 has-feedback">
+                        <select type="text" class="form-control has-feedback-left" formControlName="productId">
+                            <option *ngFor="let option of productsAvailable" [ngValue]="option.id">
+                                {{option.name + ' (' + option.nicotineAmount + ', ' + option.volume + ' мл)'}}
+                            </option>
+                        </select>
+                        <span class="fa fa-flask form-control-feedback left" aria-hidden="true"></span>
+                        <span *ngIf="option.get('productId').hasError('required') && !option.get('productId').pristine" class="text-danger">
+                            Поле обязательно
+                        </span>
+                    </div>
+
+                    <div class="col-md-3 col-sm-3 col-xs-12  has-feedback">
+                        <input formControlName="count" type="text" class="form-control has-feedback-left"
+                               placeholder="Количество">
+                        <span class="fa fa-arrow-up form-control-feedback left" aria-hidden="true"></span>
+                        <span *ngIf="option.get('count').hasError('required') && !option.get('count').pristine" class="text-danger">
+                            Поле обязательно
+                        </span>
+                    </div>
+
+                    <div class="col-md-3 col-sm-3 col-xs-12  has-feedback">
+                        <input formControlName="price" type="text" class="form-control has-feedback-left"
+                               placeholder="Цена">
+                        <span class="fa fa fa-money form-control-feedback left" aria-hidden="true"></span>
+                        <span *ngIf="option.get('price').hasError('required') && !option.get('price').pristine" class="text-danger">
+                            Поле обязательно
+                        </span>
+                    </div>
+
+                    <div class="col-md-1 col-sm-1">
+                        <button (click)="deleteDynamicControl(i)" type="button" class="btn btn-default form-control">
                             <i class="fa fa-times" aria-hidden="true"></i>
                         </button>
-                    </span>
+                    </div>
                 </div>
 
-                <button class="btn btn-default" (click)="addDynamicFormControl()" type="button">
-                    <i class="fa fa-plus" aria-hidden="true"></i> Добавить продукт
-                </button>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <button class="btn btn-default" (click)="addDynamicFormControl()" type="button">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Добавить продукт
+                        </button>
+                    </div>
+                </div>
             </fieldset>
-
 
             <button [disabled]="isProcessing || editForm.invalid" type="submit" class="btn btn-success pull-right">
                 <i *ngIf="isProcessing" class="fa fa-spinner fa-spin" aria-hidden="true"></i> Сохранить

@@ -32,6 +32,12 @@
                                     <li [routerLink]="['/pages', 'dashboard']"><a>Dashboard</a></li>
                                 </ul>
                             </li>
+                            <li><a><i class="fa fa-edit"></i> Заказы <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a [routerLink]="['/pages', 'orders', 'add']">Создать заказ</a></li>
+                                    <li><a [routerLink]="['/pages', 'orders']">Заказы</a></li>
+                                </ul>
+                            </li>
                             <li><a><i class="fa fa-edit"></i> Продукция <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a [routerLink]="['/pages', 'products', 'add']">Добавить продукт</a></li>
