@@ -93,7 +93,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetClient", new { id = product.Id }, product);
+            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
         }
 
         // DELETE: api/Product/5
