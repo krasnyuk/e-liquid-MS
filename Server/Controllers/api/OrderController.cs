@@ -1,12 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using AspNetCoreSpa.Server;
 using AspNetCoreSpa.Server.Entities;
+using AspNetCoreSpa.Server.ViewModels;
 
 namespace AspNetCoreSpa.Server.Controllers.api
 {
@@ -38,15 +36,33 @@ namespace AspNetCoreSpa.Server.Controllers.api
             }
 
             var order = await _context.Orders.SingleOrDefaultAsync(m => m.Id == id);
-
             if (order == null)
             {
                 return NotFound();
             }
 
             _context.Entry(order).Collection(c => c.OrderDetails).Load();
+            _context.OrderDetails.Include(c => c.Product).ToList();
 
-            return Ok(order);
+            List<OrderDetailsViewModel> orderDetailsVM = new List<OrderDetailsViewModel>(); 
+            foreach (OrderDetails o in order.OrderDetails.ToList())
+            {
+                orderDetailsVM.Add(new OrderDetailsViewModel
+                {
+                    Id = o.Id,
+                    Count = o.Count,
+                    Price = o.Price,
+                    Info = o.Product.Info,
+                    Name = o.Product.Name,
+                    ProductId = o.ProductId,
+                    NicotineAmount = o.Product.NicotineAmount,
+                    Volume = o.Product.Volume
+                });
+            }
+
+            var result = new GetOrderViewModel { Id = id, Date = order.Date, Info = order.Info, Payment = order.Payment, Realization = order.Realization, OrderDetails = orderDetailsVM };
+
+            return Ok(result);
         }
 
         // PUT: api/Order/5
