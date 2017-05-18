@@ -85,6 +85,8 @@ namespace AspNetCoreSpa.Server.Controllers.api
             }
 
             _context.Entry(receipt).State = EntityState.Modified;
+            var oldReceiptFlavours = _context.ReceiptFlavours.Where(x => x.ReceiptId == id).ToList();
+            _context.ReceiptFlavours.RemoveRange(oldReceiptFlavours);
 
             try
             {
@@ -101,6 +103,11 @@ namespace AspNetCoreSpa.Server.Controllers.api
                     throw;
                 }
             }
+
+            foreach (ReceiptFlavours o in receipt.ReceiptFlavours.ToList())
+                _context.ReceiptFlavours.Add(new ReceiptFlavours { Percent = o.Percent, ReceiptId = id, FlavourId = o.FlavourId });
+
+            await _context.SaveChangesAsync();
 
             return NoContent();
         }
