@@ -44,7 +44,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             _context.Entry(order).Collection(c => c.OrderDetails).Load();
             _context.OrderDetails.Include(c => c.Product).ToList();
 
-            List<OrderDetailsViewModel> orderDetailsVM = new List<OrderDetailsViewModel>(); 
+            List<OrderDetailsViewModel> orderDetailsVM = new List<OrderDetailsViewModel>();
             foreach (OrderDetails o in order.OrderDetails.ToList())
             {
                 orderDetailsVM.Add(new OrderDetailsViewModel
@@ -60,8 +60,16 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 });
             }
 
-            var result = new GetOrderViewModel { Id = id, Date = order.Date, Info = order.Info, Payment = order.Payment,
-                ClientId = order.ClientId, Realization = order.Realization, OrderDetails = orderDetailsVM };
+            var result = new GetOrderViewModel
+            {
+                Id = id,
+                Date = order.Date,
+                Info = order.Info,
+                Payment = order.Payment,
+                ClientId = order.ClientId,
+                Realization = order.Realization,
+                OrderDetails = orderDetailsVM
+            };
 
             return Ok(result);
         }
@@ -101,7 +109,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             }
 
             foreach (OrderDetails o in order.OrderDetails.ToList())
-                    _context.OrderDetails.Add(new OrderDetails { Count = o.Count, OrderId = id, Price = o.Price, ProductId = o.ProductId });
+                _context.OrderDetails.Add(new OrderDetails { Count = o.Count, OrderId = id, Price = o.Price, ProductId = o.ProductId });
 
             await _context.SaveChangesAsync();
 

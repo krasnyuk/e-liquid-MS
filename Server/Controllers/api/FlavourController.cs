@@ -1,66 +1,64 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AspNetCoreSpa.Server.Entities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AspNetCoreSpa.Server.Entities;
 
 namespace AspNetCoreSpa.Server.Controllers.api
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
-    [AllowAnonymous]
-    public class ProductController : BaseController
+    [Route("api/Flavour")]
+    public class FlavourController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ProductController(ApplicationDbContext context)
+        public FlavourController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Product
+        // GET: api/Flavour
         [HttpGet]
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<Flavour> GetFlavours()
         {
-            return _context.Products;
+            return _context.Flavours;
         }
 
-        // GET: api/Product/2
+        // GET: api/Flavour/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProduct([FromRoute] int id)
+        public async Task<IActionResult> GetFlavour([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var product = await _context.Products.SingleOrDefaultAsync(m => m.Id == id);
+            var flavour = await _context.Flavours.SingleOrDefaultAsync(m => m.Id == id);
 
-            if (product == null)
+            if (flavour == null)
             {
                 return NotFound();
             }
 
-            return Ok(product);
+            return Ok(flavour);
         }
 
-        // PUT: api/Product/5
+        // PUT: api/Flavour/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PuTProduct([FromRoute] int id, [FromBody] Product product)
+        public async Task<IActionResult> PutFlavour([FromRoute] int id, [FromBody] Flavour flavour)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != product.Id)
+            if (id != flavour.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(product).State = EntityState.Modified;
+            _context.Entry(flavour).State = EntityState.Modified;
 
             try
             {
@@ -68,7 +66,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductExists(id))
+                if (!FlavourExists(id))
                 {
                     return NotFound();
                 }
@@ -81,44 +79,45 @@ namespace AspNetCoreSpa.Server.Controllers.api
             return NoContent();
         }
 
+        // POST: api/Flavour
         [HttpPost]
-        public async Task<IActionResult> PostProduct([FromBody] Product product)
+        public async Task<IActionResult> PostFlavour([FromBody] Flavour flavour)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Products.Add(product);
+            _context.Flavours.Add(flavour);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProduct", new { id = product.Id }, product);
+            return CreatedAtAction("GetFlavour", new { id = flavour.Id }, flavour);
         }
 
-        // DELETE: api/Product/5
+        // DELETE: api/Flavour/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct([FromRoute] int id)
+        public async Task<IActionResult> DeleteFlavour([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var product = await _context.Products.SingleOrDefaultAsync(m => m.Id == id);
-            if (product == null)
+            var flavour = await _context.Flavours.SingleOrDefaultAsync(m => m.Id == id);
+            if (flavour == null)
             {
                 return NotFound();
             }
 
-            _context.Products.Remove(product);
+            _context.Flavours.Remove(flavour);
             await _context.SaveChangesAsync();
 
-            return Ok(product);
+            return Ok(flavour);
         }
 
-        private bool ProductExists(int id)
+        private bool FlavourExists(int id)
         {
-            return _context.Products.Any(e => e.Id == id);
+            return _context.Flavours.Any(e => e.Id == id);
         }
     }
 }
