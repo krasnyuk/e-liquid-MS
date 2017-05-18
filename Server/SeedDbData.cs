@@ -123,36 +123,6 @@ namespace AspNetCoreSpa.Server
                 _context.ReceiptFlavours.Add(new ReceiptFlavours { ReceiptId = 1, FlavourId = 2, Percent = 1.5 });
                 _context.SaveChanges();
             }
-
-            if (!_context.Content.Any())
-            {
-                _context.Content.Add(new Content { Key = "TITLE" });
-                _context.SaveChanges();
-                _context.Content.Add(new Content { Key = "APP_NAV_HOME" });
-                _context.SaveChanges();
-                _context.Content.Add(new Content { Key = "APP_NAV_EXAMPLES" });
-                _context.SaveChanges();
-                _context.Content.Add(new Content { Key = "APP_NAV_LOGIN" });
-                _context.SaveChanges();
-                _context.Content.Add(new Content { Key = "APP_NAV_LOGOUT" });
-                _context.SaveChanges();
-                _context.Content.Add(new Content { Key = "APP_NAV_REGISTER" });
-                _context.SaveChanges();
-                _context.Content.Add(new Content { Key = "APP_NAV_ADMIN" });
-                _context.SaveChanges();
-            }
-
-            if (!_context.ContentText.Any())
-            {
-                _context.ContentText.Add(new ContentText { Text = "Site title", ContentId = 1 });
-                _context.ContentText.Add(new ContentText { Text = "Home", ContentId = 2 });
-                _context.ContentText.Add(new ContentText { Text = "Examples", ContentId = 3 });
-                _context.ContentText.Add(new ContentText { Text = "Login", ContentId = 4 });
-                _context.ContentText.Add(new ContentText { Text = "Logout", ContentId = 5 });
-                _context.ContentText.Add(new ContentText { Text = "Register", ContentId = 6 });
-                _context.ContentText.Add(new ContentText { Text = "Admin", ContentId = 7 });
-                _context.SaveChanges();
-            }
         }
     }
 }
