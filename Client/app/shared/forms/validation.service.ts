@@ -39,4 +39,12 @@
             return { invalidPassword: true };
         }
     }
+
+    public static percentValidator(control: any): any {
+        const x = parseFloat(control.value);
+        if (isNaN(x) || x < 0 || x > 100) {
+            return { invalidPercent: true };
+        }
+        return undefined;
+    }
 }

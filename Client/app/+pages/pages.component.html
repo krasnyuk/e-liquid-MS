@@ -27,27 +27,32 @@
                     <div class="menu_section">
                         <h3>Основная информация</h3>
                         <ul class="nav side-menu">
-                            <li><a><i class="fa fa-home"></i> Аналитика <span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-line-chart"></i> Аналитика <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li [routerLink]="['/pages', 'dashboard']"><a>Dashboard</a></li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-edit"></i> Заказы <span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-shopping-cart"></i> Заказы <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a [routerLink]="['/pages', 'orders', 'add']">Создать заказ</a></li>
                                     <li><a [routerLink]="['/pages', 'orders']">Заказы</a></li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-edit"></i> Продукция <span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-flask"></i> Продукция <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a [routerLink]="['/pages', 'products', 'add']">Добавить продукт</a></li>
                                     <li><a [routerLink]="['/pages', 'products']">Список</a></li>
                                 </ul>
                             </li>
-                            <li><a><i class="fa fa-edit"></i> Клиенты <span class="fa fa-chevron-down"></span></a>
+                            <li><a><i class="fa fa-users"></i> Клиенты <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a [routerLink]="['/pages', 'clients', 'add']">Добавить клиента</a></li>
                                     <li><a [routerLink]="['/pages', 'clients']">Клиенты</a></li>
+                                </ul>
+                            </li>
+                            <li><a><i class="fa fa-thermometer-full"></i> Производство <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a [routerLink]="['/pages', 'flavours']">Ароматизаторы</a></li>
                                 </ul>
                             </li>
                         </ul>

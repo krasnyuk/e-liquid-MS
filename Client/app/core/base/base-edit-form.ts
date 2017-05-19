@@ -1,5 +1,4 @@
 import {FormGroup} from "@angular/forms";
-import {OnInit} from "@angular/core";
 import {BaseComponent} from "./base-component";
 
 export class BaseEditForm extends BaseComponent {

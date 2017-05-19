@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using AspNetCoreSpa.Server;
+using AspNetCoreSpa.Server.Entities;
 
 namespace AspNetCoreSpa.Migrations
 {
@@ -101,57 +102,229 @@ namespace AspNetCoreSpa.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Content", b =>
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Client", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Key")
+                    b.Property<string>("ContactPerson")
                         .IsRequired()
-                        .HasMaxLength(250);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Content");
-                });
-
-            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.ContentText", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ContentId");
-
-                    b.Property<int>("LanguageId");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasMaxLength(2048);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ContentId");
-
-                    b.HasIndex("LanguageId");
-
-                    b.ToTable("ContentText");
-                });
-
-            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Language", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description")
                         .HasMaxLength(100);
 
-                    b.Property<string>("Locale")
+                    b.Property<string>("Info")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(7);
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(15);
+
+                    b.Property<string>("PhysicAddress")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
+                    b.Property<string>("SecondaryPhone")
+                        .HasMaxLength(15);
+
+                    b.Property<string>("ShippingAddress")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
+                    b.Property<int>("Status");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Languages");
+                    b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.ClientLink", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ClientId");
+
+                    b.Property<string>("Link")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("ClientLinks");
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Flavour", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Manufacturer")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Flavours");
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ClientId");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Info")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<bool>("Payment");
+
+                    b.Property<bool>("Realization");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.OrderDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Count");
+
+                    b.Property<int>("OrderId");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<int>("ProductId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Info")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<double>("NicotineAmount");
+
+                    b.Property<int>("Volume");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Receipt", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("NicotinePercent");
+
+                    b.Property<double>("PgPercent");
+
+                    b.Property<double>("VgPercent");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Receipts");
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.ReceiptFlavours", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("FlavourId");
+
+                    b.Property<double>("Percent");
+
+                    b.Property<int>("ReceiptId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FlavourId");
+
+                    b.HasIndex("ReceiptId");
+
+                    b.ToTable("ReceiptFlavours");
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Shipping", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("ClientId");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<int>("OrderId");
+
+                    b.Property<int?>("ProductId");
+
+                    b.Property<int>("Status");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Shipping");
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Storage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Count");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<int>("ProductId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Storage");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<int>", b =>
@@ -312,16 +485,74 @@ namespace AspNetCoreSpa.Migrations
                     b.ToTable("OpenIddictTokens");
                 });
 
-            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.ContentText", b =>
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.ClientLink", b =>
                 {
-                    b.HasOne("AspNetCoreSpa.Server.Entities.Content", "Content")
-                        .WithMany("ContentTexts")
-                        .HasForeignKey("ContentId")
+                    b.HasOne("AspNetCoreSpa.Server.Entities.Client", "Client")
+                        .WithMany("ClientLinks")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Order", b =>
+                {
+                    b.HasOne("AspNetCoreSpa.Server.Entities.Client", "Client")
+                        .WithMany("Orders")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.OrderDetails", b =>
+                {
+                    b.HasOne("AspNetCoreSpa.Server.Entities.Order", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("AspNetCoreSpa.Server.Entities.Language", "Language")
-                        .WithMany("ContentTexts")
-                        .HasForeignKey("LanguageId")
+                    b.HasOne("AspNetCoreSpa.Server.Entities.Product", "Product")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.ReceiptFlavours", b =>
+                {
+                    b.HasOne("AspNetCoreSpa.Server.Entities.Flavour", "Flavour")
+                        .WithMany("ReceiptFlavours")
+                        .HasForeignKey("FlavourId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AspNetCoreSpa.Server.Entities.Receipt", "Receipt")
+                        .WithMany("ReceiptFlavours")
+                        .HasForeignKey("ReceiptId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Shipping", b =>
+                {
+                    b.HasOne("AspNetCoreSpa.Server.Entities.Client")
+                        .WithMany("Shipping")
+                        .HasForeignKey("ClientId");
+
+                    b.HasOne("AspNetCoreSpa.Server.Entities.Order", "Order")
+                        .WithMany("Shipping")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AspNetCoreSpa.Server.Entities.Product")
+                        .WithMany("Shipping")
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("AspNetCoreSpa.Server.Entities.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Storage", b =>
+                {
+                    b.HasOne("AspNetCoreSpa.Server.Entities.Product", "Product")
+                        .WithMany("Storage")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

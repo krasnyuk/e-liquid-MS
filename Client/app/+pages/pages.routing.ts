@@ -34,6 +34,14 @@ const pagesRoutes: Routes = [
                 path: 'orders',
                 loadChildren: './+orders/orders.module#OrdersModule'
             },
+            {
+                path: 'flavours',
+                loadChildren: './+flavours/flavours.module#FlavoursModule'
+            },
+            {
+                path: 'receipts',
+                loadChildren: './+receipts/receipts.module#ReceiptsModule'
+            }
         ]
     }
 ];
