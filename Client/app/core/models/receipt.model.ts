@@ -16,6 +16,7 @@ export interface ReceiptModel {
     pgPercent: number;
     vgPercent: number;
     nicotinePercent: number;
+    receiptFlavours: Array<ReceiptFlavoursModel>;
 //     public int Id { get; set; }
 // [Required]
 // public double PgPercent { get; set; }

@@ -37,6 +37,10 @@ const pagesRoutes: Routes = [
             {
                 path: 'flavours',
                 loadChildren: './+flavours/flavours.module#FlavoursModule'
+            },
+            {
+                path: 'receipts',
+                loadChildren: './+receipts/receipts.module#ReceiptsModule'
             }
         ]
     }
