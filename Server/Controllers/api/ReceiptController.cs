@@ -61,6 +61,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             var result = new GetReceiptViewModel
             {
                 Id = id,
+                Title = receipt.Title,
                 NicotinePercent = receipt.NicotinePercent,
                 PgPercent = receipt.PgPercent,
                 VgPercent = receipt.VgPercent,

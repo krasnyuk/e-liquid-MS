@@ -112,7 +112,7 @@ namespace AspNetCoreSpa.Server
 
             if (!_context.Receipts.Any())
             {
-                _context.Receipts.Add(new Receipt {NicotinePercent = 20, PgPercent = 30, VgPercent = 50 });
+                _context.Receipts.Add(new Receipt { Title = "Receipt1", NicotinePercent = 20, PgPercent = 30, VgPercent = 50 });
                 _context.SaveChanges();
             }
 

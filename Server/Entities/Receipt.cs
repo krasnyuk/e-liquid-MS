@@ -8,6 +8,9 @@ namespace AspNetCoreSpa.Server.Entities
         [Key]
         public int Id { get; set; }
         [Required]
+        [StringLength(100)]
+        public string Title { get; set; }
+        [Required]
         public double PgPercent { get; set; }
         [Required]
         public double VgPercent { get; set; }

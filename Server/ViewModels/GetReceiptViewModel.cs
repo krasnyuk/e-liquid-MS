@@ -5,6 +5,7 @@ namespace AspNetCoreSpa.Server.ViewModels
     public class GetReceiptViewModel
     {
         public int Id { get; set; }
+        public string Title { get; set; }
         public double PgPercent { get; set; }
         public double VgPercent { get; set; }
         public double NicotinePercent { get; set; }
