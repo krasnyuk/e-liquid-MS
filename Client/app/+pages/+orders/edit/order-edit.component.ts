@@ -43,6 +43,7 @@ export class OrderEditComponent extends BaseEditForm {
             this.notificationService.error(error);
         });
         this.formTitle = "Новый заказ";
+        this.isEditingMode = false;
         this.editForm = this.fb.group({
             id: [""],
             date: [""],
@@ -55,6 +56,7 @@ export class OrderEditComponent extends BaseEditForm {
         this.router.params.subscribe(params => {
             const orderId = +params['orderId'];
             if (orderId) {
+                this.isEditingMode = true;
                 this.formTitle = "Редактировать заказ";
                 this.ordersService.getOrder(orderId).subscribe(success => {
                     this.order = success;
@@ -69,9 +71,12 @@ export class OrderEditComponent extends BaseEditForm {
     protected saveInternal() {
         this.order = this.editForm.value as OrderModel;
         this.ordersService.saveOrder(this.order).subscribe(success => {
+            if (!this.isEditingMode) {
+                this.order = success;
+            }
             this.isProcessing = false;
             this.notificationService.success(`Заказ ${this.order.id} сохранён!`);
-            this.utilsService.navigate('/pages/orders');
+            this.utilsService.navigate('/pages/orders/details/' + this.order.id);
         }, error => {
             this.isProcessing = false;
             this.notificationService.error(`Невозможно сохранить заказ! ` + error);

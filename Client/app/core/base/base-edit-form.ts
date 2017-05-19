@@ -7,6 +7,7 @@ export class BaseEditForm extends BaseComponent {
     protected formTitle: string = "";
     protected isProcessing = false;
     protected submitted = false;
+    protected isEditingMode = false;
 
     protected submitForm() {
         this.submitted = true;
