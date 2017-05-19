@@ -90,7 +90,7 @@ namespace AspNetCoreSpa.Server
 
             if (!_context.Orders.Any())
             {
-                _context.Orders.Add(new Order { Date = DateTime.Now, Realization = true, Payment = false, ClientId = 1 });
+                _context.Orders.Add(new Order { Info = "", Date = DateTime.Now, Realization = true, Payment = false, ClientId = 1 });
                 _context.SaveChanges();
             }
 

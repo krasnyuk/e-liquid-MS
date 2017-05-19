@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AspNetCoreSpa.Migrations
 {
-    public partial class Initial : Migration
+    public partial class ReinitMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,30 +55,68 @@ namespace AspNetCoreSpa.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Content",
+                name: "Clients",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Key = table.Column<string>(maxLength: 250, nullable: false)
+                    ContactPerson = table.Column<string>(maxLength: 100, nullable: false),
+                    Info = table.Column<string>(maxLength: 255, nullable: true),
+                    Name = table.Column<string>(maxLength: 100, nullable: false),
+                    Phone = table.Column<string>(maxLength: 15, nullable: false),
+                    PhysicAddress = table.Column<string>(maxLength: 150, nullable: false),
+                    SecondaryPhone = table.Column<string>(maxLength: 15, nullable: true),
+                    ShippingAddress = table.Column<string>(maxLength: 150, nullable: false),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Content", x => x.Id);
+                    table.PrimaryKey("PK_Clients", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Languages",
+                name: "Flavours",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Description = table.Column<string>(maxLength: 100, nullable: true),
-                    Locale = table.Column<string>(maxLength: 7, nullable: false)
+                    Manufacturer = table.Column<string>(maxLength: 50, nullable: false),
+                    Title = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Languages", x => x.Id);
+                    table.PrimaryKey("PK_Flavours", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Info = table.Column<string>(maxLength: 255, nullable: true),
+                    Name = table.Column<string>(maxLength: 100, nullable: false),
+                    NicotineAmount = table.Column<double>(nullable: false),
+                    Volume = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Receipts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    NicotinePercent = table.Column<double>(nullable: false),
+                    PgPercent = table.Column<double>(nullable: false),
+                    VgPercent = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Receipts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -211,28 +249,92 @@ namespace AspNetCoreSpa.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ContentText",
+                name: "ClientLinks",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ContentId = table.Column<int>(nullable: false),
-                    LanguageId = table.Column<int>(nullable: false),
-                    Text = table.Column<string>(maxLength: 2048, nullable: false)
+                    ClientId = table.Column<int>(nullable: false),
+                    Link = table.Column<string>(maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ContentText", x => x.Id);
+                    table.PrimaryKey("PK_ClientLinks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ContentText_Content_ContentId",
-                        column: x => x.ContentId,
-                        principalTable: "Content",
+                        name: "FK_ClientLinks_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ClientId = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Info = table.Column<string>(maxLength: 255, nullable: false),
+                    Payment = table.Column<bool>(nullable: false),
+                    Realization = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Storage",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Count = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
+                    ProductId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Storage", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Storage_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReceiptFlavours",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FlavourId = table.Column<int>(nullable: false),
+                    Percent = table.Column<double>(nullable: false),
+                    ReceiptId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReceiptFlavours", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ReceiptFlavours_Flavours_FlavourId",
+                        column: x => x.FlavourId,
+                        principalTable: "Flavours",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ContentText_Languages_LanguageId",
-                        column: x => x.LanguageId,
-                        principalTable: "Languages",
+                        name: "FK_ReceiptFlavours_Receipts_ReceiptId",
+                        column: x => x.ReceiptId,
+                        principalTable: "Receipts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -255,6 +357,76 @@ namespace AspNetCoreSpa.Migrations
                         principalTable: "OpenIddictApplications",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Count = table.Column<int>(nullable: false),
+                    OrderId = table.Column<int>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
+                    ProductId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_OrderDetails_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderDetails_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Shipping",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ClientId = table.Column<int>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    OrderId = table.Column<int>(nullable: false),
+                    ProductId = table.Column<int>(nullable: true),
+                    Status = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Shipping", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Shipping_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Shipping_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Shipping_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Shipping_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -302,14 +474,59 @@ namespace AspNetCoreSpa.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_ContentText_ContentId",
-                table: "ContentText",
-                column: "ContentId");
+                name: "IX_ClientLinks_ClientId",
+                table: "ClientLinks",
+                column: "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ContentText_LanguageId",
-                table: "ContentText",
-                column: "LanguageId");
+                name: "IX_Orders_ClientId",
+                table: "Orders",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderDetails_OrderId",
+                table: "OrderDetails",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderDetails_ProductId",
+                table: "OrderDetails",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReceiptFlavours_FlavourId",
+                table: "ReceiptFlavours",
+                column: "FlavourId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReceiptFlavours_ReceiptId",
+                table: "ReceiptFlavours",
+                column: "ReceiptId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Shipping_ClientId",
+                table: "Shipping",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Shipping_OrderId",
+                table: "Shipping",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Shipping_ProductId",
+                table: "Shipping",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Shipping_UserId",
+                table: "Shipping",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Storage_ProductId",
+                table: "Storage",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -356,7 +573,19 @@ namespace AspNetCoreSpa.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ContentText");
+                name: "ClientLinks");
+
+            migrationBuilder.DropTable(
+                name: "OrderDetails");
+
+            migrationBuilder.DropTable(
+                name: "ReceiptFlavours");
+
+            migrationBuilder.DropTable(
+                name: "Shipping");
+
+            migrationBuilder.DropTable(
+                name: "Storage");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -380,10 +609,16 @@ namespace AspNetCoreSpa.Migrations
                 name: "OpenIddictTokens");
 
             migrationBuilder.DropTable(
-                name: "Content");
+                name: "Flavours");
 
             migrationBuilder.DropTable(
-                name: "Languages");
+                name: "Receipts");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Products");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -393,6 +628,9 @@ namespace AspNetCoreSpa.Migrations
 
             migrationBuilder.DropTable(
                 name: "OpenIddictAuthorizations");
+
+            migrationBuilder.DropTable(
+                name: "Clients");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictApplications");
