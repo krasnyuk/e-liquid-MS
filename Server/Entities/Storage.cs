@@ -12,10 +12,8 @@ namespace AspNetCoreSpa.Server.Entities
         [DataType(DataType.DateTime)]
         public DateTime Date { get; set; }
         [Required]
-        public int Count { get; set; }
+        public int TotalCount { get; set; }
 
-        public int ProductId { get; set; }
-
-        public virtual Product Product { get; set; }
+        public virtual ICollection<StorageDetails> StorageDetails { get; set; }
     }
 }

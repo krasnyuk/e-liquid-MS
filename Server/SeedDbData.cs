@@ -56,7 +56,6 @@ namespace AspNetCoreSpa.Server
         }
         private void AddContent()
         {
-
             if (!_context.Clients.Any())
             {
                 _context.Clients.Add(new Client
@@ -123,6 +122,20 @@ namespace AspNetCoreSpa.Server
                 _context.ReceiptFlavours.Add(new ReceiptFlavours { ReceiptId = 1, FlavourId = 2, Percent = 1.5 });
                 _context.SaveChanges();
             }
+
+            if (!_context.Storages.Any())
+            {
+                _context.Storages.Add(new Storage { Date = DateTime.Now, TotalCount = 20 });
+                _context.SaveChanges();
+            }
+
+            if (!_context.StorageDetails.Any())
+            {
+                _context.StorageDetails.Add(new StorageDetails { Count = 15, ProductId = 1, StorageId = 1 });       
+                _context.SaveChanges();
+                _context.StorageDetails.Add(new StorageDetails { Count = 5, ProductId = 2, StorageId = 1 });
+                _context.SaveChanges();
+            }        
         }
     }
 }

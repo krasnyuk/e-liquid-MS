@@ -16,7 +16,8 @@ namespace AspNetCoreSpa.Server
         public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Shipping> Shipping { get; set; }
-        public DbSet<Storage> Storage { get; set; }
+        public DbSet<Storage> Storages { get; set; }
+        public DbSet<StorageDetails> StorageDetails { get; set; }
         public DbSet<Receipt> Receipts { get; set; }
         public DbSet<Flavour> Flavours { get; set; }
         public DbSet<ReceiptFlavours> ReceiptFlavours { get; set; }
