@@ -14,6 +14,7 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
+                        <th>Название</th>
                         <th>PG, %</th>
                         <th>VG, %</th>
                         <th>Никотин, %</th>
@@ -21,6 +22,7 @@
                     </thead>
                     <tbody>
                     <tr *ngFor="let item of receipts">
+                        <td>{{item.title}}</td>
                         <td>{{item.pgPercent}}</td>
                         <td>{{item.vgPercent}}</td>
                         <td>{{item.nicotinePercent}}</td>

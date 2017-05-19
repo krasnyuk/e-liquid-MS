@@ -252,6 +252,10 @@ namespace AspNetCoreSpa.Migrations
 
                     b.Property<double>("PgPercent");
 
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
                     b.Property<double>("VgPercent");
 
                     b.HasKey("Id");

@@ -38,6 +38,7 @@ export class ReceiptEditComponent extends BaseEditForm {
         this.isEditingMode = false;
         this.editForm = this.fb.group({
             id: [""],
+            title: ["", [Validators.required, Validators.maxLength(100)]],
             pgPercent: ["", [Validators.required, ValidationService.percentValidator]],
             vgPercent: ["", [Validators.required, ValidationService.percentValidator]],
             nicotinePercent: ["", [Validators.required, ValidationService.percentValidator]],

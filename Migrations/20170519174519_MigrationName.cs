@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AspNetCoreSpa.Migrations
 {
-    public partial class ReinitMigration : Migration
+    public partial class MigrationName : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -112,6 +112,7 @@ namespace AspNetCoreSpa.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     NicotinePercent = table.Column<double>(nullable: false),
                     PgPercent = table.Column<double>(nullable: false),
+                    Title = table.Column<string>(maxLength: 100, nullable: false),
                     VgPercent = table.Column<double>(nullable: false)
                 },
                 constraints: table =>

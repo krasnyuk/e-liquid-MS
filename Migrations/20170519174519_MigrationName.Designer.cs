@@ -9,8 +9,8 @@ using AspNetCoreSpa.Server.Entities;
 namespace AspNetCoreSpa.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170519101255_ReinitMigration")]
-    partial class ReinitMigration
+    [Migration("20170519174519_MigrationName")]
+    partial class MigrationName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -252,6 +252,10 @@ namespace AspNetCoreSpa.Migrations
                     b.Property<double>("NicotinePercent");
 
                     b.Property<double>("PgPercent");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(100);
 
                     b.Property<double>("VgPercent");
 

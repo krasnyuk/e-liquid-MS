@@ -27,7 +27,7 @@ export class ReceiptsListComponent extends BaseComponent {
         if (confirm('Удалить данный рецепт?')) {
             this.receiptsService.deleteReceipt(receiptModel.id).subscribe(success => {
                 this.removeFromObjArray(this.receipts, receiptModel.id);
-                this.notificationService.success(`Рецепт ${receiptModel.id} успешно удалён!`);
+                this.notificationService.success(`Рецепт ${receiptModel.title} успешно удалён!`);
             }, error => {
                 this.notificationService.error('Server error. Details: ' + error);
             });
