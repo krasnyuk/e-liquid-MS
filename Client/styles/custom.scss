@@ -4341,3 +4341,12 @@ ul.notifications {
   border: 1px solid #e5e5e5;
 }
 /** /Dropzone.js **/
+
+@media print {
+  #navbar-iframe, #media-footer {display: none; height: 0px; visibility: hidden;}
+  .no-print {display: none;}
+  @page {
+    size: auto;   /* auto is the initial value */
+    margin: 0;  /* this affects the margin in the printer settings */
+  }
+}
