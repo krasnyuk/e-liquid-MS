@@ -38,35 +38,14 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 return BadRequest(ModelState);
             }
 
-            var storage = await _context.Storages.SingleOrDefaultAsync(m => m.Id == id);
+            var storage = await _context.Storages.Include(o => o.StorageDetails).ThenInclude(o => o.Product).SingleOrDefaultAsync(m => m.Id == id);
 
             if (storage == null)
             {
                 return NotFound();
             }
 
-            _context.Entry(storage).Collection(c => c.StorageDetails).Load();
-
-            List<StorageDetailsViewModel> storageDetailsVM = new List<StorageDetailsViewModel>();
-            foreach (StorageDetails o in storage.StorageDetails.ToList())
-            {
-                storageDetailsVM.Add(new StorageDetailsViewModel
-                {
-                    Id = o.Id,
-                    Count = o.Count,
-                    ProductId = o.ProductId
-                });
-            }
-
-            var result = new GetStorageViewModel
-            {
-                Id = id,
-                Date = storage.Date,
-                TotalCount = storage.TotalCount,
-                StorageDetails = storageDetailsVM
-            };
-
-            return Ok(result);
+            return Ok(storage);
         }
 
         // PUT: api/Storage/5

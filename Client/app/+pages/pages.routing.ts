@@ -41,6 +41,10 @@ const pagesRoutes: Routes = [
             {
                 path: 'receipts',
                 loadChildren: './+receipts/receipts.module#ReceiptsModule'
+            },
+            {
+                path: 'storage',
+                loadChildren: './+products-storage/products-storage.module#ProductsStorageModule'
             }
         ]
     }

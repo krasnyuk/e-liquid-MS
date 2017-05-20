@@ -1,0 +1,46 @@
+<div class="col-md-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Склад продуктов компании</h2>
+            <div class="nav navbar-right panel_toolbox">
+                <button [routerLink]="['/pages', 'storage', 'add']" class="btn btn-md btn-success">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Новое состояние склада
+                </button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Дата</th>
+                        <th>Сумма, шт</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let storageItem of productsStorages">
+                        <td>{{storageItem.id}}</td>
+                        <td>
+                            <a [routerLink]="['/pages', 'storage', 'details', storageItem.id]">
+                                {{formatDate(storageItem.date)}}
+                            </a>
+                        </td>
+                        <td>{{storageItem.totalCount}}</td>
+                        <td>
+                            <button [routerLink]="['/pages','storage','edit', storageItem.id]"
+                                    class="btn btn-xs btn-warning">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </button>
+                            <button (click)="deleteStorageItem(storageItem)" class="btn btn-xs btn-danger">
+                                <i class="fa fa-close"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

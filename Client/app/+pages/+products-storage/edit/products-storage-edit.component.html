@@ -1,0 +1,73 @@
+<div class="x_panel">
+    <div class="x_title">
+        <h4>{{formTitle}}</h4>
+    </div>
+    <div class="x_content">
+        <form class="form-horizontal" (ngSubmit)="submitForm()" [formGroup]="editForm">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <label>Дата</label>
+                        <input type="date" class="form-control" [class.error]="!editForm.get('date').valid"
+                               formControlName="date"/>
+                        <span class="text-danger" *ngIf="checkControlValidation('date', 'required')"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ln_solid"></div>
+
+            <div class="row">
+                <fieldset formArrayName="storageDetails">
+                    <div class="form-group"
+                         *ngFor="let option of editForm.controls['storageDetails'].controls; let i=index;"
+                         [formGroupName]="i">
+
+                        <div class="col-md-6 col-sm-6 col-xs-12 has-feedback">
+                            <select type="text" class="form-control has-feedback-left" formControlName="productId">
+                                <option *ngFor="let option of productsAvailable" [ngValue]="option.id">
+                                    {{option.name + ' (' + option.nicotineAmount + ', ' + option.volume + ' мл)'}}
+                                </option>
+                            </select>
+                            <span class="fa fa-flask form-control-feedback left" aria-hidden="true"></span>
+                            <span *ngIf="option.get('productId').hasError('required') && !option.get('productId').pristine"
+                                  class="text-danger">
+                            Поле обязательно
+                        </span>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4 col-xs-12  has-feedback">
+                            <input formControlName="count" type="text" class="form-control has-feedback-left"
+                                   placeholder="Количество">
+                            <span class="fa fa-arrow-up form-control-feedback left" aria-hidden="true"></span>
+                            <span *ngIf="option.get('count').hasError('required') && !option.get('count').pristine"
+                                  class="text-danger">
+                            Поле обязательно
+                        </span>
+                        </div>
+
+                        <div class="col-md-1 col-sm-1">
+                            <button (click)="deleteDynamicControl(i)" type="button"
+                                    class="btn btn-default form-control">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <button class="btn btn-default" (click)="addDynamicFormControl()" type="button">
+                                <i class="fa fa-plus" aria-hidden="true"></i> Добавить продукт
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <button [disabled]="isProcessing || editForm.invalid" type="submit" class="btn btn-success pull-right">
+                <i *ngIf="isProcessing" class="fa fa-spinner fa-spin" aria-hidden="true"></i> Сохранить
+            </button>
+            <button [routerLink]="['/pages', 'storage']" class="btn btn-default pull-right">Назад</button>
+        </form>
+    </div>
+</div>

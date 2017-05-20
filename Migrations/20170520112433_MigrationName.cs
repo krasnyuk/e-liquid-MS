@@ -121,6 +121,20 @@ namespace AspNetCoreSpa.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Storages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    TotalCount = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Storages", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
@@ -293,27 +307,6 @@ namespace AspNetCoreSpa.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Storage",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Count = table.Column<int>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false),
-                    ProductId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Storage", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Storage_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ReceiptFlavours",
                 columns: table => new
                 {
@@ -336,6 +329,33 @@ namespace AspNetCoreSpa.Migrations
                         name: "FK_ReceiptFlavours_Receipts_ReceiptId",
                         column: x => x.ReceiptId,
                         principalTable: "Receipts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StorageDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Count = table.Column<int>(nullable: false),
+                    ProductId = table.Column<int>(nullable: false),
+                    StorageId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StorageDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StorageDetails_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StorageDetails_Storages_StorageId",
+                        column: x => x.StorageId,
+                        principalTable: "Storages",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -525,9 +545,14 @@ namespace AspNetCoreSpa.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Storage_ProductId",
-                table: "Storage",
+                name: "IX_StorageDetails_ProductId",
+                table: "StorageDetails",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StorageDetails_StorageId",
+                table: "StorageDetails",
+                column: "StorageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -586,7 +611,7 @@ namespace AspNetCoreSpa.Migrations
                 name: "Shipping");
 
             migrationBuilder.DropTable(
-                name: "Storage");
+                name: "StorageDetails");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -620,6 +645,9 @@ namespace AspNetCoreSpa.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Storages");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

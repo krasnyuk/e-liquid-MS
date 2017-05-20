@@ -318,17 +318,33 @@ namespace AspNetCoreSpa.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Count");
-
                     b.Property<DateTime>("Date");
 
+                    b.Property<int>("TotalCount");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Storages");
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.StorageDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Count");
+
                     b.Property<int>("ProductId");
+
+                    b.Property<int>("StorageId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Storage");
+                    b.HasIndex("StorageId");
+
+                    b.ToTable("StorageDetails");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<int>", b =>
@@ -552,11 +568,16 @@ namespace AspNetCoreSpa.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Storage", b =>
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.StorageDetails", b =>
                 {
                     b.HasOne("AspNetCoreSpa.Server.Entities.Product", "Product")
-                        .WithMany("Storage")
+                        .WithMany("StorageDetails")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AspNetCoreSpa.Server.Entities.Storage", "Storage")
+                        .WithMany("StorageDetails")
+                        .HasForeignKey("StorageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
