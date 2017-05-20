@@ -4,10 +4,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AspNetCoreSpa.Server.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AspNetCoreSpa.Server.Controllers.api
 {
     [Produces("application/json")]
+    [Authorize]
     [Route("api/Flavour")]
     public class FlavourController : Controller
     {

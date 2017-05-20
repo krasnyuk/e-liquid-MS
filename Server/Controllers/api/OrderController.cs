@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AspNetCoreSpa.Server.Entities;
 using AspNetCoreSpa.Server.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AspNetCoreSpa.Server.Controllers.api
 {
     [Produces("application/json")]
+    [Authorize]
     [Route("api/Order")]
     public class OrderController : Controller
     {

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore;
 namespace AspNetCoreSpa.Server.Controllers.api
 {
     [Produces("application/json")]
+    [Authorize]
     [Route("api/[controller]")]
-    [AllowAnonymous]
     public class ProductController : BaseController
     {
         private readonly ApplicationDbContext _context;
