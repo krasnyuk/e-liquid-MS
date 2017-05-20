@@ -1,6 +1,8 @@
 import {OnInit} from "@angular/core";
 import {Lang} from "../app-lang";
 import {AppConst} from "../app-constants";
+import {DatePipe} from "@angular/common";
+
 export class BaseComponent implements OnInit {
     protected templateLang = Lang;
     protected templateConst = AppConst;
@@ -10,6 +12,11 @@ export class BaseComponent implements OnInit {
 
     protected removeFromObjArray(array: Array<any>, elementId: number): Array<any> {
         return array.splice(array.map(item => item.id).indexOf(elementId), 1);
+    }
+
+    protected formatDate(date: string) {
+        const datePipe = new DatePipe('en-US');
+        return datePipe.transform(date, 'dd/MM/yyyy');
     }
 
     protected dynamicSort(property: any, sortOrder: 1 | -1 = 1) {

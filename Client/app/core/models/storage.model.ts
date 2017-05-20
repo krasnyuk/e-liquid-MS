@@ -1,5 +1,5 @@
 import {ProductModel} from "./product.model";
-export interface StorageDetails {
+export interface ProductsStorageDetails {
     id: number;
     count: number;
     productId: number;
@@ -12,11 +12,11 @@ export interface StorageDetails {
 // public int StorageId { get; set; }
 }
 
-export interface StorageModel {
+export interface ProductsStorageModel {
     id: number;
     date: string;
     totalCount: number;
-    storageDetails: Array<StorageDetails>;
+    storageDetails: Array<ProductsStorageDetails>;
 //     public int Id { get; set; }
 // [Required]
 //     [DataType(DataType.DateTime)]

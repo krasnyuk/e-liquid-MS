@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {DataService} from "./data.service";
 import {Observable} from "rxjs/Observable";
 import {UtilityService} from "./utility.service";
-import {StorageModel} from "../models/storage.model";
+import {ProductsStorageModel} from "../models/storage.model";
 
 @Injectable()
 export class ProductsStorageService {
@@ -26,7 +26,7 @@ export class ProductsStorageService {
         return this.dataService.delete(url);
     }
 
-    public saveStorageItem(storageModel: StorageModel): Observable<any> {
+    public saveStorageItem(storageModel: ProductsStorageModel): Observable<any> {
         if (!storageModel.id) {
             storageModel.id = 0;
             return this.createStorageItem(storageModel);
@@ -34,12 +34,12 @@ export class ProductsStorageService {
         return this.updateStorageItem(storageModel);
     }
 
-    private createStorageItem(storageModel: StorageModel): Observable<any> {
+    private createStorageItem(storageModel: ProductsStorageModel): Observable<any> {
         storageModel.date = this.utilsService.convertDateTime(new Date());
         return this.dataService.post(this.baseUrl, storageModel);
     }
 
-    private updateStorageItem(storageModel: StorageModel): Observable<any> {
+    private updateStorageItem(storageModel: ProductsStorageModel): Observable<any> {
         const url = `${this.baseUrl}/${storageModel.id}`;
         return this.dataService.put(url, storageModel);
     }

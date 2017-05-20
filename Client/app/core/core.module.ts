@@ -19,6 +19,7 @@ import {ClientsService} from "./services/clients.service";
 import {OrdersService} from "./services/orders.service";
 import {FlavoursService} from "./services/flavours.service";
 import {ReceiptsService} from "./services/receipts.service";
+import {ProductsStorageService} from "./services/products-storage.service";
 
 @NgModule({
     imports: [
@@ -52,7 +53,8 @@ export class CoreModule {
                 ClientsService,
                 OrdersService,
                 FlavoursService,
-                ReceiptsService
+                ReceiptsService,
+                ProductsStorageService
             ]
         };
     }
