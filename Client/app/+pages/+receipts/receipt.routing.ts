@@ -2,6 +2,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {ReceiptsPageComponent} from "./receipts-page.component";
 import {ReceiptsListComponent} from "./list/receipts-list.component";
 import {ReceiptEditComponent} from "./edit/receipt-edit.component";
+import {CalculatorComponent} from "./calculator/calculator.component";
 
 
 export const routes: Routes = [
@@ -24,6 +25,10 @@ export const routes: Routes = [
             {
                 path: 'add',
                 component: ReceiptEditComponent
+            },
+            {
+                path: 'calc',
+                component: CalculatorComponent
             }
         ]
     }

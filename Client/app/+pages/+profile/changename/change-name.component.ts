@@ -27,6 +27,7 @@ export class ChangeNameComponent implements OnInit {
             .subscribe((res: any) => {
                 this.userNameModel.firstName = res.firstName;
                 this.userNameModel.lastName = res.lastName;
+                this.profileService.nameChanged.emit(res);
                 this.notification.emit(`Profile name changed to ${res.firstName} ${res.lastName}`);
             });
 

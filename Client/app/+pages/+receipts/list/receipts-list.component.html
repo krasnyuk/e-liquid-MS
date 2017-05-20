@@ -3,6 +3,9 @@
         <div class="x_title">
             <h2>Рецепты жидкостей</h2>
             <div class="nav navbar-right panel_toolbox">
+                <button [routerLink]="['/pages', 'receipts', 'calc']" class="btn btn-md btn-info">
+                    <i class="fa fa-calculator" aria-hidden="true"></i> Калькулятор рецептов
+                </button>
                 <button [routerLink]="['/pages', 'receipts', 'add']" class="btn btn-md btn-success">
                     <i class="fa fa-plus" aria-hidden="true"></i> Добавить
                 </button>
@@ -27,9 +30,6 @@
                         <td>{{item.vgPercent}}</td>
                         <td>{{item.nicotinePercent}}</td>
                         <td>
-                            <button [routerLink]="['/pages','receipts','details', item.id]" class="btn btn-xs btn-info">
-                                <i class="fa fa-eye" aria-hidden="true"></i>
-                            </button>
                             <button [routerLink]="['/pages','receipts','edit', item.id]" class="btn btn-xs btn-warning">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>

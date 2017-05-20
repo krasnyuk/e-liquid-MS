@@ -15,6 +15,10 @@ export class PagesComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.profileService.nameChanged.subscribe(newName => {
+            this.user.firstName = newName.firstName;
+            this.user.lastName = newName.lastName;
+        });
         this.profileService.userName().subscribe(success => this.user = success);
         this.initCustomThemeScripts();
     }
