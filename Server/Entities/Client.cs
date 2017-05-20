@@ -14,7 +14,6 @@ namespace AspNetCoreSpa.Server.Entities
         realization
     }     
 
-
     public class Client : IEntityBase
     {
         [Key]
@@ -46,5 +45,4 @@ namespace AspNetCoreSpa.Server.Entities
         public virtual ICollection<Shipping> Shipping { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
-
 }
