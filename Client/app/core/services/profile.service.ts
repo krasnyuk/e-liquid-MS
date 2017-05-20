@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+﻿import {EventEmitter, Injectable} from '@angular/core';
 
 import { DataService } from './data.service';
 import { ChangePasswordModel } from '../../+pages/+profile/changepassword/change-password.model';
@@ -9,6 +9,7 @@ export class ProfileService {
 
     public userNameApi = 'api/profile/username/';
     public changePasswordApi = 'api/profile/changepassword/';
+    public nameChanged: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(public dataService: DataService) { }
 

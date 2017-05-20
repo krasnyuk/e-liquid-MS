@@ -23,7 +23,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [HttpGet]
         public IEnumerable<Receipt> GetReceipts()
         {
-            return _context.Receipts;
+            return _context.Receipts.Include(flavour => flavour.ReceiptFlavours).ThenInclude(f => f.Flavour).ToList();
         }
 
         // GET: api/Receipt/5
