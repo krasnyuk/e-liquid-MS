@@ -33,6 +33,8 @@ export class CurrentUserService {
 
     roleIs = (role: string): boolean => role === this.getRoleType();
 
+    isAdmin = (): boolean => this.roleIs('Admin');
+
     getRoleType = (): any => this.isLoggedIn() ? CurrentUserService.user['role'] : null;
 
     hasRole = (roles: Array<string> = []): boolean => roles.indexOf(this.getRoleType()) !== -1;

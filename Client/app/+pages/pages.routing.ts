@@ -2,6 +2,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {PagesComponent} from "./pages.component";
 import {CanActivateUser} from "../shared/guards/user-can-activate.guard";
+import {CanActivateAdmin} from "../shared/guards/admin-can-activate.guard";
 
 const pagesRoutes: Routes = [
     {
@@ -45,6 +46,11 @@ const pagesRoutes: Routes = [
             {
                 path: 'storage',
                 loadChildren: './+products-storage/products-storage.module#ProductsStorageModule'
+            },
+            {
+                path: 'register',
+                canActivate: [CanActivateAdmin],
+                loadChildren: './+register/register.module#RegisterModule'
             }
         ]
     }

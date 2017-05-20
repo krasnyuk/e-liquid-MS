@@ -1,30 +1,38 @@
-﻿import { Component, OnInit } from '@angular/core';
-import { Response } from '@angular/http';
-import { Router, ActivatedRoute } from '@angular/router';
+﻿import {Component, OnInit} from '@angular/core';
+import {Response} from '@angular/http';
+import {Router, ActivatedRoute} from '@angular/router';
 
-import { RegisterModel } from '../../core/models/register-model';
-import { AccountService } from '../../core/account/account.service';
-import { ControlBase } from '../../shared/forms/control-base';
-import { ControlTextbox } from '../../shared/forms/control-textbox';
+import {RegisterModel} from '../../../core/models/register-model';
+import {AccountService} from '../../../core/account/account.service';
+import {ControlBase} from '../../../shared/forms/control-base';
+import {ControlTextbox} from '../../../shared/forms/control-textbox';
+import {ToastsManager} from "ng2-toastr";
+import {CurrentUserService} from "../../../core/services/current-user.service";
 
 @Component({
     selector: 'appc-register',
-    templateUrl: './register.component.html'
+    templateUrl: 'register.component.html'
 })
 export class RegisterComponent implements OnInit {
     public errors: string[] = [];
     public controls: Array<ControlBase<any>>;
 
-    constructor(public accountService: AccountService, public router: Router, public route: ActivatedRoute) { }
+    constructor(public accountService: AccountService,
+                public router: Router,
+                public currentUserService: CurrentUserService,
+                private notificationService: ToastsManager,
+                public route: ActivatedRoute) {
+    }
 
     public register(model: RegisterModel): void {
         this.accountService.register(model)
             .subscribe((res: Response) => {
-                this.router.navigate(['../registerconfirmation'], { relativeTo: this.route, queryParams: { emailConfirmed: true } });
-            },
-            (errors: string[]) => {
-                this.errors = errors;
-            });
+                    this.router.navigate(['/pages', 'dashboard']);
+                    this.notificationService.success(`Аккаунт ${model.email} создан.`)
+                },
+                (errors: string[]) => {
+                    this.errors = errors;
+                });
     };
 
     public ngOnInit() {

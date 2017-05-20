@@ -1,0 +1,12 @@
+﻿<div class="col-xs-6 col-xs-offset-3">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Создать пользователя</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <appc-error-summary [errors]="errors"></appc-error-summary>
+            <appc-dynamic-form (formsubmit)="register($event)" [controls]="controls" [btnText]="'Создать'"></appc-dynamic-form>
+        </div>
+    </div>
+</div>

@@ -21,6 +21,7 @@ import {UppercasePipe} from "./pipes/uppercase.pipe";
 // Services
 import {NavbarComponent} from "./components/navbar.component";
 import {CanActivateUser} from "./guards/user-can-activate.guard";
+import {CanActivateAdmin} from "./guards/admin-can-activate.guard";
 
 const components: Array<any> = [
     DynamicFormComponent,
@@ -36,7 +37,8 @@ const components: Array<any> = [
 
 const services = [
     FormControlService,
-    CanActivateUser
+    CanActivateUser,
+    CanActivateAdmin
 ];
 
 @NgModule({
