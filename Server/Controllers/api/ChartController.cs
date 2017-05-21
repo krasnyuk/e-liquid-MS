@@ -52,7 +52,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             {
                 productChartVm.Add(new ProductChartViewModel
                 {
-                    Name = o.Name,
+                    Name = o.Name + " " + o.Volume + " мл " + o.NicotineAmount + " мг",
                     Percent = (double)o.OrderDetails.Sum(x => x.Count) / totalSold * 100
                 });
             }

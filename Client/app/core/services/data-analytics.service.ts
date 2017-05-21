@@ -16,4 +16,8 @@ export class DataAnalyticsService {
         return this.dataService.get('api/Charts/Order')
     }
 
+    public getProductsPercentsChartData(): Observable<any> {
+        return this.dataService.get('api/Charts/Product')
+    }
+
 }
