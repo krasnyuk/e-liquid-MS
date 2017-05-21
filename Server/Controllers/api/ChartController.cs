@@ -22,7 +22,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
         // GET: api/Charts/Order
         [HttpGet]
         [Route("api/Charts/Order")]
-        public IEnumerable<OrderChartViewModel> Get()
+        public IEnumerable<OrderChartViewModel> GetOrders()
         {
             var orders = _context.Orders.ToList();
             _context.Orders.Include(c => c.OrderDetails).ToList();
@@ -36,6 +36,27 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 });
             }
             return orderChartsVM;
+        }
+
+        // GET: api/Charts/Product
+        [HttpGet]
+        [Route("api/Charts/Product")]
+        public IEnumerable<ProductChartViewModel> GetProducts()
+        {
+            var totalSold = _context.Orders.Sum(order => order.OrderDetails.Sum(x => x.Count));
+            var products = _context.Products.ToList();
+            _context.Products.Include(c => c.OrderDetails).ToList();
+
+            List<ProductChartViewModel> productChartVm = new List<ProductChartViewModel>();
+            foreach (Product o in products)
+            {
+                productChartVm.Add(new ProductChartViewModel
+                {
+                    Name = o.Name,
+                    Percent = (double)o.OrderDetails.Sum(x => x.Count) / totalSold * 100
+                });
+            }
+            return productChartVm;
         }
     }
 }
