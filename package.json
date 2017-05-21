@@ -55,6 +55,7 @@
     "@ngrx/store-devtools": "3.2.4",
     "@ngx-translate/core": "6.0.1",
     "angular2-google-maps": "0.17.0",
+    "angular2-highcharts": "^0.5.5",
     "angular2-jwt": "0.2.2",
     "aspnet-prerendering": "2.0.3",
     "aspnet-webpack": "1.0.28",
