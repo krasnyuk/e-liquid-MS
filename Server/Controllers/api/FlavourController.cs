@@ -111,6 +111,13 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 return NotFound();
             }
 
+            _context.Entry(flavour).Collection(c => c.ReceiptFlavours).Load();
+            if (flavour.ReceiptFlavours.Count != 0)
+            {
+                ModelState.AddModelError("Existing", "Ароматизатор используется в рецептах! Измените данные, перед тем как удалить данный элемент.");
+                return BadRequest(ModelState);
+            }
+
             _context.Flavours.Remove(flavour);
             await _context.SaveChangesAsync();
 

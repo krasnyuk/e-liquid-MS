@@ -110,6 +110,13 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 return NotFound();
             }
 
+            _context.Entry(product).Collection(c => c.OrderDetails).Load();
+            if (product.OrderDetails.Count != 0)
+            {
+                ModelState.AddModelError("Existing", "Товар используется в рецептах! Измените данные, перед тем как удалить данный элемент.");
+                return BadRequest(ModelState);
+            }
+
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
 

@@ -128,6 +128,13 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 return NotFound();
             }
 
+            _context.Entry(client).Collection(c => c.Orders).Load();
+            if (client.Orders.Count != 0)
+            {
+                ModelState.AddModelError("Existing", "Клиент имеет заказы! Измените данные, перед тем как удалить данный элемент.");
+                return BadRequest(ModelState);
+            }
+
             _context.Clients.Remove(client);
             await _context.SaveChangesAsync();
 
