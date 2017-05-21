@@ -10,18 +10,18 @@ namespace AspNetCoreSpa.Server.Controllers.api
 {
     [Produces("application/json")]
     [Authorize]
-    [Route("api/ChartOrder")]
-    public class ChartOrderController : Controller
+    public class ChartController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ChartOrderController(ApplicationDbContext context)
+        public ChartController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/ChartOrder
+        // GET: api/Charts/Order
         [HttpGet]
+        [Route("api/Charts/Order")]
         public IEnumerable<OrderChartViewModel> Get()
         {
             var orders = _context.Orders.ToList();
@@ -35,7 +35,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
                     Date = o.Date
                 });
             }
-
             return orderChartsVM;
         }
     }
