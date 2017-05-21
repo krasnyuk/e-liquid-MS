@@ -1,45 +1,70 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from "@angular/core";
+import {DataAnalyticsService} from "../../core/services/data-analytics.service";
+import {BaseComponent} from "../../core/base/base-component";
 
 @Component({
     selector: 'appc-dashboard',
     templateUrl: 'dashboard.component.html'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent extends BaseComponent {
     options: Object;
 
-    constructor() {
+    public dashboardInfo: any = {
+        totalSold: 0,
+        totalProfit: 0,
+        thisMonth: 0,
+        clientCount: 0,
+        averageOrder: 0
+    };
+
+    constructor(private dataAnalyticsService: DataAnalyticsService) {
+        super();
     }
 
+
     ngOnInit() {
-        this.options = {
-            title: {
-                text: 'Solar Employment Growth by Sector, 2010-2016'
-            },
 
-            subtitle: {
-                text: 'Source: thesolarfoundation.com'
-            },
+        this.dataAnalyticsService.getDashboardInfo().subscribe(success => {
+            this.dashboardInfo = success;
+        });
+        this.dataAnalyticsService.getOrdersChartData().subscribe((success: Array<any>) => {
+            const dates: Array<string | null> = [];
+            const orderItemsCount: Array<number> = [];
 
-            yAxis: {
+            success.forEach(item => {
+                dates.push(this.formatDate(item.date));
+                orderItemsCount.push(item.count);
+            });
+            this.options = {
                 title: {
-                    text: 'Number of Employees'
-                }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle'
-            },
+                    text: 'График продаж'
+                },
 
-            xAxis: {
-                categories: ['11 Jan', ' 21 Feb', '31 Mar', 'Apr', 'May', 'Jun',
-                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            },
+                subtitle: {
+                    text: '(количество/дата)'
+                },
 
-            series: [{
-                name: 'Installation',
-                data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
-            }]
-        };
+                yAxis: {
+                    title: {
+                        text: 'Количество единиц в заказе'
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+                },
+
+                xAxis: {
+                    categories: dates
+                },
+
+                series: [{
+                    name: 'Количество',
+                    data: orderItemsCount
+                }]
+            };
+        });
+
     }
 }
