@@ -9,7 +9,7 @@ using AspNetCoreSpa.Server.Entities;
 namespace AspNetCoreSpa.Server.Controllers.api
 {
     [Produces("application/json")]
-   // [Authorize]
+    [Authorize]
     public class ChartController : Controller
     {
         private readonly ApplicationDbContext _context;
