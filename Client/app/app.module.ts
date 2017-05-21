@@ -35,7 +35,8 @@ export class CustomOption extends ToastOptions {
         HomeModule,
         StoreModule.provideStore(appReducer),
         StoreDevtoolsModule.instrumentOnlyWithExtension(),
-        ToastModule.forRoot()
+        ToastModule.forRoot(),
+
     ],
     providers: [
         AppService,
