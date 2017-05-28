@@ -33,7 +33,7 @@ export class ProductsStorageEditComponent extends BaseEditForm {
         }, error => {
             this.notificationService.error(error);
         });
-        this.formTitle = "Новое состояние склада";
+        this.formTitle = "Новое поступление на склад";
         this.isEditingMode = false;
         this.editForm = this.fb.group({
             id: [""],
@@ -44,7 +44,7 @@ export class ProductsStorageEditComponent extends BaseEditForm {
             const storageId = +params['storageId'];
             if (storageId) {
                 this.isEditingMode = true;
-                this.formTitle = "Редактировать состояние склада";
+                this.formTitle = "Редактировать поуступление на склад";
                 this.productsStorageService.getStorageItem(storageId).subscribe(success => {
                     this.storage = success;
                     this.updateEditForm();
