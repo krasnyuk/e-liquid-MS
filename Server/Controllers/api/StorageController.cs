@@ -126,6 +126,29 @@ namespace AspNetCoreSpa.Server.Controllers.api
             return Ok(storage);
         }
 
+        // GET: api/Storage/Remain
+        [HttpGet]
+        [Route("Remain")]
+        public IEnumerable<GetRemainViewModel> GetRemain()
+        {
+            _context.Products.Include(c => c.StorageDetails).ToList();
+            _context.Products.Include(c => c.OrderDetails).ToList();
+            List<GetRemainViewModel> remainVM = new List<GetRemainViewModel>();
+            foreach (Product o in _context.Products.ToList())
+            {
+                remainVM.Add(new GetRemainViewModel
+                {
+                    Id = o.Id,
+                    Name = o.Name,
+                    Volume = o.Volume,
+                    NicotineAmount = o.NicotineAmount,
+                    Remain = o.StorageDetails.Sum(x => x.Count) - o.OrderDetails.Sum(x => x.Count)
+                });
+            }
+
+            return remainVM;
+        }
+
         private bool StorageExists(int id)
         {
             return _context.Storages.Any(e => e.Id == id);
