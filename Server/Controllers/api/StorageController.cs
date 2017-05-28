@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace AspNetCoreSpa.Server.Controllers.api
 {
     [Produces("application/json")]
-  //  [Authorize]
+    [Authorize]
     [Route("api/Storage")]
     public class StorageController : Controller
     {
