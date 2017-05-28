@@ -5,6 +5,7 @@ import {ProductsStoragePageComponent} from "./products-storage-page.component";
 import {ProductsStorageListComponent} from "./list/products-storage-list.component";
 import {ProductsStorageEditComponent} from "./edit/products-storage-edit.component";
 import {ProductStorageDetailsComponent} from "./details/product-storage-details.component";
+import {RemainComponent} from "./remain/remain.component";
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import {ProductStorageDetailsComponent} from "./details/product-storage-details.
         ProductsStoragePageComponent,
         ProductsStorageListComponent,
         ProductsStorageEditComponent,
-        ProductStorageDetailsComponent
+        ProductStorageDetailsComponent,
+        RemainComponent
     ],
     providers: [],
 })

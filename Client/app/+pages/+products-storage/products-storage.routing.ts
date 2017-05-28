@@ -3,6 +3,7 @@ import {ProductsStoragePageComponent} from "./products-storage-page.component";
 import {ProductsStorageListComponent} from "./list/products-storage-list.component";
 import {ProductsStorageEditComponent} from "./edit/products-storage-edit.component";
 import {ProductStorageDetailsComponent} from "./details/product-storage-details.component";
+import {RemainComponent} from "./remain/remain.component";
 
 
 export const routes: Routes = [
@@ -29,6 +30,10 @@ export const routes: Routes = [
             {
                 path: 'details/:storageId',
                 component: ProductStorageDetailsComponent
+            },
+            {
+                path: 'remain',
+                component: RemainComponent
             }
         ]
     }

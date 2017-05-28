@@ -44,4 +44,9 @@ export class ProductsStorageService {
         return this.dataService.put(url, storageModel);
     }
 
+    public getCurrentStorageState(): Observable<any> {
+        const url = `${this.baseUrl}/remain`;
+        return this.dataService.get(url);
+    }
+
 }
