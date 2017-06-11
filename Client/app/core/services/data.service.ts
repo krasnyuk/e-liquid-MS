@@ -193,7 +193,11 @@ export class DataService {
 
     private unwrapHttpError(error: any): any {
         try {
-            return error.text() ? error.json() : {}
+            const errorJson = error.json();
+            if (errorJson['Existing']) {
+                return errorJson['Existing'];
+            }
+            return error.text() ? errorJson : {}
         } catch (jsonError) {
             return ({
                 code: -1,
