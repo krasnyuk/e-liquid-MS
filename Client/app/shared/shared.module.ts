@@ -22,6 +22,7 @@ import {UppercasePipe} from "./pipes/uppercase.pipe";
 import {NavbarComponent} from "./components/navbar.component";
 import {CanActivateUser} from "./guards/user-can-activate.guard";
 import {CanActivateAdmin} from "./guards/admin-can-activate.guard";
+import {FilterPipe} from "./pipes/filter.pipe";
 
 const components: Array<any> = [
     DynamicFormComponent,
@@ -32,6 +33,7 @@ const components: Array<any> = [
     HeaderComponent,
     PageHeadingComponent,
     UppercasePipe,
+    FilterPipe,
     NavbarComponent
 ];
 

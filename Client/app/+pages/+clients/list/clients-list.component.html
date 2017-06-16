@@ -1,10 +1,23 @@
+<div class="form-group col-xs-12 col-md-4">
+    <input [(ngModel)]="clientNameFilterPattern" type="text"
+           class="form-control" placeholder="Название клиента">
+</div>
+<div class="form-group col-xs-12 col-md-4">
+    <select [(ngModel)]="clientStatusFilterPattern" class="form-control">
+        <option value="">Любой статус</option>
+        <option *ngFor="let item of availableClientStatuses" [ngValue]="item.key">
+            {{item.value}}
+        </option>
+    </select>
+</div>
+
 <div class="col-xs-12">
     <div class="x_panel">
         <div class="x_title">
             <h2>Клиенты компании</h2>
             <div class="nav navbar-right panel_toolbox">
                 <button [routerLink]="['/pages', 'clients', 'add']" class="btn btn-md btn-success">
-                    <i class="fa fa-plus" aria-hidden="true"></i> Добавить клиента
+                    <i class="fa fa-plus" aria-hidden="true"></i> Добавить
                 </button>
             </div>
             <div class="clearfix"></div>
@@ -25,7 +38,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let client of clients"
+                    <tr *ngFor="let client of clients |
+                     paramFilter: 'name' : clientNameFilterPattern |
+                     paramFilter: 'status' : clientStatusFilterPattern : true"
                         [ngClass]="{'success': client.status === templateConst.clientStatus.active,
                     'warning': client.status === templateConst.clientStatus.pending,
                     'danger': client.status === templateConst.clientStatus.inactive}">
@@ -38,10 +53,12 @@
                         <td>{{templateLang.clientStatus[client.status]}}</td>
                         <td>{{client.info}}</td>
                         <td>
-                            <button [routerLink]="['/pages','clients','details', client.id]" class="btn btn-xs btn-info">
+                            <button [routerLink]="['/pages','clients','details', client.id]"
+                                    class="btn btn-xs btn-info">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                             </button>
-                            <button [routerLink]="['/pages','clients','edit', client.id]" class="btn btn-xs btn-warning">
+                            <button [routerLink]="['/pages','clients','edit', client.id]"
+                                    class="btn btn-xs btn-warning">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                             </button>
                             <button (click)="deleteClient(client)" class="btn btn-xs btn-danger">

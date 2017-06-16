@@ -3,6 +3,8 @@ import {BaseComponent} from "../../../core/base/base-component";
 import {ToastsManager} from "ng2-toastr";
 import {ClientModel} from "../../../core/models/client.model";
 import {ClientsService} from "../../../core/services/clients.service";
+import {AppConst} from "../../../core/app-constants";
+import {Lang} from "../../../core/app-lang";
 
 @Component({
     selector: 'appc-clients-list',
@@ -11,6 +13,9 @@ import {ClientsService} from "../../../core/services/clients.service";
 export class ClientsListComponent extends BaseComponent {
 
     public clients: Array<ClientModel> = [];
+    public clientNameFilterPattern: string;
+    public clientStatusFilterPattern: string;
+    public availableClientStatuses: Array<any> = [];
 
     constructor(private clientsService: ClientsService,
                 private notificationService: ToastsManager) {
@@ -19,9 +24,10 @@ export class ClientsListComponent extends BaseComponent {
 
     ngOnInit() {
         this.clientsService.getClients().subscribe((success: Array<any>) => {
-            this.clients = success.sort((a, b) => {
-                return (a.status > b.status) ? 1 : ((b.status > a.status) ? -1 : 0);
-            });
+            this.clients = success.sort(this.dynamicSort('status'));
+        });
+        this.availableClientStatuses = Object.keys(AppConst.clientStatus).map((item: any) => {
+            return {key: item, value: Lang.clientStatus[item]};
         });
     }
 
