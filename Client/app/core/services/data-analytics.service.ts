@@ -20,4 +20,9 @@ export class DataAnalyticsService {
         return this.dataService.get('api/Charts/Product')
     }
 
+    public getOrdersByDate(firstDate: any, secondDate: any): Observable<any> {
+        const url = `api/Order/api/GetOrdersByDate?firstDate=${firstDate}&secondDate=${secondDate}`;
+        return this.dataService.get(url);
+    }
+
 }

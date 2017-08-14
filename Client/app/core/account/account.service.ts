@@ -12,7 +12,7 @@ import {ProfileActions} from '../profile/profile.actions';
 import {UtilityService} from '../../core/services/utility.service';
 import {Observable} from 'rxjs/Observable';
 import {CurrentUserService} from "../services/current-user.service";
-
+import 'rxjs';
 @Injectable()
 export class AccountService {
 

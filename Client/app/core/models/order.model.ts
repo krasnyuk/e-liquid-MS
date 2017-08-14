@@ -16,3 +16,12 @@ export interface OrderModel {
     // additional properties
     client: ClientModel;
 }
+
+export interface OrderReportModel {
+    id: number;
+    clientName: string;
+    totalAmount: number;
+    pricePerUnit: number;
+    date: string;
+    totalSum: number;
+}

@@ -32,6 +32,7 @@ export class OrderDetailsComponent extends BaseComponent {
                     this.order.orderDetails.forEach(item => {
                         this.orderTotal += item.count * item.price;
                     });
+                    this.order.orderDetails.sort(this.dynamicSort(['name']));
                     this.clientsService.getClient(this.order.clientId).subscribe(success => {
                         this.order.client = success;
                     });

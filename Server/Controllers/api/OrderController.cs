@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using AspNetCoreSpa.Server.Entities;
 using AspNetCoreSpa.Server.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace AspNetCoreSpa.Server.Controllers.api
 {
@@ -26,6 +27,12 @@ namespace AspNetCoreSpa.Server.Controllers.api
         public IEnumerable<Order> GetOrders()
         {
             return _context.Orders.Include(order => order.Client).ToList();
+        }
+
+        [HttpGet("api/GetOrdersByDate")]
+        public IEnumerable<Order> GetOrdersByDate(DateTime firstDate, DateTime secondDate)
+        {
+            return _context.Orders.Include(order => order.Client).Include(order => order.OrderDetails).ThenInclude(details => details.Product).ToList().Where(x => x.Date >= firstDate && x.Date <= secondDate);
         }
 
         // GET: api/Order/5

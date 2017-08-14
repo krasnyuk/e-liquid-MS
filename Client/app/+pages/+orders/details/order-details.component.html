@@ -34,6 +34,7 @@
                             Для
                             <address *ngIf="order.client">
                                 <strong>{{order.client.name}}</strong>
+                                <br>{{order.client.contactPerson}}
                                 <br>{{order.client.physicAddress}}
                                 <br>{{order.client.phone}}
                                 <ng-template *ngFor="let item of order.client.clientLinks">

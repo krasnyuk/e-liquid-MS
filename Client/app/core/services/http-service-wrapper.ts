@@ -121,7 +121,7 @@ export class HttpServiceWrapper {
             .catch((error) => {
                 if (error.status === 0) { // 401
                     this.authStateService.clearToken();
-                    return Observable.empty();
+                    return Observable.of();
                 } else {
                     return Observable.throw(error);
                 }

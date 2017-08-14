@@ -51,6 +51,10 @@ const pagesRoutes: Routes = [
                 path: 'register',
                 canActivate: [CanActivateAdmin],
                 loadChildren: './+register/register.module#RegisterModule'
+            },
+            {
+                path: 'reports',
+                loadChildren: './+reports/reports.module#ReportsModule'
             }
         ]
     }

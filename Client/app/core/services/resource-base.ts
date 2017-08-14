@@ -1,5 +1,6 @@
 import {Observable} from "rxjs/Observable";
-import {HttpServiceWrapper} from "./http-service-wrapper";
+import { HttpServiceWrapper } from "./http-service-wrapper";
+declare var ENV: any;
 
 export class ResourceBase {
 
@@ -60,7 +61,7 @@ export class ResourceBase {
     }
 
     protected handleError(error: any) {
-        const errMsg = (error.message) ? error.message :
+        let errMsg = (error.message) ? error.message :
             error.status ? `${error.status} - ${error.statusText}` : 'Server error';
 
         if (error.text()) {

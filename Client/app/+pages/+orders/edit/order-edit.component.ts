@@ -38,7 +38,7 @@ export class OrderEditComponent extends BaseEditForm {
             this.notificationService.error(error);
         });
         this.clientsService.getClients().subscribe(success => {
-            this.clientAvailable = success;
+            this.clientAvailable = success.sort(this.dynamicSort(['name']));
         }, error => {
             this.notificationService.error(error);
         });

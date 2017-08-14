@@ -6,7 +6,6 @@ import {TranslateModule} from "@ngx-translate/core";
 import {HttpModule, JsonpModule} from "@angular/http";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
-import {PageHeadingComponent} from "./directives/page-heading.directive";
 import {DynamicFormComponent} from "./forms/dynamic-form.component";
 import {DynamicFormControlComponent} from "./forms/dynamic-form-control.component";
 import {ErrorMessageComponent} from "./forms/error-message.component";
@@ -31,7 +30,6 @@ const components: Array<any> = [
     ErrorSummaryComponent,
     FooterComponent,
     HeaderComponent,
-    PageHeadingComponent,
     UppercasePipe,
     FilterPipe,
     NavbarComponent
