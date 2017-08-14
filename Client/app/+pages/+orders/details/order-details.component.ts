@@ -32,7 +32,9 @@ export class OrderDetailsComponent extends BaseComponent {
                     this.order.orderDetails.forEach(item => {
                         this.orderTotal += item.count * item.price;
                     });
-                    this.order.orderDetails.sort(this.dynamicSort(['name']));
+                    this.order.orderDetails.sort((a, b) => {
+                        return this.sortMultipleKeys(a['volume'], b['volume']) || this.sortMultipleKeys(a['name'], b['name']) || this.sortMultipleKeys(a['nicotineAmount'], b['nicotineAmount'])
+                    });
                     this.clientsService.getClient(this.order.clientId).subscribe(success => {
                         this.order.client = success;
                     });
@@ -40,4 +42,6 @@ export class OrderDetailsComponent extends BaseComponent {
             }
         });
     }
+
+
 }

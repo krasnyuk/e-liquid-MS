@@ -29,4 +29,10 @@ export class BaseComponent implements OnInit {
             return result * sortOrder;
         }
     }
+
+    protected sortMultipleKeys(a, b) {
+        if (a > b) return +1;
+        if (a < b) return -1;
+        return 0;
+    }
 }
