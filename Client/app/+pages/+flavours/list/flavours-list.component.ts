@@ -19,7 +19,7 @@ export class FlavoursListComponent extends BaseComponent  {
 
     ngOnInit() {
         this.flavoursService.getFlavours().subscribe(success => {
-            this.flavours = success.sort(this.dynamicSort('manufacturer', -1));
+            this.flavours = success.sort((a, b) => this.sortMultipleKeys(a['manufacturer'], b['manufacturer']) || this.sortMultipleKeys(a['title'], b['title']));
         });
     }
 

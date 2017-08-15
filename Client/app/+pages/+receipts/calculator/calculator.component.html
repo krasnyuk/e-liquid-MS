@@ -17,12 +17,14 @@
                     <thead>
                     <tr>
                         <th>Ароматизатор</th>
+                        <th>Производитель</th>
                         <th>Проценты, %</th>
                     </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let flavour of currentReceipt.receiptFlavours">
                             <td>{{flavour.flavour.title}}</td>
+                            <td>{{flavour.flavour.manufacturer}}</td>
                             <td>{{flavour.percent}}</td>
                         </tr>
                     </tbody>
@@ -74,12 +76,14 @@
                     <thead>
                     <tr>
                         <th>Ароматизатор</th>
+                        <th>Производитель</th>
                         <th>Объём, мл</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr *ngFor="let flavour of currentReceipt.receiptFlavours">
                         <td>{{flavour.flavour.title}}</td>
+                        <td>{{flavour.flavour.manufacturer}}</td>
                         <td>{{(totalLiquidAmount / 100) * flavour.percent}}</td>
                     </tr>
                     </tbody>

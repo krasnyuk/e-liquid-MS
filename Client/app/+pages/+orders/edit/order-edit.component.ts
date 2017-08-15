@@ -33,7 +33,7 @@ export class OrderEditComponent extends BaseEditForm {
 
     ngOnInit() {
         this.productsService.getProducts().subscribe(success => {
-            this.productsAvailable = success;
+            this.productsAvailable = success.sort((a, b) => this.sortMultipleKeys(a['volume'], b['volume']) || this.sortMultipleKeys(a['name'], b['name']) || this.sortMultipleKeys(a['nicotineAmount'], b['nicotineAmount']));
         }, error => {
             this.notificationService.error(error);
         });

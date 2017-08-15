@@ -30,7 +30,7 @@ export class ReceiptEditComponent extends BaseEditForm {
 
     ngOnInit() {
         this.flavoursService.getFlavours().subscribe(success => {
-            this.flavoursAvailable = success;
+            this.flavoursAvailable = success.sort(this.dynamicSort('title'));
         }, error => {
             this.notificationService.error(error);
         });
