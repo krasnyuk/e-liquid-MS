@@ -16,6 +16,9 @@ const AOT = helpers.hasNpmFlag('aot');
 console.log("==========Is Dev Build = " + isDevBuild + " ============")
 console.log("==========Is AOT Build = " + AOT + " ============")
 
+const buildDate = new Date();
+const appVersion = require('../package.json').version;
+
 let commonConfig = {
     entry: {
         'main': AOT ? './Client/main.aot.ts' : './Client/main.ts'
@@ -70,7 +73,9 @@ let commonConfig = {
         new ExtractTextPlugin("vendor.css"),
         new webpack.DefinePlugin({
             'process.env': {
-                'ENV': JSON.stringify(isDevBuild ? 'Development' : 'Production')
+                'ENV': JSON.stringify(isDevBuild ? 'Development' : 'Production'),
+                'BUILD_DATE': JSON.stringify(buildDate),
+                'APP_VERSION': JSON.stringify(appVersion)
             }
         }),
         /*

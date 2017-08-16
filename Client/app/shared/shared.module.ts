@@ -22,6 +22,7 @@ import {NavbarComponent} from "./components/navbar.component";
 import {CanActivateUser} from "./guards/user-can-activate.guard";
 import {CanActivateAdmin} from "./guards/admin-can-activate.guard";
 import {FilterPipe} from "./pipes/filter.pipe";
+import {AppBuildComponent} from "./components/app-build/app-build.component";
 
 const components: Array<any> = [
     DynamicFormComponent,
@@ -32,7 +33,8 @@ const components: Array<any> = [
     HeaderComponent,
     UppercasePipe,
     FilterPipe,
-    NavbarComponent
+    NavbarComponent,
+    AppBuildComponent
 ];
 
 const services = [
