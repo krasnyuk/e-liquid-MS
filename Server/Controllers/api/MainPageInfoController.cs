@@ -25,9 +25,9 @@ namespace AspNetCoreSpa.Server.Controllers.api
         {
             var clients = _context.Clients.Where(client => client.Status == StatusEnum.active).Count();
             var avrOrder = _context.Orders.Average(order => order.OrderDetails.Sum( x => x.Count));
-            var totalSold = _context.Orders.Sum(order => order.OrderDetails.Sum(x => x.Count));
-            var totalProfit = _context.Orders.Sum(order => order.OrderDetails.Sum(x => x.Price * x.Count));
-            var thisMonth = _context.Orders.Where(order => order.Date.Month == DateTime.Now.Month).Sum(order => order.OrderDetails.Sum(x => x.Count));
+            var totalSold = _context.Orders.Select(order => order.OrderDetails.Sum(x => x.Count)).ToList().Sum();
+            var totalProfit = _context.Orders.Select(order => order.OrderDetails.Sum(x => x.Price * x.Count)).ToList().Sum();
+            var thisMonth = _context.Orders.Where(order => order.Date.Month == DateTime.Now.Month).Select(order => order.OrderDetails.Sum(x => x.Count)).ToList().Sum();
 
             var result = new MainPageInfoViewModel
             {

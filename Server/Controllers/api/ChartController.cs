@@ -43,17 +43,18 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [Route("api/Charts/Product")]
         public IEnumerable<ProductChartViewModel> GetProducts()
         {
-            var totalSold = _context.Orders.Sum(order => order.OrderDetails.Sum(x => x.Count));
+            var totalSold = _context.Orders.Select(order => order.OrderDetails.Sum(x => x.Count)).ToList().Sum();
             var products = _context.Products.ToList();
             _context.Products.Include(c => c.OrderDetails).ToList();
 
             List<ProductChartViewModel> productChartVm = new List<ProductChartViewModel>();
             foreach (Product o in products)
             {
+               
                 productChartVm.Add(new ProductChartViewModel
                 {
                     Name = o.Name + " " + o.Volume + " мл " + o.NicotineAmount + " мг",
-                    Percent = (double)o.OrderDetails.Sum(x => x.Count) / totalSold * 100
+                    Percent = (double)o.OrderDetails.Select(x => x.Count).ToList().Sum() / totalSold * 100
                 });
             }
             return productChartVm;
