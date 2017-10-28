@@ -49,7 +49,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                     return BadRequest(new OpenIdConnectResponse
                     {
                         Error = OpenIdConnectConstants.Errors.InvalidGrant,
-                        ErrorDescription = "The username/password couple is invalid."
+                        ErrorDescription = "The username/password couple is invalid. This user is not exist."
                     });
                 }
 
@@ -94,7 +94,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                     return BadRequest(new OpenIdConnectResponse
                     {
                         Error = OpenIdConnectConstants.Errors.InvalidGrant,
-                        ErrorDescription = "The username/password couple is invalid."
+                        ErrorDescription = "The username/password couple is invalid. The password is invalid."
                     });
                 }
 

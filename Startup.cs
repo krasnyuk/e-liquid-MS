@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using AspNetCoreSpa.Server;
 using AspNetCoreSpa.Server.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
+using Newtonsoft.Json;
 
 namespace AspNetCoreSpa
 {
@@ -72,6 +73,10 @@ namespace AspNetCoreSpa
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "AspNetCoreSpa", Version = "v1" });
+            });
+
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
         }
         public void Configure(IApplicationBuilder app)

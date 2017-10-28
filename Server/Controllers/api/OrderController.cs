@@ -30,9 +30,45 @@ namespace AspNetCoreSpa.Server.Controllers.api
         }
 
         [HttpGet("api/GetOrdersByDate")]
-        public IEnumerable<Order> GetOrdersByDate(DateTime firstDate, DateTime secondDate)
+        public List<OrderViewModel> GetOrdersByDate(DateTime firstDate, DateTime secondDate)
         {
-            return _context.Orders.Include(order => order.Client).Include(order => order.OrderDetails).ThenInclude(details => details.Product).ToList().Where(x => x.Date >= firstDate && x.Date <= secondDate);
+            var orders = _context.Orders.Where(x => x.Date >= firstDate && x.Date <= secondDate)
+                .Select(o => new OrderViewModel {
+                    Order = new Order
+                    {
+                        Id = o.Id,
+                        Date = o.Date,
+                        Info = o.Info,
+                        Payment = o.Payment,
+                        Realization = o.Realization
+                    },
+                    Client = new Client
+                    {
+                        Id = o.Client.Id,
+                        ClientLinks = o.Client.ClientLinks,
+                        ContactPerson = o.Client.ContactPerson,
+                        Info = o.Client.Info,
+                        Name = o.Client.Name,
+                        Phone = o.Client.Phone,
+                        PhysicAddress = o.Client.PhysicAddress,
+                        SecondaryPhone = o.Client.SecondaryPhone,
+                        ShippingAddress = o.Client.ShippingAddress,
+                        Status = o.Client.Status
+                    }, 
+                    OrderDetails = o.OrderDetails.Select(details => new OrderDetailsViewModel
+                    {
+                        Count = details.Count,
+                        Id = details.Id,
+                        Info = details.Product.Info,
+                        Name = details.Product.Name,
+                        NicotineAmount = details.Product.NicotineAmount,
+                        Price = details.Price,
+                        ProductId = details.ProductId,
+                        Volume = details.Product.Volume
+                    }).ToList()
+                }).ToList();
+                /*Include(order => order.Client).Include(order => order.OrderDetails).ThenInclude(details => details.Product).ToList();*/
+            return orders;
         }
 
         // GET: api/Order/5
