@@ -25,7 +25,8 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [HttpGet]
         public IEnumerable<Receipt> GetReceipts()
         {
-            return _context.Receipts.Include(flavour => flavour.ReceiptFlavours).ThenInclude(f => f.Flavour).ToList();
+            var receipts = _context.Receipts.Include(flavour => flavour.ReceiptFlavours).ThenInclude(f => f.Flavour).ToList();
+            return receipts;
         }
 
         // GET: api/Receipt/5
